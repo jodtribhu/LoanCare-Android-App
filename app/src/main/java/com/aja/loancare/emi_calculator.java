@@ -2,6 +2,7 @@ package com.aja.loancare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class emi_calculator extends AppCompatActivity {
+    public  static String EMI_PRINCIPAL="com.aja.loancare.principalamount";
+    public static String EMI_INTEREST="com.aja.loancare.interest";
+    public static String EMI_TENURE="com.aja.loancare.tenure";
+    public static String EMI_AMOUNT="com.aja.loancare.amount";
     EditText principal_amount;
     EditText interest_rate;
     EditText tenure;
@@ -90,11 +95,18 @@ public class emi_calculator extends AppCompatActivity {
                 }
                 if(calculate)
                 {
-                   i_r=i_r/1200;
+                   Intent intent=new Intent(emi_calculator.this,piemain.class);
+
+                    intent.putExtra(EMI_INTEREST,i_r);
+                    intent.putExtra(EMI_PRINCIPAL,p_amt);
+                    intent.putExtra(EMI_TENURE,t);
+                    i_r=i_r/1200;
                     double carry=1 + i_r;
                     emi_amt = (p_amt * i_r * Math.pow(carry,t))/(Math.pow(carry,t)-1);
                     Log.i(TAG, "onClick: emi"+emi_amt);
                     emiresult.setText(String.valueOf(Math.round(emi_amt)));
+                    intent.putExtra(EMI_AMOUNT,emi_amt);
+                    startActivity(intent);
                 }
             }
         });

@@ -5,6 +5,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="#2196f3"
     tools:context=".piemain">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
@@ -124,7 +125,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvR"
+                    android:id="@+id/pie_pamt"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -158,7 +159,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvPython"
+                    android:id="@+id/pie_ir"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -192,7 +193,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvCPP"
+                    android:id="@+id/pie_tenure"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -226,7 +227,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvJava"
+                    android:id="@+id/pie_emi"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"

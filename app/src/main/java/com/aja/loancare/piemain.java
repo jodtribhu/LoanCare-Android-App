@@ -13,7 +13,7 @@ public class piemain  extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.pie);
         tvR = findViewById(R.id.tvR);
         tvPython = findViewById(R.id.tvPython);
         tvCPP = findViewById(R.id.tvCPP);
@@ -40,7 +40,6 @@ public class piemain  extends AppCompatActivity{
                         "Python",
                         Integer.parseInt(tvPython.getText().toString()),
                         Color.parseColor("#66BB6A")));
-
         // To animate the pie chart
         pieChart.startAnimation();
     }

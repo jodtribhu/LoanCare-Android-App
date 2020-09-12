@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="2"
+    android:weightSum="10"
+    android:background="#2196f3"
     tools:context=".emi_calculator">
 
 
@@ -14,7 +15,7 @@
         android:id="@+id/emi_calculator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="6">
 
     </FrameLayout>
 
@@ -22,7 +23,7 @@
         android:id="@+id/emi_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="4">
 
     </FrameLayout>
 </LinearLayout>

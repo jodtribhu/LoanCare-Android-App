@@ -19,12 +19,11 @@ private fragment_emi_graph mFragment_emi_graph;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.emi_calculator,mFragment_emi_calculations).replace(R.id.emi_graph,mFragment_emi_graph).commit();
 
-
-
     }
 
     @Override
     public void onInputCalcSent(double principal, int tenure, double rate, double emi) {
+        mFragment_emi_graph.update_data(0,0,0,0);
         mFragment_emi_graph.update_data(principal,tenure,rate,emi);
     }
 }

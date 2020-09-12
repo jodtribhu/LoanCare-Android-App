@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,16 +17,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class fragment_emi_calculations extends Fragment {
-    public  static String EMI_PRINCIPAL="com.aja.loancare.principalamount";
-    public static String EMI_INTEREST="com.aja.loancare.interest";
-    public static String EMI_TENURE="com.aja.loancare.tenure";
-    public static String EMI_AMOUNT="com.aja.loancare.amount";
-    EditText principal_amount;
-    EditText interest_rate;
+    SeekBar loan_seekbar;
+    EditText loanamt;
+    SeekBar interest_seekbar;
+    EditText interestamt;
+    SeekBar tenure_Seekbar;
     EditText tenure;
     double p_amt;
     double i_r;
@@ -34,6 +35,13 @@ public class fragment_emi_calculations extends Fragment {
     Button emi_calculate;
     boolean calculate=false;
     TextView emiresult;
+
+    double si_r=0;
+    double sp_amt=0;
+    int st;
+    double carry=0;
+    double semi_amt=0;
+
     private static final String TAG = "emi_calculator";
     emi_calculatorlistner listner;
 
@@ -44,86 +52,124 @@ public class fragment_emi_calculations extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_emi_calculations, container, false);;
+        View v=inflater.inflate(R.layout.fragment_emi_calculations, container, false);
 
-        principal_amount=v.findViewById(R.id.principal_amount);
-        interest_rate=v.findViewById(R.id.interest_rate);
-        emi_calculate=v.findViewById(R.id.emi_button);
+        loan_seekbar=v.findViewById(R.id.loan_seekbar);
+        loanamt=v.findViewById(R.id.loan_amt);
+        interest_seekbar=v.findViewById(R.id.interest_seekbar);
+        interestamt=v.findViewById(R.id.interest_rate);
+        tenure_Seekbar=v.findViewById(R.id.tenure_seekbar);
         tenure=v.findViewById(R.id.tenure);
-        interest_rate.addTextChangedListener(new TextWatcher() {
+
+        loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                if (s != null) {
-                    if(s.toString()!="") {
-                        int currentno = Integer.parseInt(s.toString());
-                        if (currentno > 100) {
-                            Toast.makeText(getActivity(), "Invalid Interest Rate", Toast.LENGTH_SHORT).show();
-                            interest_rate.setText("0");
-                        }
-                    }
-                }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                loanamt.setText(String.valueOf(seekBar.getProgress()));
+                p_amt=seekBar.getProgress();
+                calculation();
             }
         });
 
-        emi_calculate.setOnClickListener(new View.OnClickListener() {
+        interest_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View v) {
-                if(principal_amount.getText() != null)
-                {
-                    p_amt=Integer.parseInt(principal_amount.getText().toString());
-                    calculate=true;
-                }
-                else
-                {
-                    calculate=false;
-                }
-                if(interest_rate.getText() != null)
-                {
-                    i_r=Integer.parseInt(interest_rate.getText().toString());
-                    calculate=true;
-                }
-                else
-                {
-                    calculate=false;
-                }
-                if(tenure.getText() != null)
-                {
-                    t=Integer.parseInt(tenure.getText().toString());
-                    calculate=true;
-                }
-                else
-                {
-                    calculate=false;
-                }
-                if(calculate)
-                {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
-                    double si_r=i_r;
-                    double sp_amt=p_amt;
-                    int st=t;
-                    i_r=i_r/1200;
-                    double carry=1 + i_r;
-                    emi_amt = (p_amt * i_r * Math.pow(carry,t))/(Math.pow(carry,t)-1);
-                    Log.i(TAG, "onClick: emi"+emi_amt);
+            }
 
-                    double semi_amt=emi_amt;
-                    listner.onInputCalcSent(sp_amt,st,si_r,semi_amt);
-                }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                interestamt.setText((String.valueOf(seekBar.getProgress())));
+                i_r=seekBar.getProgress();
+                calculation();
+
+            }
+        });
+
+        tenure_Seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                tenure.setText((String.valueOf(seekBar.getProgress())));
+                t=seekBar.getProgress();
+                calculation();
             }
         });
         return v;
+    }
+    public void calculation()
+    {
+        p_amt=0;
+        i_r=0;
+        t=0;
+        emi_amt=0;
+
+        if(!TextUtils.isEmpty(loanamt.getText()))
+        {
+
+            p_amt=Integer.parseInt(loanamt.getText().toString());
+            calculate=true;
+        }
+        else
+        {
+            calculate=false;
+        }
+        if(!TextUtils.isEmpty(interestamt.getText()))
+        {
+
+            i_r=Integer.parseInt(interestamt.getText().toString());
+            calculate=true;
+        }
+        else {
+            Log.i(TAG, "onCreateView: inside interest calculate");
+            calculate=false;
+        }
+        if(!TextUtils.isEmpty(tenure.getText()))
+        {
+
+            t=Integer.parseInt(tenure.getText().toString());
+            calculate=true;
+        }
+        else {
+            Log.i(TAG, "onCreateView: inside tenure calculate");
+            calculate=false;
+        }
+        if(calculate)
+        {
+            Log.i(TAG, "onCreateView: inside calculate");
+             si_r=i_r;
+             sp_amt=p_amt;
+             st=t;
+             i_r=i_r/1200;
+             carry=1 + i_r;
+             emi_amt = (p_amt * i_r * Math.pow(carry,t))/(Math.pow(carry,t)-1);
+             Log.i(TAG, "onClick: emi"+emi_amt);
+             semi_amt=emi_amt;
+            listner.onInputCalcSent(sp_amt,st,si_r,semi_amt);
+        }
     }
 
     @Override

@@ -40,12 +40,14 @@ public class fragment_emi_calculations extends Fragment {
     Button emi_calculate;
     boolean calculate=false;
     TextView emiresult;
+    int finalamount;
 
     double si_r=0;
     double sp_amt=0;
     int st;
     double carry=0;
     double semi_amt=0;
+    NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
     private static final String TAG = "emi_calculator";
     emi_calculatorlistner listner;
@@ -66,25 +68,20 @@ public class fragment_emi_calculations extends Fragment {
         tenure_Seekbar=v.findViewById(R.id.tenure_seekbar);
         tenure=v.findViewById(R.id.tenure);
 
-loanamt.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        inedittext=true;
-        loanamt.getText().clear();
-    }
-});
+
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
                 NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
                 String moneyString = formatter.format(Math.round(progress));
                 loanamt.setText(moneyString);
+                Log.i(TAG, "onProgressChanged: false inedittext");
+                inedittext=false;
 
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                Log.i(TAG, "onStartTrackingTouch: false inedittext");
                 inedittext=false;
             }
 
@@ -92,9 +89,12 @@ loanamt.setOnClickListener(new View.OnClickListener() {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
                 String moneysString = formatter.format(Math.round(seekBar.getProgress()));
+                Log.i(TAG, "onStopTrackingTouch: false inedittext");
                 loanamt.setText(moneysString);
                 p_amt=seekBar.getProgress();
                 calculation();
+                inedittext=false;
+
             }
         });
 
@@ -136,7 +136,7 @@ loanamt.setOnClickListener(new View.OnClickListener() {
                 calculation();
             }
         });
-        loanamt.addTextChangedListener(new TextWatcher() {
+        interestamt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -149,25 +149,63 @@ loanamt.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                if(!TextUtils.isEmpty(s.toString()) && inedittext)
-//                {
-//                    int amt=Integer.parseInt(s.toString());
-//                    if(amt>100000000)
-//                    {
-//                        loanamt.getText().clear();
-//                    }
-//                    else
-//                    {
-//                        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-//                        String moneysString = formatter.format(Math.round(amt));
-//                        Toast.makeText(get, "", Toast.LENGTH_SHORT).show();
-//                        formatter.format(moneysString);
-//                        loanamt.setText(moneysString);
-//                    }
-//                }
+                calculation();
+            }
+        });
+        tenure.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(Integer.parseInt(String.valueOf(s))>0) {
+                    calculation();
+                }
+            }
+        });
+
+        loanamt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+
+                if(!TextUtils.isEmpty(s))
+                {
+                    calculation();
+                    double d = Double.parseDouble(s.toString().replaceAll("₹.|,", ""));
+                    double amount = Math.round(d);
+                    if (amount > 100000000) {
+                        loanamt.getText().clear();
+                    }
+                }
 
             }
         });
+
+        loanamt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inedittext=true;
+            }
+        });
+
         return v;
     }
     public void calculation()
@@ -177,10 +215,16 @@ loanamt.setOnClickListener(new View.OnClickListener() {
         t=0;
         emi_amt=0;
 
-        if(!TextUtils.isEmpty(loanamt.getText()))
+        if(!TextUtils.isEmpty(loanamt.getText()) )
         {
-
-
+           if(inedittext)
+           {
+               p_amt=Integer.parseInt(loanamt.getText().toString());
+           }
+            else
+           {
+               p_amt=Double.parseDouble(loanamt.getText().toString().replaceAll("₹.|,", ""));
+           }
             calculate=true;
         }
         else
@@ -201,7 +245,13 @@ loanamt.setOnClickListener(new View.OnClickListener() {
         {
 
             t=Integer.parseInt(tenure.getText().toString());
-            calculate=true;
+            if(t>0) {
+                calculate = true;
+            }
+            else
+            {
+                calculate=false;
+            }
         }
         else {
             Log.i(TAG, "onCreateView: inside tenure calculate");

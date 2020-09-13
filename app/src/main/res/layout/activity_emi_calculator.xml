@@ -10,20 +10,18 @@
     android:background="#2196f3"
     tools:context=".emi_calculator">
 
-
     <FrameLayout
         android:id="@+id/emi_calculator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5">
-
+        android:layout_weight="6">
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/emi_graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5">
+        android:layout_weight="4">
 
     </FrameLayout>
 </LinearLayout>

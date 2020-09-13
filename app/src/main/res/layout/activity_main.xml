@@ -6,23 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="2"
+    android:weightSum="10"
     tools:context=".MainActivity">
 
-
-    <FrameLayout
-        android:id="@+id/emi_calculator"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/emi_graph"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </FrameLayout>
 </LinearLayout>

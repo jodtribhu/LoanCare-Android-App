@@ -21,12 +21,17 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ibm.icu.text.NumberFormat;
+
+import java.util.Locale;
+
 public class fragment_emi_calculations extends Fragment {
     SeekBar loan_seekbar;
     EditText loanamt;
     SeekBar interest_seekbar;
     EditText interestamt;
     SeekBar tenure_Seekbar;
+    boolean inedittext=false;
     EditText tenure;
     double p_amt;
     double i_r;
@@ -61,20 +66,33 @@ public class fragment_emi_calculations extends Fragment {
         tenure_Seekbar=v.findViewById(R.id.tenure_seekbar);
         tenure=v.findViewById(R.id.tenure);
 
+loanamt.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        inedittext=true;
+        loanamt.getText().clear();
+    }
+});
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+                String moneyString = formatter.format(Math.round(progress));
+                loanamt.setText(moneyString);
 
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                inedittext=false;
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                loanamt.setText(String.valueOf(seekBar.getProgress()));
+                NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+                String moneysString = formatter.format(Math.round(seekBar.getProgress()));
+                loanamt.setText(moneysString);
                 p_amt=seekBar.getProgress();
                 calculation();
             }
@@ -83,7 +101,7 @@ public class fragment_emi_calculations extends Fragment {
         interest_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                interestamt.setText((String.valueOf(seekBar.getProgress())));
             }
 
             @Override
@@ -103,7 +121,7 @@ public class fragment_emi_calculations extends Fragment {
         tenure_Seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                tenure.setText((String.valueOf(seekBar.getProgress())));
             }
 
             @Override
@@ -118,6 +136,38 @@ public class fragment_emi_calculations extends Fragment {
                 calculation();
             }
         });
+        loanamt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                if(!TextUtils.isEmpty(s.toString()) && inedittext)
+//                {
+//                    int amt=Integer.parseInt(s.toString());
+//                    if(amt>100000000)
+//                    {
+//                        loanamt.getText().clear();
+//                    }
+//                    else
+//                    {
+//                        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+//                        String moneysString = formatter.format(Math.round(amt));
+//                        Toast.makeText(get, "", Toast.LENGTH_SHORT).show();
+//                        formatter.format(moneysString);
+//                        loanamt.setText(moneysString);
+//                    }
+//                }
+
+            }
+        });
         return v;
     }
     public void calculation()
@@ -130,7 +180,7 @@ public class fragment_emi_calculations extends Fragment {
         if(!TextUtils.isEmpty(loanamt.getText()))
         {
 
-            p_amt=Integer.parseInt(loanamt.getText().toString());
+
             calculate=true;
         }
         else

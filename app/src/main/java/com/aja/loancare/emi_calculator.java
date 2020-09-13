@@ -4,16 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class emi_calculator extends AppCompatActivity implements fragment_emi_calculations.emi_calculatorlistner {
 private fragment_emi_calculations mFragment_emi_calculations;
 private fragment_emi_graph mFragment_emi_graph;
+EditText loan_amt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emi_calculator);
+        loan_amt=findViewById(R.id.loan_amt);
         mFragment_emi_calculations=new fragment_emi_calculations();
         mFragment_emi_graph=new fragment_emi_graph();
         getSupportFragmentManager().beginTransaction()
@@ -26,4 +30,6 @@ private fragment_emi_graph mFragment_emi_graph;
         mFragment_emi_graph.update_data(0,0,0,0);
         mFragment_emi_graph.update_data(principal,tenure,rate,emi);
     }
+
+
 }

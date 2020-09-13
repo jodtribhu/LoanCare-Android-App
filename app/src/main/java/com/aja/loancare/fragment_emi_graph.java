@@ -25,12 +25,14 @@ public class fragment_emi_graph extends Fragment {
     TextView pie_pamt, pie_ir, pie_tenure, pie_emi;
     PieChart pieChart;
     TextView emi_amount;
+    TextView inwords_emi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_emi_graph, container, false);
         pieChart = v.findViewById(R.id.piechart);
         emi_amount=v.findViewById(R.id.emi_amount);
+        inwords_emi=v.findViewById(R.id.inwords_emi);
         return v ;
     }
 
@@ -58,8 +60,7 @@ public class fragment_emi_graph extends Fragment {
         String english=Currency.convertToIndianCurrency(String.valueOf(Math.round(emi)));
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
         String moneyString = formatter.format(Math.round(emi));
-
-        Toast.makeText(getActivity(), "In words "+english, Toast.LENGTH_SHORT).show();
+        inwords_emi.setText(english);
         emi_amount.setText(moneyString);
         double totalinterest=tenure*emi;
 
@@ -73,7 +74,7 @@ public class fragment_emi_graph extends Fragment {
                 new PieModel(
                         "Interest",
                         (int)totalinterest,
-                        Color.parseColor("#800000")));
+                        Color.parseColor("#66BB6A")));
         pieChart.startAnimation();
     }
 }

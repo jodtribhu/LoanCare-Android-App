@@ -240,6 +240,7 @@ public class fragment_emi_calculations extends Fragment {
         else {
             Log.i(TAG, "onCreateView: inside interest calculate");
             calculate=false;
+
         }
         if(!TextUtils.isEmpty(tenure.getText()))
         {

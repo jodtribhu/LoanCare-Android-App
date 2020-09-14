@@ -69,12 +69,12 @@ public class fragment_emi_graph extends Fragment {
                 new PieModel(
                         "Principal Amount",
                         (float) principle,
-                        Color.parseColor("#FFA726")));
+                        Color.parseColor("#2196f3")));
         pieChart.addPieSlice(
                 new PieModel(
                         "Interest",
                         (int)totalinterest,
-                        Color.parseColor("#66BB6A")));
+                        Color.parseColor("#1a237e")));
         pieChart.startAnimation();
     }
 }

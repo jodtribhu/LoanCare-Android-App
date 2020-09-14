@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".piemain" />
 
         <activity android:name=".emi_calculator">
             <intent-filter>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#2196f3"
+    android:background="#2f2f31"
     tools:context=".piemain">
 
     <androidx.cardview.widget.CardView
@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            >
 
             <org.eazegraph.lib.charts.PieChart
                 xmlns:app="http://schemas.android.com/apk/res-auto"

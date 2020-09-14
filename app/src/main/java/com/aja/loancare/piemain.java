@@ -48,12 +48,12 @@ public class piemain  extends AppCompatActivity{
                 new PieModel(
                         "Principal Amount",
                         (float) principle,
-                        Color.parseColor("#FFA726")));
+                        Color.parseColor("@color/R")));
         pieChart.addPieSlice(
                 new PieModel(
                         "Interest",
                         (int)totalinterest,
-                        Color.parseColor("#800000")));
+                        Color.parseColor("@color/Python")));
 
 
         pieChart.startAnimation();

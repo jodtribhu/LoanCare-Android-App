@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoanLists"></activity>
+        <activity android:name=".LoanForm"></activity>
+        <activity android:name=".LoanLists" />
         <activity android:name=".NewsUpdates" />
         <activity android:name=".MainActivity" />
         <activity

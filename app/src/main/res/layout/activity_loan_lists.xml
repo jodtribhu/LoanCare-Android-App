@@ -16,6 +16,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="1.0"
     android:text="Enter"
+    android:onClick="submit"
     android:id="@+id/loanButton"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

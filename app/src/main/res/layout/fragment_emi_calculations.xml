@@ -150,7 +150,7 @@
                 android:minHeight="4dp"
                 android:padding="8dp"
                 android:progressDrawable="@drawable/seekbar_style"
-                android:thumb="@drawable/hourglass"
+                android:thumb="@drawable/interest"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/interest_seekbar"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />

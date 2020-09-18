@@ -42,6 +42,7 @@ public class fragment_emi_calculations extends Fragment {
     TextView emiresult;
     int finalamount;
 
+    int stepSize;
     double si_r=0;
     double sp_amt=0;
     int st;
@@ -149,7 +150,13 @@ public class fragment_emi_calculations extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                calculation();
+                if (!TextUtils.isEmpty(s)) {
+                    if (Integer.parseInt(String.valueOf(s)) > 0 && Integer.parseInt(String.valueOf(s)) < 100) {
+                        calculation();
+                    } else {
+                        Toast.makeText(getActivity(), "Invalid Rate", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         tenure.addTextChangedListener(new TextWatcher() {
@@ -165,8 +172,12 @@ public class fragment_emi_calculations extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(Integer.parseInt(String.valueOf(s))>0) {
-                    calculation();
+                if(!TextUtils.isEmpty(s)) {
+                    if (Integer.parseInt(String.valueOf(s)) > 0 && Integer.parseInt(String.valueOf(s)) < 100) {
+                        calculation();
+                    } else {
+                        Toast.makeText(getActivity(), "Invalid Tenure", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -217,9 +228,11 @@ public class fragment_emi_calculations extends Fragment {
 
         if(!TextUtils.isEmpty(loanamt.getText()) )
         {
-           if(inedittext)
+            Log.i(TAG, "calculation: ineittext"+inedittext);
+            if(inedittext)
            {
-               p_amt=Integer.parseInt(loanamt.getText().toString());
+               p_amt=Double.parseDouble(loanamt.getText().toString().replaceAll("₹.|,", ""));
+
            }
             else
            {
@@ -240,6 +253,7 @@ public class fragment_emi_calculations extends Fragment {
         else {
             Log.i(TAG, "onCreateView: inside interest calculate");
             calculate=false;
+
         }
         if(!TextUtils.isEmpty(tenure.getText()))
         {

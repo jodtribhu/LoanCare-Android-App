@@ -22,12 +22,6 @@ EditText loan_amt;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emi_calculator);
-        loan_amt=findViewById(R.id.loan_amt);
-        mFragment_emi_calculations=new fragment_emi_calculations();
-        mFragment_emi_graph=new fragment_emi_graph();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.emi_calculator,mFragment_emi_calculations).replace(R.id.emi_graph,mFragment_emi_graph).commit();
-
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.emi_cal);
 
@@ -47,6 +41,13 @@ EditText loan_amt;
                 return false;
             }
         });
+        loan_amt=findViewById(R.id.loan_amt);
+        mFragment_emi_calculations=new fragment_emi_calculations();
+        mFragment_emi_graph=new fragment_emi_graph();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.emi_calculator,mFragment_emi_calculations).replace(R.id.emi_graph,mFragment_emi_graph).commit();
+
+
 
     }
 

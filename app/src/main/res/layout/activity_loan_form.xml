@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#2196f3"
+    android:background="#5fa0b6"
     android:orientation="vertical"
     android:padding="10dip"
     tools:context=".LoanForm">
@@ -21,7 +21,9 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:elevation="10dp"
-        app:cardCornerRadius="10dp">
+        app:cardBackgroundColor="#88b6c5"
+        android:layout_gravity="center"
+        app:cardCornerRadius="8dp">>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,24 +98,32 @@
                         android:id="@+id/home"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Home Loan" />
+                        android:button="@drawable/radiobuttonstyle"
+                        android:text="Home Loan"
+                        android:layout_marginBottom="4dp"/>
 
                     <RadioButton
                         android:id="@+id/car"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Car Loan" />
+                        android:button="@drawable/radiobuttonstyle"
+                        android:text="Car Loan"
+                        android:layout_marginBottom="4dp"/>
 
                     <RadioButton
                         android:id="@+id/edu"
                         android:layout_width="wrap_content"
+                        android:layout_marginBottom="4dp"
                         android:layout_height="wrap_content"
+                        android:button="@drawable/radiobuttonstyle"
                         android:text="Education Loan" />
 
                     <RadioButton
                         android:id="@+id/agri"
                         android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
+                        android:button="@drawable/radiobuttonstyle"
                         android:text="Agricultural Loan" />
 
                 </RadioGroup>

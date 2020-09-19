@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment_loanList">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_above="@+id/loanButton">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:id="@+id/recyclerpersonal" />
+    </ScrollView>
 
     <Button
         android:id="@+id/loanButton"

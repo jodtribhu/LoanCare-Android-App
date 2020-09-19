@@ -23,23 +23,6 @@ EditText loan_amt;
         setContentView(R.layout.activity_emi_calculator);
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.emi_cal);
-
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId())
-                {
-                    case R.id.News:startActivity(new Intent(getApplicationContext(), NewsUpdates.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.LoanList:startActivity(new Intent(getApplicationContext(),LoanLists.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });
         loan_amt=findViewById(R.id.loan_amt);
         mFragment_emi_calculations=new fragment_emi_calculations();
         loadFragment(mFragment_emi_calculations);

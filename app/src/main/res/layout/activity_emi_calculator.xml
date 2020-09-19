@@ -10,34 +10,16 @@
 
     tools:context=".emi_calculator">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <FrameLayout
+        android:id="@+id/emi_calculator"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#5fa0b6"
-        android:orientation="vertical"
+        android:layout_weight="5"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39">
-
-        <FrameLayout
-            android:id="@+id/emi_calculator"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/emi_graph"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
-
-        </FrameLayout>
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

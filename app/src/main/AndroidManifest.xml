@@ -10,8 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoanForm"></activity>
-        <activity android:name=".LoanLists" />
-        <activity android:name=".NewsUpdates" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".emi_calculator"

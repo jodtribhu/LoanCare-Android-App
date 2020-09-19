@@ -3,6 +3,7 @@ package com.aja.loancare;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ibm.icu.text.NumberFormat;
+import com.ibm.icu.text.RuleBasedNumberFormat;
+
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
 import java.util.Locale;
 
@@ -48,19 +53,28 @@ public class fragment_emi_calculations extends Fragment {
     int st;
     double carry=0;
     double semi_amt=0;
+    View v;
     NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
     private static final String TAG = "emi_calculator";
     emi_calculatorlistner listner;
 
+
+
+    TextView pie_pamt, pie_ir, pie_tenure, pie_emi;
+    PieChart pieChart;
+    TextView emi_amount;
+    TextView inwords_emi;
+
     public interface emi_calculatorlistner
     {
         void onInputCalcSent(double principal,int tenure,double rate,double emi);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_emi_calculations, container, false);
+        v=inflater.inflate(R.layout.fragment_emi, container, false);
 
         loan_seekbar=v.findViewById(R.id.loan_seekbar);
         loanamt=v.findViewById(R.id.loan_amt);
@@ -68,7 +82,9 @@ public class fragment_emi_calculations extends Fragment {
         interestamt=v.findViewById(R.id.interest_rate);
         tenure_Seekbar=v.findViewById(R.id.tenure_seekbar);
         tenure=v.findViewById(R.id.tenure);
-
+        pieChart = v.findViewById(R.id.piechart);
+        emi_amount=v.findViewById(R.id.emi_amount);
+        inwords_emi=v.findViewById(R.id.inwords_emi);
 
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -219,6 +235,52 @@ public class fragment_emi_calculations extends Fragment {
 
         return v;
     }
+
+
+
+    public void update_data(double s_principal,int s_tenure,double s_rate,double s_emi)
+    {
+        double principal=s_principal;
+        double interest=s_rate;
+        int tenure=s_tenure;
+        double emi=s_emi;
+        setData(principal,interest,tenure,emi);
+    }
+    private String convertIntoWords(Double str,String language,String Country) {
+        Locale local = new Locale(language, Country);
+        RuleBasedNumberFormat ruleBasedNumberFormat = new RuleBasedNumberFormat(local, RuleBasedNumberFormat.SPELLOUT);
+        return ruleBasedNumberFormat.format(str);
+    }
+
+    private void setData(double principle,double interest ,int tenure,double emi)
+    {
+        emi=Math.round(emi);
+        String prin=Double.toString(principle);
+        String intre=Double.toString(interest);
+        String tenu=Integer.toString(tenure);
+        String amt=Double.toString(emi);
+
+        String english=Currency.convertToIndianCurrency(String.valueOf(Math.round(emi)));
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+        String moneyString = formatter.format(Math.round(emi));
+        inwords_emi.setText(english);
+        emi_amount.setText(moneyString);
+        double totalinterest=tenure*emi;
+
+        pieChart.clearChart();
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Principal Amount",
+                        (float) principle,
+                        Color.parseColor("#ffce08")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Interest",
+                        (int)totalinterest,
+                        Color.parseColor("#b42e8c")));
+        pieChart.startAnimation();
+    }
+
     public void calculation()
     {
         p_amt=0;
@@ -301,5 +363,6 @@ public class fragment_emi_calculations extends Fragment {
     public void onDetach() {
         super.onDetach();
         listner=null;
+
     }
 }

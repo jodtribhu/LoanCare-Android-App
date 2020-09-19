@@ -15,7 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class emi_calculator extends AppCompatActivity implements fragment_emi_calculations.emi_calculatorlistner {
 private fragment_emi_calculations mFragment_emi_calculations;
-private fragment_emi_graph mFragment_emi_graph;
 EditText loan_amt;
 
     @Override
@@ -43,18 +42,49 @@ EditText loan_amt;
         });
         loan_amt=findViewById(R.id.loan_amt);
         mFragment_emi_calculations=new fragment_emi_calculations();
-        mFragment_emi_graph=new fragment_emi_graph();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.emi_calculator,mFragment_emi_calculations).replace(R.id.emi_graph,mFragment_emi_graph).commit();
+        loadFragment(mFragment_emi_calculations);
+        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null;
 
+                switch (menuItem.getItemId()) {
+                    case R.id.emi_cal:
+                        fragment =mFragment_emi_calculations;
+                        break;
 
+                    case R.id.News:
+                        fragment = new fragment_news();
+                        break;
 
+                    case R.id.LoanList:
+                        fragment = new fragment_loanList();
+                        break;
+
+                }
+
+                return loadFragment(fragment);
+            }
+        });
     }
 
     @Override
     public void onInputCalcSent(double principal, int tenure, double rate, double emi) {
-        mFragment_emi_graph.update_data(0,0,0,0);
-        mFragment_emi_graph.update_data(principal,tenure,rate,emi);
+        mFragment_emi_calculations.update_data(0,0,0,0);
+        mFragment_emi_calculations.update_data(principal,tenure,rate,emi);
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.emi_calculator, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
 

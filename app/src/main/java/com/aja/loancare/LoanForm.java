@@ -23,7 +23,7 @@ public class LoanForm extends Activity implements OnItemSelectedListener,View.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_loan_form);
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 

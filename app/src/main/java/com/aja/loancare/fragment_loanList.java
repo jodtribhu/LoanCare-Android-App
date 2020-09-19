@@ -31,7 +31,6 @@ public class fragment_loanList extends Fragment {
                 recyclerAdapter= new PersonalRecyclerAdapter(getActivity());
                 lv.setAdapter((RecyclerView.Adapter) recyclerAdapter);
                 lv.setLayoutManager((RecyclerView.LayoutManager) layoutmanager);
-
             }
         });
         return v;

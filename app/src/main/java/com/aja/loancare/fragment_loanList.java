@@ -12,16 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class fragment_loanList extends Fragment {
-    Button entry;
+    FloatingActionButton fab;
     private Object recyclerAdapter;
     private  Object layoutmanager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_loan_list, container, false);
-        entry=v.findViewById(R.id.loanButton);
-        entry.setOnClickListener(new View.OnClickListener() {
+        fab=v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),LoanForm.class);

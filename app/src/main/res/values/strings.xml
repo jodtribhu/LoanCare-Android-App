@@ -24,20 +24,92 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string-array name="pref_countries_entries">
-        <item>Canada</item>
-        <item>Switzerland</item>
-        <item>India</item>
-        <item>US</item>
-        <item>Japan</item>
-        <item>Europe</item>
+        <item>Afghani</item>
+        <item>Euro</item>
+        <item>Lek</item>
+        <item>Algerian Dinar</item>
+        <item>US Dollar</item>
+        <item>Kwanza</item>
+        <item>East Caribbean Dollar</item>
+        <item>Argentine Peso</item>
+        <item>Armenian Dram</item>
+        <item>Aruban Florin</item>
+        <item>Australian Dollar</item>
+        <item>Azerbaijan Manat</item>
+        <item>Bahamian Dollar</item>
+        <item>Bahraini Dinar</item>
+        <item>Taka</item>
+        <item>Barbados Dollar</item>
+        <item>>Belarusian Ruble</item>
+        <item>Belize Dollar</item>
+        <item>CFA Franc BCEAO</item>
+        <item>>Bermudian Dollar</item>
+        <item>Indian Rupee</item>
+        <item>Boliviano</item>
+        <item>Pula</item>
+        <item>Norwegian Krone</item>
+        <item>Brazilian Real</item>
+        <item>Brunei Dollar</item>
+        <item>Bulgarian Lev</item>
+        <item>Burundi Franc</item>
+        <item>Canadian Dollar</item>
+        <item>Indian Rupee</item>
+        <item>Indian Rupee</item>
+        <item>Chilean Peso</item>
+        <item>Yuan Renminbi</item>
+        <item>Colombian Peso</item>
+        <item>Congolese Franc</item>
+        <item>Costa Rican Colon</item>
+        <item>Cuban Peso</item>
+        <item>CAD</item>
+
     </string-array>
 
     <string-array name="pref_countries_values">
-        <item>Canada</item>
-        <item>Switzerland</item>
+        <item>AFN</item>
+        <item>EUR</item>
+        <item>ALL</item>
+        <item>USD</item>
+        <item>AOA</item>
+        <item>XCD</item>
+        <item>ARS</item>
+        <item>AMD</item>
+        <item>AWG</item>
+        <item>AUD</item>
+        <item>AZN</item>
+        <item>BSD</item>
+        <item>BHD</item>
+        <item>BDT</item>
+        <item>BBD</item>
+        <item>BYN</item>
+        <item>BZD</item>
+        <item>XOF</item>
+        <item>BMD</item>
+        <item>INR</item>
+        <item>BOB</item>
+        <item>BWP</item>
+        <item>NOK</item>
+        <item>BRL</item>
+        <item>BND</item>
+        <item>BGN</item>
+        <item>BIF</item>
+        <item>CAD</item>
+        <item>CLP</item>
+        <item>CNY</item>
+        <item>COP</item>
+        <item>CDF</item>
+        <item>CRC</item>
+        <item>HRK</item>
+        <item>CUC</item>
+    </string-array>
+
+    <string-array name="pref_countries_list">
         <item>India</item>
+        <item>USA</item>
+    </string-array>
+
+    <string-array name="pref_countries_list_values">
+        <item>IN</item>
         <item>US</item>
-        <item>Japan</item>
-        <item>Europe</item>
     </string-array>
 </resources>

@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
 
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.LoginFilter;
 import android.text.TextUtils;

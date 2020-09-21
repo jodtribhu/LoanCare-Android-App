@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class LoanForm extends Activity implements OnItemSelectedListener,View.OnClickListener,
+public class LoanForm extends Activity implements OnItemSelectedListener,
         DatePickerDialog.OnDateSetListener{
     EditText txtDate;
     private int mYear, mMonth, mDay;
@@ -53,7 +53,6 @@ public class LoanForm extends Activity implements OnItemSelectedListener,View.On
         spinner.setAdapter(dataAdapter);
 
         txtDate=(EditText)findViewById(R.id.in_date);
-        txtDate.setOnClickListener(this);
     }
 
     @Override
@@ -64,8 +63,8 @@ public class LoanForm extends Activity implements OnItemSelectedListener,View.On
         // TODO Auto-generated method stub
     }
 
-    @Override
-    public void onClick(View v) {
+
+    public void selectDate(View v) {
 
         if (v == txtDate) {
 

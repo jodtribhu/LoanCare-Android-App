@@ -23,17 +23,16 @@ public class fragment_loanList extends Fragment {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_loan_list, container, false);
         fab=v.findViewById(R.id.fab);
-        RecyclerView lv = v.findViewById(R.id.recyclerpersonal);
-        layoutmanager = new LinearLayoutManager(getActivity());
-        recyclerAdapter= new PersonalRecyclerAdapter(getActivity());
-        lv.setAdapter((RecyclerView.Adapter) recyclerAdapter);
-        lv.setLayoutManager((RecyclerView.LayoutManager) layoutmanager);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),LoanForm.class);
                 startActivity(intent);
-
+                RecyclerView lv = v.findViewById(R.id.recyclerpersonal);
+                layoutmanager = new LinearLayoutManager(getActivity());
+                recyclerAdapter= new PersonalRecyclerAdapter(getActivity());
+                lv.setAdapter((RecyclerView.Adapter) recyclerAdapter);
+                lv.setLayoutManager((RecyclerView.LayoutManager) layoutmanager);
 
             }
         });

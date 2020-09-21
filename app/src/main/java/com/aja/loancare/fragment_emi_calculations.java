@@ -2,17 +2,14 @@ package com.aja.loancare;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
 
 import android.text.Editable;
-import android.text.LoginFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -62,16 +59,13 @@ public class fragment_emi_calculations extends Fragment {
     private static final String TAG = "emi_calculator";
     emi_calculatorlistner listner;
 
-    String currency_code;
-    String currency_name;
-    String currency_symbol;
-    String tcurrency_symbol;
-    String currency_symbol_from;
+
+
     TextView pie_pamt, pie_ir, pie_tenure, pie_emi;
     PieChart pieChart;
     TextView emi_amount;
     TextView inwords_emi;
-    java.util.Currency mCurrency;
+
     public interface emi_calculatorlistner
     {
         void onInputCalcSent(double principal,int tenure,double rate,double emi);
@@ -91,22 +85,14 @@ public class fragment_emi_calculations extends Fragment {
         pieChart = v.findViewById(R.id.piechart);
         emi_amount=v.findViewById(R.id.emi_amount);
         inwords_emi=v.findViewById(R.id.inwords_emi);
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
-         currency_name=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
-        Locale uk = new Locale("en", currency_code);
-        mCurrency= java.util.Currency.getInstance(new Locale("en", currency_code));
-        currency_symbol= mCurrency.getSymbol(uk);
-        Toast.makeText(getActivity(), "currency symbol"+currency_symbol, Toast.LENGTH_SHORT).show();
 
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance(new Locale("en", currency_code));
-//                String moneyString = formatter.format(Math.round(progress));
-                loanamt.setText(moneyincommas(seekBar.getProgress()));
-//                Log.i(TAG, "onProgressChanged: false inedittext + Pricipal amount " +moneyString );
+                NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+                String moneyString = formatter.format(Math.round(progress));
+                loanamt.setText(moneyString);
+                Log.i(TAG, "onProgressChanged: false inedittext");
                 inedittext=false;
 
             }
@@ -118,10 +104,10 @@ public class fragment_emi_calculations extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-//                NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", currency_code));
-//                String moneysString = formatter.format(Math.round(seekBar.getProgress()));
-//                Log.i(TAG, "onStopTrackingTouch: false inedittext +amount "+moneysString );
-                loanamt.setText(moneyincommas(seekBar.getProgress()));
+                NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+                String moneysString = formatter.format(Math.round(seekBar.getProgress()));
+                Log.i(TAG, "onStopTrackingTouch: false inedittext");
+                loanamt.setText(moneysString);
                 p_amt=seekBar.getProgress();
                 calculation();
                 inedittext=false;
@@ -229,11 +215,8 @@ public class fragment_emi_calculations extends Fragment {
 
                 if(!TextUtils.isEmpty(s))
                 {
-                    Log.i(TAG, "Loan amount calculation: ineittext"+inedittext+"Value "+s.toString() +" " +currency_symbol);
                     calculation();
-                    Log.i(TAG, "afterTextChanged: "+s.toString());
-                    double d=ValueFromEdittext(s.toString());
-                    Log.i(TAG, "Loan amount double calculation: ineittext"+inedittext+"Value "+p_amt +" " +currency_symbol+" "+d);
+                    double d = Double.parseDouble(s.toString().replaceAll("₹.|,", ""));
                     double amount = Math.round(d);
                     if (amount > 100000000) {
                         loanamt.getText().clear();
@@ -278,10 +261,10 @@ public class fragment_emi_calculations extends Fragment {
         String amt=Double.toString(emi);
 
         String english=Currency.convertToIndianCurrency(String.valueOf(Math.round(emi)));
-//        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", currency_code));
-//        String moneyString = formatter.format(Math.round(emi));
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+        String moneyString = formatter.format(Math.round(emi));
         inwords_emi.setText(english);
-        emi_amount.setText(moneyincommas(Math.round(emi)));
+        emi_amount.setText(moneyString);
         double totalinterest=tenure*emi;
 
         pieChart.clearChart();
@@ -307,16 +290,15 @@ public class fragment_emi_calculations extends Fragment {
 
         if(!TextUtils.isEmpty(loanamt.getText()) )
         {
-            Log.i(TAG, "calculation: ineittext"+inedittext+"Value "+p_amt);
+            Log.i(TAG, "calculation: ineittext"+inedittext);
             if(inedittext)
            {
-               p_amt=ValueFromEdittext(loanamt.getText().toString());
-
+               p_amt=Double.parseDouble(loanamt.getText().toString().replaceAll("₹.|,", ""));
 
            }
             else
            {
-               p_amt=ValueFromEdittext(loanamt.getText().toString());
+               p_amt=Double.parseDouble(loanamt.getText().toString().replaceAll("₹.|,", ""));
            }
             calculate=true;
         }
@@ -364,60 +346,6 @@ public class fragment_emi_calculations extends Fragment {
              semi_amt=emi_amt;
             listner.onInputCalcSent(sp_amt,st,si_r,semi_amt);
         }
-    }
-
-    public  String moneyincommas(double d)
-    {
-       double amount=d;
-        String moneyString;
-        String currency_code_value_inmoney;
-        String currency_symbol_value_inmoney;
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_symbol_value_inmoney=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
-        currency_code_value_inmoney=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
-        if(currency_symbol_value_inmoney.length()==3 && currency_symbol_value_inmoney.matches("[a-zA-Z]*"))
-        {
-            java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance();
-
-
-            Log.i(TAG, "moneyincommas: Code "+currency_symbol_value_inmoney+" amount "+d);
-            formatter.setCurrency(java.util.Currency.getInstance(currency_symbol_value_inmoney));
-            moneyString = formatter.format(amount);
-        }
-        else
-        {
-            moneyString = NumberFormat.getCurrencyInstance(new Locale("en", currency_code_value_inmoney)).format(amount);
-        }
-
-        return moneyString;
-    }
-    public double ValueFromEdittext(String s)
-    {
-        double Value;
-        String currency_code_value;
-        String currency_name_value;
-        String tcurrency_symbol_value;
-        java.util.Currency mCurrency_value;
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
-        currency_name_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
-        Locale uk = new Locale("en", currency_code);
-        mCurrency_value= java.util.Currency.getInstance(new Locale("en", currency_code));
-        currency_symbol= mCurrency_value.getSymbol(uk);
-        Log.i(TAG, "ValueFromEdittext: value"+s.toString());
-        if(!TextUtils.isEmpty(s))
-        {
-            String replace=s.replaceAll("[^\\d.]", "");
-            Log.i(TAG, "ValueFromEdittext: replace"+replace.toString());
-            Value = Double.parseDouble(replace);
-
-        }
-        else
-        {
-            Value=0;
-        }
-        return Value;
     }
 
     @Override

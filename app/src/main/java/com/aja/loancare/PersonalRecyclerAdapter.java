@@ -27,8 +27,6 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
         Object intent;
-        holder.pers.setOnClickListener((View.OnClickListener) (intent= new Intent(context,)));
-       context.startActivity((Intent) intent);
     }
 
     @Override

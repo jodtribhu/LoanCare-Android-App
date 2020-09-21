@@ -3,8 +3,8 @@
 
         <ListPreference
             app:defaultValue="India"
-            app:entries="@array/pref_countries_entries"
-            app:entryValues="@array/pref_countries_values"
+            app:entries="@array/pref_countries_list"
+            app:entryValues="@array/pref_countries_list_values"
             app:key="Countries"
             app:title="Countries"
             app:summary="Select the country"

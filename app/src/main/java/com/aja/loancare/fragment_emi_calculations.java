@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
@@ -61,7 +62,7 @@ public class fragment_emi_calculations extends Fragment {
 
     private static final String TAG = "emi_calculator";
     emi_calculatorlistner listner;
-
+    ToggleButton year_month;
     String currency_code;
     String currency_name;
     String currency_symbol;
@@ -72,6 +73,7 @@ public class fragment_emi_calculations extends Fragment {
     TextView emi_amount;
     TextView inwords_emi;
     java.util.Currency mCurrency;
+    String tenure_type;
     public interface emi_calculatorlistner
     {
         void onInputCalcSent(double principal,int tenure,double rate,double emi);
@@ -81,7 +83,7 @@ public class fragment_emi_calculations extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_emi, container, false);
-
+        year_month=v.findViewById(R.id.year_month);
         loan_seekbar=v.findViewById(R.id.loan_seekbar);
         loanamt=v.findViewById(R.id.loan_amt);
         interest_seekbar=v.findViewById(R.id.interest_seekbar);
@@ -99,7 +101,7 @@ public class fragment_emi_calculations extends Fragment {
         mCurrency= java.util.Currency.getInstance(new Locale("en", currency_code));
         currency_symbol= mCurrency.getSymbol(uk);
         Toast.makeText(getActivity(), "currency symbol"+currency_symbol, Toast.LENGTH_SHORT).show();
-
+      
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -356,7 +358,7 @@ public class fragment_emi_calculations extends Fragment {
             Log.i(TAG, "onCreateView: inside calculate");
              si_r=i_r;
              sp_amt=p_amt;
-             st=t;
+            st = t;
              i_r=i_r/1200;
              carry=1 + i_r;
              emi_amt = (p_amt * i_r * Math.pow(carry,t))/(Math.pow(carry,t)-1);

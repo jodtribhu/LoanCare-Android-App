@@ -16,8 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class LoanForm extends Activity implements OnItemSelectedListener,
-        DatePickerDialog.OnDateSetListener{
+public class LoanForm extends Activity implements DatePickerDialog.OnDateSetListener, View.OnClickListener {
     EditText txtDate;
     private int mYear, mMonth, mDay;
     @Override
@@ -25,11 +24,8 @@ public class LoanForm extends Activity implements OnItemSelectedListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loan_form);
         // Spinner element
+        /*
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
-
         // Spinner Drop down elements
         List<String> banks = new ArrayList<String>();
         banks.add("-");
@@ -51,36 +47,30 @@ public class LoanForm extends Activity implements OnItemSelectedListener,
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+        */
 
         txtDate=(EditText)findViewById(R.id.in_date);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-    }
+
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
 
-
-    public void selectDate(View v) {
-
-        if (v == txtDate) {
-
-            // Get Current Date
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
+    @Override
+    public void onClick(View v) {
+        if(v == txtDate){
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog
-                    (this, this, mYear, mMonth, mDay);
-            datePickerDialog.show();
-        }
+        DatePickerDialog datePickerDialog = new DatePickerDialog
+                (this, this, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }}
 
-    }
 
     @Override
     public void onDateSet(DatePicker datePicker, int dayOfMonth, int monthOfYear, int year) {

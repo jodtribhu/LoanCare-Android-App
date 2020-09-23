@@ -1,220 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:background="#5fa0b6"
-    android:orientation="vertical"
-    android:padding="10dip"
-    tools:context=".LoanForm">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/details"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cardViewGraph"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="10dp"
-        app:cardBackgroundColor="#88b6c5"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        app:cardCornerRadius="8dp">>
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        tools:context=".LoanForm">
 
-        <LinearLayout
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="5">
+            android:layout_below="@+id/cardViewGraph"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="#88b6c5"
+            app:cardCornerRadius="8dp">>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:text="Portfolio"
-                android:textSize="23sp" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp">
+                android:orientation="vertical"
+                android:weightSum="7">
 
                 <TextView
-                    android:id="@+id/select"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Portfolio"
+                    android:textSize="23sp" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Select Bank:" />
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1">
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_toRightOf="@+id/select"
-                    android:textAlignment="textEnd" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp">
-
-                <RadioGroup
-                    android:id="@+id/myRadioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/home"
+                    <TextView
+                        android:id="@+id/select"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/radiobuttonstyle"
-                        android:text="Home Loan"
-                        android:layout_marginBottom="4dp"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Select Bank:" />
 
-                    <RadioButton
-                        android:id="@+id/car"
+                    <Spinner
+                        android:id="@+id/spinnerBank"
+                        android:entries="@array/BankItems"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/radiobuttonstyle"
-                        android:text="Car Loan"
-                        android:layout_marginBottom="4dp"/>
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_toRightOf="@+id/select"
+                        android:textAlignment="textEnd" />
 
-                    <RadioButton
-                        android:id="@+id/edu"
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/loantype"
                         android:layout_width="wrap_content"
-                        android:layout_marginBottom="4dp"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/radiobuttonstyle"
-                        android:text="Education Loan" />
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Loan type:" />
 
-                    <RadioButton
-                        android:id="@+id/agri"
+                    <Spinner
+                        android:id="@+id/spinnerLoan"
+                        android:entries="@array/LoanItems"
                         android:layout_width="wrap_content"
-
                         android:layout_height="wrap_content"
-                        android:button="@drawable/radiobuttonstyle"
-                        android:text="Agricultural Loan" />
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_toRightOf="@+id/select"
+                        android:textAlignment="textEnd" />
 
-                </RadioGroup>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textColorHint="#ffffff">
 
-                <com.google.android.material.textfield.TextInputEditText
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Principle Amount"
-                    android:inputType="numberDecimal|number"
-                    android:shadowColor="#E1D4D4"
-                    android:textColor="#DFC5C5"
-                    android:textColorHint="#871A" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#ffffff">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Principle Amount"
+                        android:inputType="numberDecimal|number"
+                        android:shadowColor="#E1D4D4"
+                        android:textColor="#DFC5C5"
+                        android:textColorHint="#871A" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textColorHint="#ffffff">
-
-                 <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Interest"
-                    android:inputType="numberDecimal|number"
-                    android:shadowColor="#E1D4D4"
-                    android:textColor="#DFC5C5"
-                    android:textColorHint="#871A" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#ffffff">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Interest"
+                        android:inputType="numberDecimal|number"
+                        android:shadowColor="#E1D4D4"
+                        android:textColor="#DFC5C5"
+                        android:textColorHint="#871A" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textColorHint="#ffffff">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:id="@+id/in_date"
-                    android:onClick="selectDate"
-                    android:hint="Date"
-                    android:inputType="date"
-                    android:shadowColor="#E1D4D4"
-                    android:textColor="#DFC5C5"
-                    android:textColorHint="#871A" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:textColorHint="#ffffff">
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#ffffff">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/in_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Date"
+                        android:inputType="date"
+                        android:shadowColor="#E1D4D4"
+                        android:textColor="#DFC5C5"
+                        android:textColorHint="#871A" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Duration"
-                    android:inputType="numberDecimal|number"
-                    android:shadowColor="#E1D4D4"
-                    android:textColor="#DFC5C5"
-                    android:textColorHint="#871A" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#ffffff">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Submit"
-                android:layout_gravity="center"
-                />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Duration"
+                        android:inputType="numberDecimal|number"
+                        android:shadowColor="#E1D4D4"
+                        android:textColor="#DFC5C5"
+                        android:textColorHint="#871A" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_background"
+                    android:text="Submit" />
 
-    </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 </LinearLayout>
+</ScrollView>

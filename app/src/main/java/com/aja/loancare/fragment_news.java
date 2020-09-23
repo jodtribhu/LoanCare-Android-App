@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 public class fragment_news extends Fragment {
     ImageButton settings;
+    private NewsRecyclerAdapter recyclerAdapter2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,6 +32,10 @@ public class fragment_news extends Fragment {
 
             }
         });
+        RecyclerView ns = v.findViewById(R.id.recyclernews);
+        recyclerAdapter2= new NewsRecyclerAdapter(getActivity());
+        ns.setAdapter( recyclerAdapter2);
+        ns.setLayoutManager( new LinearLayoutManager(getActivity()));
         return v;
     }
 

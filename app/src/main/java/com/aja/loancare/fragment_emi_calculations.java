@@ -92,9 +92,9 @@ public class fragment_emi_calculations extends Fragment {
         emi_amount=v.findViewById(R.id.emi_amount);
         inwords_emi=v.findViewById(R.id.inwords_emi);
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
+        currency_code=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"IN"));
          currency_name=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"IN"));
+        tcurrency_symbol=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"₹"));
         Locale uk = new Locale("en", currency_code);
         mCurrency= java.util.Currency.getInstance(new Locale("en", currency_code));
         currency_symbol= mCurrency.getSymbol(uk);

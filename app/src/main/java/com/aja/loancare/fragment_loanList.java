@@ -19,7 +19,6 @@ import model.Loan;
 
 public class fragment_loanList extends Fragment {
     FloatingActionButton fab;
-    private PersonalRecyclerAdapter recyclerAdapter;
     ArrayList<Loan> loanlist= new ArrayList<>();
 
 
@@ -41,8 +40,8 @@ public class fragment_loanList extends Fragment {
             }
         });
         RecyclerView lv = v.findViewById(R.id.recyclerpersonal);
-        recyclerAdapter= new PersonalRecyclerAdapter(getActivity() ,loanlist);
-        lv.setAdapter( recyclerAdapter);
+        PersonalRecyclerAdapter recyclerAdapter = new PersonalRecyclerAdapter(getActivity(), loanlist);
+        lv.setAdapter(recyclerAdapter);
         lv.setLayoutManager( new LinearLayoutManager(getActivity()));
         return v;
     }

@@ -20,10 +20,11 @@ import model.Loan;
 
 public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecyclerAdapter.PersonalRecyclerHolder> {
     ArrayList<Loan> ll;
+    Context context;
     private onPersonalItemisCLick mOnPersonalItemisCLick;
 
     public PersonalRecyclerAdapter(Context context, ArrayList<Loan> loanlist) {
-        Context context1=context;
+        this.context=context;
         this.ll=loanlist;
     }
 
@@ -42,9 +43,9 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         holder.txtpgr.setText(text.textpgr+"%");
         holder.loanimg.setImageResource(text.loanimg);
         holder.pgr.setProgress(Integer.parseInt(text.textpgr));
-//        intent;
-//        holder.pers.setOnClickListener((View.OnClickListener) (intent= new Intent(contex t,)));
-//       context.startActivity((Intent) intent);
+         Intent intent;
+        holder.pers.setOnClickListener((View.OnClickListener) (intent= new Intent(context,PersonalLoanActivity.class)));
+      context.startActivity( intent);
     }
 
     @Override

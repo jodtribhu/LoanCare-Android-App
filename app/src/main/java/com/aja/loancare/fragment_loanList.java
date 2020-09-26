@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import model.Loan;
 
-public class fragment_loanList extends Fragment {
+public class fragment_loanList extends Fragment implements PersonalRecyclerAdapter.onPersonalItemisCLick{
     FloatingActionButton fab;
     private PersonalRecyclerAdapter recyclerAdapter;
     ArrayList<Loan> loanlist= new ArrayList<>();
@@ -28,6 +28,8 @@ public class fragment_loanList extends Fragment {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_loan_list, container, false);
         fab=v.findViewById(R.id.fab);
+
+
         loanlist.add(new Loan("Home Loan","60",R.drawable.ic_home));
         loanlist.add(new Loan("Car Loan","30",R.drawable.ic_car));
         loanlist.add(new Loan("Education Loan","50",R.drawable.ic_edu));
@@ -44,7 +46,13 @@ public class fragment_loanList extends Fragment {
         recyclerAdapter= new PersonalRecyclerAdapter(getActivity() ,loanlist);
         lv.setAdapter( recyclerAdapter);
         lv.setLayoutManager( new LinearLayoutManager(getActivity()));
+        recyclerAdapter.onPersonalItemisCLickListener(this);
         return v;
     }
 
+    @Override
+    public void onClickListener(int position) {
+    Intent intent=new Intent(getActivity(),PersonalLoanActivity.class);
+    startActivity(intent);
+    }
 }

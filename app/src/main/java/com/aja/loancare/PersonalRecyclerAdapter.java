@@ -20,6 +20,8 @@ import model.Loan;
 
 public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecyclerAdapter.PersonalRecyclerHolder> {
     ArrayList<Loan> ll;
+    private onPersonalItemisCLick mOnPersonalItemisCLick;
+
     public PersonalRecyclerAdapter(Context context, ArrayList<Loan> loanlist) {
         Context context1=context;
         this.ll=loanlist;
@@ -57,10 +59,23 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         TextView txtpgr=itemView.findViewById(R.id.text_view_progress);
         public PersonalRecyclerHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnPersonalItemisCLick.onClickListener(getAdapterPosition());
+                }
+            });
 
         }
     }
+    public interface onPersonalItemisCLick{
+        void onClickListener( int position);
+    }
 
+    public void onPersonalItemisCLickListener(onPersonalItemisCLick onItemisCLick)
+    {
+        this.mOnPersonalItemisCLick=onItemisCLick;
+    }
 
 
 }

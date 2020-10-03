@@ -3,6 +3,9 @@ package com.aja.loancare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,34 +56,39 @@ private fragment_emi_calculations mFragment_emi_calculations;
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.emi_cal);
+        NavController navController= Navigation.findNavController(this,R.id.NavHost_Fragment);
+        NavigationUI.setupWithNavController(bottomNavigationView,navController);
+
         loan_amt=findViewById(R.id.loan_amt);
-        mFragment_emi_calculations=new fragment_emi_calculations();
-        loadFragment(mFragment_emi_calculations);
-        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment = null;
 
-                switch (menuItem.getItemId()) {
-                    case R.id.emi_cal:
-                        fragment =mFragment_emi_calculations;
-                        break;
+        //NO NEED USED JETPACK NAVIGATION
 
-                    case R.id.News:
-                        fragment = new fragment_news();
-                        break;
-
-                    case R.id.LoanList:
-                        fragment = new fragment_loanList();
-                        break;
-
-                }
-
-                return loadFragment(fragment);
-            }
-        });
+//        mFragment_emi_calculations=new fragment_emi_calculations();
+//        loadFragment(mFragment_emi_calculations);
+//        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+//        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                Fragment fragment = null;
+//
+//                switch (menuItem.getItemId()) {
+//                    case R.id.emi_cal:
+//                        fragment =mFragment_emi_calculations;
+//                        break;
+//
+//                    case R.id.News:
+//                        fragment = new fragment_news();
+//                        break;
+//
+//                    case R.id.LoanList:
+//                        fragment = new fragment_loanList();
+//                        break;
+//
+//                }
+//
+//                return loadFragment(fragment);
+//            }
+//        });
     }
 
     @Override

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_emi_top">
+
+    <fragment
+        android:id="@+id/fragment_loanList"
+        android:name="com.aja.loancare.fragment_loanList"
+        android:label="fragment_loan_list"
+        tools:layout="@layout/fragment_loan_list" />
+    <fragment
+        android:id="@+id/fragment_news"
+        android:name="com.aja.loancare.fragment_news"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/fragment_emi_top"
+        android:name="com.aja.loancare.fragment_emi_top"
+        android:label="fragment_emi_top"
+        tools:layout="@layout/fragment_emi_top" />
+</navigation>

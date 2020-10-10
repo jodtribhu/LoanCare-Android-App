@@ -39,20 +39,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 
-public class emi_calculator extends AppCompatActivity implements fragment_emi_calculations.emi_calculatorlistner {
-private fragment_emi_calculations mFragment_emi_calculations;
+public class emi_calculator extends AppCompatActivity {
 
     EditText loan_amt;
     private static final String Base_Url="";
     private static final String TAG = "emi_calculator";
-
+    fragment_emi_calculations mFragment_emi_calculations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emi_calculator);
-
-
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -91,11 +88,7 @@ private fragment_emi_calculations mFragment_emi_calculations;
 //        });
     }
 
-    @Override
-    public void onInputCalcSent(double principal, int tenure, double rate, double emi) {
-        mFragment_emi_calculations.update_data(0,0,0,0);
-        mFragment_emi_calculations.update_data(principal,tenure,rate,emi);
-    }
+
 
     private boolean loadFragment(Fragment fragment) {
         //switching fragment

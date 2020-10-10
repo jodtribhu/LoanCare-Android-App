@@ -61,7 +61,7 @@ public class fragment_emi_calculations extends Fragment {
     NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
     private static final String TAG = "emi_calculator";
-    emi_calculatorlistner listner;
+
     ToggleButton year_month;
     String currency_code;
     String currency_name;
@@ -74,10 +74,7 @@ public class fragment_emi_calculations extends Fragment {
     TextView inwords_emi;
     java.util.Currency mCurrency;
     String tenure_type;
-    public interface emi_calculatorlistner
-    {
-        void onInputCalcSent(double principal,int tenure,double rate,double emi);
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -364,7 +361,7 @@ public class fragment_emi_calculations extends Fragment {
              emi_amt = (p_amt * i_r * Math.pow(carry,t))/(Math.pow(carry,t)-1);
              Log.i(TAG, "onClick: emi"+emi_amt);
              semi_amt=emi_amt;
-            listner.onInputCalcSent(sp_amt,st,si_r,semi_amt);
+             update_data(sp_amt,st,si_r,semi_amt);
         }
     }
 
@@ -425,18 +422,10 @@ public class fragment_emi_calculations extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof emi_calculator) {
-            listner = (emi_calculatorlistner) context;
-        }else
-        {
-            throw new RuntimeException(context.toString()+"must implement emi_listner");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        listner=null;
-
     }
 }

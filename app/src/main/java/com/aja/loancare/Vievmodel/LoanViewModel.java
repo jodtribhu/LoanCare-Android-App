@@ -4,6 +4,10 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.aja.loancare.Repository.LoanRepository;
@@ -12,7 +16,7 @@ import com.aja.loancare.mvvmmodel.Loan;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LoanViewModel  extends AndroidViewModel {
+public class LoanViewModel  extends AndroidViewModel implements LifecycleObserver {
     private LoanRepository Repository;
     private LiveData<List<Loan>> allLoanss;
 
@@ -49,4 +53,6 @@ public class LoanViewModel  extends AndroidViewModel {
         }
         return new Loan();
     }
+
+
 }

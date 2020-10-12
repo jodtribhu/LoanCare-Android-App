@@ -13,15 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+import com.aja.loancare.mvvmmodel.Loan;
+
 import java.util.ArrayList;
 
-import model.Loan;
 
 public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecyclerAdapter.PersonalRecyclerHolder> {
     ArrayList<Loan> ll;
+    Context context;
+    private onPersonalItemisCLick mOnPersonalItemisCLick;
+
     public PersonalRecyclerAdapter(Context context, ArrayList<Loan> loanlist) {
-        Context context1=context;
+        this.context=context;
         this.ll=loanlist;
     }
 
@@ -32,17 +35,19 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         return new PersonalRecyclerHolder(view);
     }
 
+    public void changed(ArrayList<Loan> ll)
+    {
+        this.ll=ll;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
 
         Loan text = ll.get(position);
-        holder.loantype.setText(text.loantype);
-        holder.txtpgr.setText(text.textpgr+"%");
-        holder.loanimg.setImageResource(text.loanimg);
-        holder.pgr.setProgress(Integer.parseInt(text.textpgr));
-//        intent;
-//        holder.pers.setOnClickListener((View.OnClickListener) (intent= new Intent(contex t,)));
-//       context.startActivity((Intent) intent);
+        holder.loantype.setText(text.getLoanType());
+        holder.txtpgr.setText(text.getProgress());
+        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
+
     }
 
     @Override
@@ -57,10 +62,23 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         TextView txtpgr=itemView.findViewById(R.id.text_view_progress);
         public PersonalRecyclerHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnPersonalItemisCLick.onClickListener(getAdapterPosition());
+                }
+            });
 
         }
     }
+    public interface onPersonalItemisCLick{
+        void onClickListener( int position);
+    }
 
+    public void onPersonalItemisCLickListener(onPersonalItemisCLick onItemisCLick)
+    {
+        this.mOnPersonalItemisCLick=onItemisCLick;
+    }
 
 
 }

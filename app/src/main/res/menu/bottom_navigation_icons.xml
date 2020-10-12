@@ -3,15 +3,19 @@
     <group android:checkableBehavior="single">
         <item
             android:title="Emi Calculation"
-            android:id="@+id/emi_cal"
+            android:id="@+id/fragment_emi_top"
             android:icon="@drawable/emi_selector"/>
         <item
             android:title="News"
-            android:id="@+id/News"
+            android:id="@+id/fragment_news"
             android:icon="@drawable/news_selector"/>
         <item
             android:title="LoanList"
-            android:id="@+id/LoanList"
+            android:id="@+id/fragment_loanList"
             android:icon="@drawable/bottom_navigation_list"/>
+        <item
+            android:title="Settings"
+            android:id="@+id/fragment_settings"
+            android:icon="@drawable/settings_icon"/>
     </group>
 </menu>

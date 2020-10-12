@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
@@ -60,8 +61,8 @@ public class fragment_emi_calculations extends Fragment {
     NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
     private static final String TAG = "emi_calculator";
-    emi_calculatorlistner listner;
 
+    ToggleButton year_month;
     String currency_code;
     String currency_name;
     String currency_symbol;
@@ -72,16 +73,14 @@ public class fragment_emi_calculations extends Fragment {
     TextView emi_amount;
     TextView inwords_emi;
     java.util.Currency mCurrency;
-    public interface emi_calculatorlistner
-    {
-        void onInputCalcSent(double principal,int tenure,double rate,double emi);
-    }
+    String tenure_type;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_emi, container, false);
-
+        year_month=v.findViewById(R.id.year_month);
         loan_seekbar=v.findViewById(R.id.loan_seekbar);
         loanamt=v.findViewById(R.id.loan_amt);
         interest_seekbar=v.findViewById(R.id.interest_seekbar);
@@ -92,14 +91,14 @@ public class fragment_emi_calculations extends Fragment {
         emi_amount=v.findViewById(R.id.emi_amount);
         inwords_emi=v.findViewById(R.id.inwords_emi);
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"IN"));
-         currency_name=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"₹"));
+        currency_code=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_CODE,"IN"));
+         currency_name=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_NAME,"India"));
+        tcurrency_symbol=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_SYMBOL,"₹"));
         Locale uk = new Locale("en", currency_code);
         mCurrency= java.util.Currency.getInstance(new Locale("en", currency_code));
         currency_symbol= mCurrency.getSymbol(uk);
-        Toast.makeText(getActivity(), "currency symbol"+currency_symbol, Toast.LENGTH_SHORT).show();
 
+      
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -356,13 +355,13 @@ public class fragment_emi_calculations extends Fragment {
             Log.i(TAG, "onCreateView: inside calculate");
              si_r=i_r;
              sp_amt=p_amt;
-             st=t;
+            st = t;
              i_r=i_r/1200;
              carry=1 + i_r;
              emi_amt = (p_amt * i_r * Math.pow(carry,t))/(Math.pow(carry,t)-1);
              Log.i(TAG, "onClick: emi"+emi_amt);
              semi_amt=emi_amt;
-            listner.onInputCalcSent(sp_amt,st,si_r,semi_amt);
+             update_data(sp_amt,st,si_r,semi_amt);
         }
     }
 
@@ -373,8 +372,8 @@ public class fragment_emi_calculations extends Fragment {
         String currency_code_value_inmoney;
         String currency_symbol_value_inmoney;
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_symbol_value_inmoney=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
-        currency_code_value_inmoney=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
+        currency_symbol_value_inmoney=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_SYMBOL,"India"));
+        currency_code_value_inmoney=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_CODE,"INR"));
         if(currency_symbol_value_inmoney.length()==3 && currency_symbol_value_inmoney.matches("[a-zA-Z]*"))
         {
             java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance();
@@ -399,9 +398,9 @@ public class fragment_emi_calculations extends Fragment {
         String tcurrency_symbol_value;
         java.util.Currency mCurrency_value;
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
-        currency_name_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
+        currency_code_value=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_CODE,"INR"));
+        currency_name_value=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_NAME,"India"));
+        tcurrency_symbol_value=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_SYMBOL,"India"));
         Locale uk = new Locale("en", currency_code);
         mCurrency_value= java.util.Currency.getInstance(new Locale("en", currency_code));
         currency_symbol= mCurrency_value.getSymbol(uk);
@@ -423,18 +422,10 @@ public class fragment_emi_calculations extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof emi_calculator) {
-            listner = (emi_calculatorlistner) context;
-        }else
-        {
-            throw new RuntimeException(context.toString()+"must implement emi_listner");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        listner=null;
-
     }
 }

@@ -57,7 +57,8 @@
                     android:layout_marginEnd="8dp"
                     android:max="10000000"
                     android:maxHeight="4dp"
-
+                    android:progressTint="#2a2e43"
+                    android:thumbTint="#2a2e43"
                     android:minHeight="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -122,10 +123,11 @@
                     android:layout_height="20dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:progressTint="#2a2e43"
                     android:max="100"
                     android:maxHeight="4dp"
                     android:minHeight="4dp"
-
+                    android:thumbTint="#2a2e43"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/loan_seekbar"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -170,9 +172,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
+                    android:progressTint="#2a2e43"
                     android:maxHeight="4dp"
                     android:minHeight="4dp"
-
+                    android:thumbTint="#2a2e43"
                     android:padding="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline4"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -193,9 +196,10 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/year_month"
                     app:layout_constraintStart_toStartOf="@+id/interest_rate"
-                    app:layout_constraintTop_toTopOf="@+id/textView3" />
+                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -226,6 +230,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintGuide_begin="271dp" />
+
+                <ToggleButton
+                    android:id="@+id/year_month"
+                    android:layout_width="68dp"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#31A2B3B8"
+                    android:textColor="#214F5E"
+                    android:textOff="Year"
+                    android:textOn="M"
+                    app:layout_constraintBottom_toBottomOf="@+id/tenure"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tenure"
+                    app:layout_constraintTop_toTopOf="@+id/tenure"
+                    app:layout_constraintVertical_bias="0.571" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

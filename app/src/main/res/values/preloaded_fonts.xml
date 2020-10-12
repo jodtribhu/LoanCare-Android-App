@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+
         <item>@font/acme</item>
-        <item>@font/lora</item>
+        <item>@font/frank_ruhl_libre_bold</item>
+        <item>@font/libre_franklin_semibold_italic</item>
+        <item>@font/monoton</item>
         <item>@font/montserrat</item>
     </array>
 </resources>

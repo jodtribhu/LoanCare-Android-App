@@ -20,4 +20,9 @@
         android:name="com.aja.loancare.fragment_emi_top"
         android:label="fragment_emi_top"
         tools:layout="@layout/fragment_emi_top" />
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="com.aja.loancare.fragment_settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

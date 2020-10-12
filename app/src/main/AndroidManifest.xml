@@ -13,9 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".emi_calculator"></activity>
         <activity android:name=".PersonalLoanActivity" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
         <activity android:name=".LoanForm" />
         <activity android:name=".MainActivity" />
         <activity

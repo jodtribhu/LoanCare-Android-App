@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="3dp"
+        android:layout_marginTop="2dp"
         android:background="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorHeight="3dp"
+        android:background="#88b6c5"
         app:tabMode="fixed"
         app:tabPaddingBottom="8dp"
         app:tabPaddingTop="15dp" />

@@ -35,7 +35,7 @@
         android:text="Loan Care"
         android:textSize="40sp"
         android:textColor="#BFB4B4"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/monoton"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="340dp" />

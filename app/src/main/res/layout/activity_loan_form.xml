@@ -25,7 +25,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:cardBackgroundColor="#FF95B3"
-            app:cardCornerRadius="8dp">>
+            app:cardCornerRadius="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="20dp"
-                    android:text="Portfolio"
+                    android:text="Loan Details"
                     android:textSize="23sp" />
 
 
@@ -58,7 +58,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/lora"
-                        android:text="Select Bank:" />
+                        android:text="Select Bank: "  />
 
                     <Spinner
                         android:id="@+id/spinnerBank"
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/lora"
-                        android:text="Loan type:" />
+                        android:text="Loan type: " />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -105,17 +105,12 @@
                             android:layout_marginRight="7dp"
                             android:layout_toRightOf="@+id/select"
                             android:entries="@array/LoanItems"
-                            android:textAlignment="textStart"></Spinner>
+                            android:textAlignment="textStart"/>
 
                     </FrameLayout>
 
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
 
 
                 <View
@@ -135,6 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        android:id="@+id/principle"
                         android:fontFamily="@font/montserrat"
                         android:hint="Principle Amount"
                         android:inputType="numberDecimal|number"
@@ -157,6 +153,7 @@
                         android:ems="10"
                         android:fontFamily="@font/montserrat"
                         android:hint="Interest"
+                        android:id="@+id/interest"
                         android:inputType="numberDecimal|number"
                         android:shadowColor="#ffffff"
                         android:textColor="#ffffff"
@@ -198,6 +195,7 @@
                         android:ems="10"
                         android:fontFamily="@font/montserrat"
                         android:hint="Duration"
+                        android:id="@+id/duration"
                         android:inputType="numberDecimal|number"
                         android:shadowColor="#ffffff"
                         android:textColor="#ffffff"

@@ -5,7 +5,10 @@ import java.util.List;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,58 +20,61 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class LoanForm extends Activity implements View.OnClickListener,DatePickerDialog.OnDateSetListener,OnItemSelectedListener {
-    EditText txtDate;
-    Button b1;
+public class LoanForm extends Activity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
+    EditText txtDate,principle,interest,duration;
+    Spinner bank,loan;
+    Button submit;
+    String bankName,loanType,date;
     private int mYear, mMonth, mDay;
+    int durationVal;
+    Intent i;
+    Float principleVal,interestVal;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loan_form);
 
         // Spinner element
+        principle=findViewById(R.id.principle);
+        interest=findViewById(R.id.interest);
+        duration=findViewById(R.id.duration);
+        loan = (Spinner) findViewById(R.id.spinnerLoan);
+        loan.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loanType = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),loanType,Toast.LENGTH_SHORT).show();
+            }
 
-        Spinner s1 = (Spinner) findViewById(R.id.spinnerLoan);
-        s1.setOnItemSelectedListener(this);
-       /* // Spinner Drop down elements
-        List<String> banks = new ArrayList<String>();
-        banks.add("-");
-        banks.add("SBI");
-        banks.add("HDFC");
-        banks.add("PNB");
-        banks.add("Axis bank");
-        banks.add("Canara");
-        banks.add("Federal bank");
-        banks.add("ICICI");
-        banks.add("City bank");
-        banks.add("Dhanlaxmi bank");
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, banks);
+            }
+        });
+        bank = (Spinner) findViewById(R.id.spinnerBank);
+        bank.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bankName = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),bankName,Toast.LENGTH_SHORT).show();
+            }
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-        */
+            }
+        });
+        i=getIntent();
+
+
 
         txtDate=(EditText)findViewById(R.id.in_date);
+        submit=findViewById(R.id.Button_loan);
+        submit.setOnClickListener(this);
         txtDate.setOnClickListener(this);
     }
 
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selected=parent.getItemAtPosition(position).toString();
-        if(selected == "others"){
-
-        }
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-    }
 
     @Override
     public void onClick(View v) {
@@ -84,6 +90,62 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
             datePickerDialog.show();
 
         }
+        if (v == submit){
+            boolean error=false;
+            String errMsg="Enter ";
+            if(principle.getText().toString().matches("")){
+                error=true;
+                errMsg+="principle; ";
+            }
+            else {
+                principleVal = Float.valueOf(principle.getText().toString());
+            }
+            if(interest.getText().toString().matches("")){
+                error=true;
+                errMsg+="interest; ";
+            }
+            else {
+                interestVal = Float.valueOf(interest.getText().toString());
+            }
+            if(duration.getText().toString().matches("")){
+                error=true;
+                errMsg+="duration; ";
+            }
+            else {
+                durationVal = Integer.parseInt(duration.getText().toString());
+
+            }
+            if(txtDate.getText().toString().matches("")){
+                error=true;
+                errMsg+="date; ";
+            }
+            else {
+                date = txtDate.getText().toString();
+            }
+            if(bankName=="-"){
+                errMsg+="Bank; ";
+            }
+            if(loanType=="-"){
+                errMsg+="Loan type; ";
+            }
+
+            if(error==true) {
+                Toast.makeText(getApplicationContext(),errMsg,Toast.LENGTH_LONG).show();
+            }
+            else {
+                i.putExtra("principle", String.valueOf(principleVal));
+                i.putExtra("interest", String.valueOf(interestVal));
+                i.putExtra("duration", String.valueOf(durationVal));
+                i.putExtra("date", date);
+                i.putExtra("bankname",bankName);
+                i.putExtra("loantype", loanType);
+
+                Toast.makeText(this, "onClick: Log data "+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK,i);
+                finish();
+
+            }
+        }
     }
 
 
@@ -91,6 +153,5 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
     public void onDateSet(DatePicker datePicker, int dayOfMonth, int monthOfYear, int year) {
         txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1)
                 + "-" + year);
-
     }
 }

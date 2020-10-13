@@ -2,8 +2,13 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
 
+        <item>@font/abeezee</item>
+        <item>@font/abhaya_libre</item>
         <item>@font/acme</item>
+        <item>@font/adamina</item>
         <item>@font/frank_ruhl_libre_bold</item>
+        <item>@font/hind_vadodara</item>
+        <item>@font/hind_vadodara_light</item>
         <item>@font/libre_franklin_semibold_italic</item>
         <item>@font/monoton</item>
         <item>@font/montserrat</item>

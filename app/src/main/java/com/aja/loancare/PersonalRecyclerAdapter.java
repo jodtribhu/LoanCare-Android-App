@@ -45,6 +45,10 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
 
         Loan text = ll.get(position);
         holder.loantype.setText(text.getLoanType());
+        holder.bankname.setText(text.getLoanType());
+        holder.principal.setText(text.getLoanType());
+        holder.interest.setText(text.getLoanType());
+        holder.duration.setText(text.getLoanType());
         holder.txtpgr.setText(text.getProgress());
         holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
 
@@ -55,9 +59,12 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         return ll.size();
     }
     public class PersonalRecyclerHolder extends RecyclerView.ViewHolder {
-        LinearLayout pers= itemView.findViewById(R.id.pers);
         ImageView loanimg= itemView.findViewById(R.id.loanimg);
         TextView loantype=itemView.findViewById(R.id.loantype);
+        TextView bankname=itemView.findViewById(R.id.bank);
+        TextView principal=itemView.findViewById(R.id.prp);
+        TextView interest=itemView.findViewById(R.id.intrst);
+        TextView duration=itemView.findViewById(R.id.dur);
         ProgressBar pgr=itemView.findViewById(R.id.progress_bar);
         TextView txtpgr=itemView.findViewById(R.id.text_view_progress);
         public PersonalRecyclerHolder(@NonNull View itemView) {

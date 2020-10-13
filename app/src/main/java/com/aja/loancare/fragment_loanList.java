@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.aja.loancare.Vievmodel.LoanViewModel;
 import com.aja.loancare.mvvmmodel.Loan;
@@ -26,7 +27,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     ArrayList<Loan> loanlist;
     LoanViewModel loanviemodel;
     PersonalRecyclerAdapter recyclerAdapter;
-
+    Button modify,more;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,15 +52,19 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),LoanForm.class);
                 startActivity(intent);
+                modify=v.findViewById(R.id.mod);
+                more=v.findViewById(R.id.more);
+                modify.setOnClickListener(this);
+                more.setOnClickListener(this);
 
             }
         });
-
         return v;
     }
 
     @Override
     public void onClickListener(int position) {
+
     Intent intent=new Intent(getActivity(),PersonalLoanActivity.class);
     intent.putExtra("position",position);
     startActivity(intent);

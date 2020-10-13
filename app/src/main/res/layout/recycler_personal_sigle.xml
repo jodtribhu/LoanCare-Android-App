@@ -113,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:text="Modify"
                 android:id="@+id/mod"
+                android:onClick="modify"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
             <Button

@@ -31,13 +31,13 @@ public class fragment_emi_top extends Fragment {
                 switch (position)
                 {
                     case 0:{
-                        tab.setText("EMI COMPARE");
-                        tab.setIcon(R.drawable.tabbed_compare);
+                        tab.setText("EMI CALCULATOR");
+                        tab.setIcon(R.drawable.tab_loan_calculator);
                         break;
                     }
                     case 1:{
-                        tab.setText("EMI CALCULATOR");
-                        tab.setIcon(R.drawable.tab_loan_calculator);
+                        tab.setText("EMI COMPARE ");
+                        tab.setIcon(R.drawable.tabbed_compare);
                         break;
                     }
                 }

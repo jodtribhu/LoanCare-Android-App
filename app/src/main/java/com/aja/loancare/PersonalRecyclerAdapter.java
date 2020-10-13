@@ -13,10 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+import com.aja.loancare.mvvmmodel.Loan;
+
 import java.util.ArrayList;
 
-import model.Loan;
 
 public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecyclerAdapter.PersonalRecyclerHolder> {
     ArrayList<Loan> ll;
@@ -35,17 +35,19 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         return new PersonalRecyclerHolder(view);
     }
 
+    public void changed(ArrayList<Loan> ll)
+    {
+        this.ll=ll;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
 
         Loan text = ll.get(position);
-        holder.loantype.setText(text.loantype);
-        holder.txtpgr.setText(text.textpgr+"%");
-        holder.loanimg.setImageResource(text.loanimg);
-        holder.pgr.setProgress(Integer.parseInt(text.textpgr));
-//         Intent intent;
-//        holder.pers.setOnClickListener((View.OnClickListener) (intent= new Intent(context,PersonalLoanActivity.class)));
-//      context.startActivity( intent);
+        holder.loantype.setText(text.getLoanType());
+        holder.txtpgr.setText(text.getProgress());
+        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
+
     }
 
     @Override

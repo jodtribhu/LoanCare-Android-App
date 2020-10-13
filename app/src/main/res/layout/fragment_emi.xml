@@ -57,7 +57,8 @@
                     android:layout_marginEnd="8dp"
                     android:max="10000000"
                     android:maxHeight="4dp"
-
+                    android:progressTint="#2a2e43"
+                    android:thumbTint="#2a2e43"
                     android:minHeight="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -122,10 +123,11 @@
                     android:layout_height="20dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:progressTint="#2a2e43"
                     android:max="100"
                     android:maxHeight="4dp"
                     android:minHeight="4dp"
-
+                    android:thumbTint="#2a2e43"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/loan_seekbar"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -170,9 +172,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
+                    android:progressTint="#2a2e43"
                     android:maxHeight="4dp"
                     android:minHeight="4dp"
-
+                    android:thumbTint="#2a2e43"
                     android:padding="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline4"
                     app:layout_constraintEnd_toEndOf="parent"

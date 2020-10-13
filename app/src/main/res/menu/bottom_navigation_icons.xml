@@ -13,5 +13,9 @@
             android:title="LoanList"
             android:id="@+id/fragment_loanList"
             android:icon="@drawable/bottom_navigation_list"/>
+        <item
+            android:title="Settings"
+            android:id="@+id/fragment_settings"
+            android:icon="@drawable/settings_icon"/>
     </group>
 </menu>

@@ -91,13 +91,13 @@ public class fragment_emi_calculations extends Fragment {
         emi_amount=v.findViewById(R.id.emi_amount);
         inwords_emi=v.findViewById(R.id.inwords_emi);
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"IN"));
-         currency_name=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"₹"));
+        currency_code=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_CODE,"IN"));
+         currency_name=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_NAME,"India"));
+        tcurrency_symbol=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_SYMBOL,"₹"));
         Locale uk = new Locale("en", currency_code);
         mCurrency= java.util.Currency.getInstance(new Locale("en", currency_code));
         currency_symbol= mCurrency.getSymbol(uk);
-        Toast.makeText(getActivity(), "currency symbol"+currency_symbol, Toast.LENGTH_SHORT).show();
+
       
         loan_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -372,8 +372,8 @@ public class fragment_emi_calculations extends Fragment {
         String currency_code_value_inmoney;
         String currency_symbol_value_inmoney;
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_symbol_value_inmoney=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
-        currency_code_value_inmoney=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
+        currency_symbol_value_inmoney=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_SYMBOL,"India"));
+        currency_code_value_inmoney=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_CODE,"INR"));
         if(currency_symbol_value_inmoney.length()==3 && currency_symbol_value_inmoney.matches("[a-zA-Z]*"))
         {
             java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance();
@@ -398,9 +398,9 @@ public class fragment_emi_calculations extends Fragment {
         String tcurrency_symbol_value;
         java.util.Currency mCurrency_value;
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        currency_code_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_CODE,"INR"));
-        currency_name_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_NAME,"India"));
-        tcurrency_symbol_value=String.valueOf(sharedPreferences.getString(SettingsActivity.CURRENCY_SYMBOL,"India"));
+        currency_code_value=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_CODE,"INR"));
+        currency_name_value=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_NAME,"India"));
+        tcurrency_symbol_value=String.valueOf(sharedPreferences.getString(fragment_settings.CURRENCY_SYMBOL,"India"));
         Locale uk = new Locale("en", currency_code);
         mCurrency_value= java.util.Currency.getInstance(new Locale("en", currency_code));
         currency_symbol= mCurrency_value.getSymbol(uk);

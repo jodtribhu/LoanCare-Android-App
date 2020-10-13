@@ -45,17 +45,6 @@ public class fragment_news extends Fragment implements NewsRecyclerAdapter.onIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_news, container, false);
-        settings=v.findViewById(R.id.settings_id);
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),SettingsActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-
 
         mQueue= MySingleton.getInstance(getActivity()).getRequestQueue();
 

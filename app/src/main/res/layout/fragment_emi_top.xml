@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment_emi_top">
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-
-        android:layout_height="3dp"
-        android:background="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -24,6 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorHeight="3dp"
+        app:tabIndicatorColor="#2a2e43"
+        app:tabIconTint="#2a2e43"
+        app:tabTextColor="#2a2e43"
+        android:background="#5fa0b6"
         app:tabMode="fixed"
         app:tabPaddingBottom="8dp"
         app:tabPaddingTop="15dp" />
@@ -35,6 +30,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,11 +38,11 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
 
-//        Loan text = ll.get(position);
-//        holder.loantype.setText(text.loantype);
-//        holder.txtpgr.setText(text.textpgr+"%");
-//        holder.loanimg.setImageResource(text.loanimg);
-//        holder.pgr.setProgress(Integer.parseInt(text.textpgr));
+        Loan text = ll.get(position);
+        holder.loantype.setText(text.loantype);
+        holder.txtpgr.setText(text.textpgr+"%");
+        holder.loanimg.setImageResource(text.loanimg);
+        holder.pgr.setProgress(Integer.parseInt(text.textpgr));
 //         Intent intent;
 //        holder.pers.setOnClickListener((View.OnClickListener) (intent= new Intent(context,PersonalLoanActivity.class)));
 //      context.startActivity( intent);

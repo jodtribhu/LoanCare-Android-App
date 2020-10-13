@@ -52,6 +52,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     @Override
     public void onClickListener(int position) {
     Intent intent=new Intent(getActivity(),PersonalLoanActivity.class);
+    intent.putExtra("position",position);
     startActivity(intent);
     }
 }

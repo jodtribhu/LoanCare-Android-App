@@ -1,14 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_emi_compare">
+    android:orientation="vertical"
+    android:background="#5fa0b6"
+    tools:context=".MainActivity">
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="MissingConstraints">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="LOAN-1"
+            android:textColor="#10000A" />
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="LOAN-2"
+            android:textColor="#10000A" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/L1amount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:hint="Amount"
+            android:inputType="number|numberDecimal"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/L2amount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number|numberDecimal"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:hint="Amount"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/L1interest"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:inputType="number|numberDecimal"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:hint="Interest"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/L2interest"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number|numberDecimal"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:hint="Interest"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/L1month"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:hint="Months"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/L2month"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:hint="Months"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="25dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/calulate"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:fontFamily="monospace"
+            android:text="calulate" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/reset"
+            android:background="@drawable/button_background"
+            android:fontFamily="monospace"
+            android:text="reset" />
+    </LinearLayout>
+
+    <TableLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:stretchColumns="0,1,2">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+
+
+            </TableRow>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/adamina"
+                android:gravity="left"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_margin="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/hind_vadodara"
+                android:gravity="center"
+                android:text="Loan-1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="3dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/hind_vadodara"
+                android:gravity="center"
+                android:text="Loan-2"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="12sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/hind_vadodara"
+                android:gravity="left"
+                android:text="EMI"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/emi1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_margin="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/abeezee"
+                android:gravity="center"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/emi2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/abeezee"
+                android:gravity="center"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#000000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/hind_vadodara"
+                android:gravity="left"
+                android:text="Total Interest"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/interest1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_margin="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/abeezee"
+                android:gravity="center"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+
+            <TextView
+
+                android:id="@+id/interest2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="3dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/abeezee"
+                android:gravity="center"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="#000000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="0"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/hind_vadodara"
+                android:gravity="left"
+                android:text="Total Amount"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/TA1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_margin="1dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/abeezee"
+                android:gravity="center"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TA2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="3dp"
+                android:background="#88b6c5"
+                android:fontFamily="@font/abeezee"
+                android:gravity="center"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+        </TableRow>
+
+
+    </TableLayout>
+</LinearLayout>

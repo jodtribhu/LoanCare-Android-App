@@ -64,7 +64,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 loanviemodel.delete(recyclerAdapter.getLoanAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(), "Alarm Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Loan Deleted", Toast.LENGTH_SHORT).show();
             }
         })).attachToRecyclerView(lv);
         loanviemodel.getAllLoanss().observe(getActivity(), new Observer<List<Loan>>() {

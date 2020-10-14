@@ -35,7 +35,7 @@ public class LoanRepository {
     }
     public void delete(Loan loan)
     {
-        new DeleteAllLoanAsyncTask(mLoanDao).execute(loan);
+        new DeleteLoanAsyncTask(mLoanDao).execute(loan);
     }
     public void deleteallAlarms()
     {

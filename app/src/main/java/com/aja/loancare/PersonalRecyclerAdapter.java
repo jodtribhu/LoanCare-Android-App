@@ -115,6 +115,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
 
     public Loan getLoanAt(int position)
     {
-        return ll.get(position);
+       Loan loan=ll.get(position);
+        return loan;
     }
 }

@@ -21,8 +21,8 @@ public interface LoanDao {
 
     @Query("DELETE FROM loan_table")
     void deleteall();
-    @Query("SELECT * FROM loan_table ORDER BY loan_id DESC")
-    LiveData<List<Loan>> getAllalarm();
+    @Query("SELECT * FROM loan_table")
+    LiveData<List<Loan>> getAllLoan();
 
     @Query("SELECT * FROM loan_table WHERE loan_id=:id")
     Loan getById(int id);

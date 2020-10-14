@@ -3,7 +3,9 @@ package com.aja.loancare.Repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.aja.loancare.mvvmmodel.Loan;
 import com.aja.loancare.mvvmmodel.LoanDao;
@@ -20,27 +22,27 @@ public class LoanRepository {
     {
         LoanDatabase database=LoanDatabase.getInstance(application);
         mLoanDao=database.mLoanDao();
-        allLoan=mLoanDao.getAllalarm();
+        allLoan=mLoanDao.getAllLoan();
     }
 
     public void Insert(Loan loan)
     {
-        new InsertAlarmAsyncTask(mLoanDao).execute(loan);
+        new InsertLoanAsyncTask(mLoanDao).execute(loan);
     }
     public void update(Loan loan)
     {
-        new UpdateAlarmAsyncTask(mLoanDao).execute(loan);
+        new UpdateLoanAsyncTask(mLoanDao).execute(loan);
     }
     public void delete(Loan loan)
     {
-        new DeleteAlarmAsyncTask(mLoanDao).execute(loan);
+        new DeleteAllLoanAsyncTask(mLoanDao).execute(loan);
     }
     public void deleteallAlarms()
     {
-        new DeleteAllAlarmAsyncTask(mLoanDao).execute();
+        new DeleteAllLoanAsyncTask(mLoanDao).execute();
     }
 
-    public LiveData<List<Loan>> getAllAlarm()
+    public LiveData<List<Loan>> getAllLoan()
     {
         return allLoan;
     }
@@ -50,11 +52,11 @@ public class LoanRepository {
     }
 
 
-    private static class InsertAlarmAsyncTask extends AsyncTask<Loan,Void,Void>
+    private static class InsertLoanAsyncTask extends AsyncTask<Loan,Void,Void>
     {
         private LoanDao mLoanDao;
 
-        private  InsertAlarmAsyncTask(LoanDao mLoanDao)
+        private  InsertLoanAsyncTask(LoanDao mLoanDao)
         {
             this.mLoanDao=mLoanDao;
         }
@@ -66,11 +68,11 @@ public class LoanRepository {
         }
     }
 
-    private static class DeleteAlarmAsyncTask extends AsyncTask<Loan,Void,Void>
+    private static class DeleteLoanAsyncTask extends AsyncTask<Loan,Void,Void>
     {
         private LoanDao mLoanDao;
 
-        private DeleteAlarmAsyncTask(LoanDao mLoanDao)
+        private DeleteLoanAsyncTask(LoanDao mLoanDao)
         {
             this.mLoanDao=mLoanDao;
         }
@@ -82,11 +84,11 @@ public class LoanRepository {
         }
     }
 
-    private static class UpdateAlarmAsyncTask extends AsyncTask<Loan,Void,Void>
+    private static class UpdateLoanAsyncTask extends AsyncTask<Loan,Void,Void>
     {
         private LoanDao mLoanDao;
 
-        private  UpdateAlarmAsyncTask(LoanDao mLoanDao)
+        private  UpdateLoanAsyncTask(LoanDao mLoanDao)
         {
             this.mLoanDao=mLoanDao;
         }
@@ -98,11 +100,11 @@ public class LoanRepository {
         }
     }
 
-    private static class DeleteAllAlarmAsyncTask extends AsyncTask<Loan,Void,Void>
+    private static class DeleteAllLoanAsyncTask extends AsyncTask<Loan,Void,Void>
     {
         private LoanDao mLoanDao;
 
-        private  DeleteAllAlarmAsyncTask(LoanDao mLoanDao)
+        private  DeleteAllLoanAsyncTask(LoanDao mLoanDao)
         {
             this.mLoanDao=mLoanDao;
         }
@@ -127,4 +129,5 @@ public class LoanRepository {
             return mLoanDao.getById(params[0]);
         }
     }
+
 }

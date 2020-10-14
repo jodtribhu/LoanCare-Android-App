@@ -24,8 +24,8 @@ public class PersonalLoanActivity extends AppCompatActivity {
         layMain = findViewById(R.id.table);
 
         String[] firstRow = {"EMI#", "EMI", "Principal", "Interest","Balance"};
-        String[] secondRow = {"11", "12", "13", "14","15"};
-        String[] thirdRow = {"16", "17", "18", "19","20"};
+        String[] secondRow = {"1", "12", "13", "14","15"};
+        String[] thirdRow = {"2", "17", "18", "19","20"};
 
         mTable.addRow(firstRow);
         mTable.addRow(secondRow);
@@ -38,8 +38,8 @@ public class PersonalLoanActivity extends AppCompatActivity {
             layMain = findViewById(R.id.table);
 
             String[] firstRow = {"EMI#", "EMI", "Principal", "Interest","Balance"};
-            String[] secondRow = {"10", "12", "13", "14","15"};
-            String[] thirdRow = {"20", "17", "18", "19","20"};
+            String[] secondRow = {"1", "12", "13", "14","15"};
+            String[] thirdRow = {"2", "17", "18", "19","20"};
 
             mTable.addRow(firstRow);
             mTable.addRow(secondRow);
@@ -53,8 +53,8 @@ public class PersonalLoanActivity extends AppCompatActivity {
             layMain = findViewById(R.id.table);
 
             String[] firstRow = {"EMI#", "EMI", "Principal", "Interest","Balance"};
-            String[] secondRow = {"50", "12", "13", "14","15"};
-            String[] thirdRow = {"60", "17", "18", "19","20"};
+            String[] secondRow = {"1", "12", "13", "14","15"};
+            String[] thirdRow = {"2", "17", "18", "19","20"};
 
             mTable.addRow(firstRow);
             mTable.addRow(secondRow);
@@ -68,8 +68,8 @@ public class PersonalLoanActivity extends AppCompatActivity {
             layMain = findViewById(R.id.table);
 
             String[] firstRow = {"EMI#", "EMI", "Principal", "Interest","Balance"};
-            String[] secondRow = {"70", "12", "13", "14","15"};
-            String[] thirdRow = {"80", "17", "18", "19","20"};
+            String[] secondRow = {"1", "12", "13", "14","15"};
+            String[] thirdRow = {"2", "17", "18", "19","20"};
 
             mTable.addRow(firstRow);
             mTable.addRow(secondRow);

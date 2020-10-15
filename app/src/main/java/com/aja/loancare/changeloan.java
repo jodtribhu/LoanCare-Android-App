@@ -15,13 +15,19 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class changeloan extends Activity implements View.OnClickListener, DatePickerDialog.OnDateSetListener  {
+    public static String EDIT_LOAN_PRINCIPLE="com.aja.loancare.PRINCIPLE";
+    public static String EDIT_LOAN_INTEREST="com.aja.loancare.INTEREST";
+    public static String EDIT_LOAN_DURATION="com.aja.loancare.DURATION";
+    public static String EDIT_LOAN_DATE="com.aja.loancare.DATE";
+    public static String EDIT_LOAN_BANKNAME="com.aja.loancare.BANKNAME";
+    public static String EDIT_LOAN_LOANTYPE="com.aja.loancare.LOANTYPE";
     EditText txtDate,principle,interest,duration;
     Spinner bank,loan;
     Button submit;
     String bankName,loanType,date;
     private int mYear, mMonth, mDay;
     int durationVal;
-    Intent i;
+    int editid;
     Float principleVal,interestVal;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,16 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
         duration=findViewById(R.id.duration);
         txtDate=(EditText) findViewById(R.id.in_date);
         loan = (Spinner) findViewById(R.id.spinnerLoan);
+
+
+        Intent i=getIntent();
+        principle.setText(String.valueOf(i.getFloatExtra(EDIT_LOAN_PRINCIPLE,0)));
+        interest.setText(String.valueOf(i.getFloatExtra(EDIT_LOAN_INTEREST,0)));
+        duration.setText(String.valueOf(i.getIntExtra(EDIT_LOAN_DURATION,0)));
+        txtDate.setText(i.getStringExtra(EDIT_LOAN_DATE));
+        editid=i.getIntExtra("IDd",0);
+
+        submit=findViewById(R.id.Button_loan);
         loan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -59,12 +75,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
 
             }
         });
-        i=getIntent();
-         principle.setHint(i.getExtras().getString("principal"));
-         interest.setHint(i.getExtras().getString("interest"));
-         duration.setHint(i.getExtras().getString("duration"));
-         txtDate.setHint(i.getExtras().getString("date"));
-         submit=findViewById(R.id.Button_loan);
+
         submit.setOnClickListener(this);
         txtDate.setOnClickListener(this);
     }
@@ -124,8 +135,19 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
             if(error==true) {
                 Toast.makeText(getApplicationContext(),errMsg,Toast.LENGTH_LONG).show();
             }
-            else {
-                //set data change
+            else
+                {
+                    Intent i=getIntent();
+                    i.putExtra("principle", String.valueOf(principleVal));
+                    i.putExtra("interest", String.valueOf(interestVal));
+                    i.putExtra("duration", String.valueOf(durationVal));
+                    i.putExtra("date", date);
+                    i.putExtra("bankname",bankName);
+                    i.putExtra("loantype", loanType);
+                    i.putExtra("Id",editid);
+                    Toast.makeText(this, "onClick: Log data biri"+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK,i);
+                    finish();
 
             }
         }

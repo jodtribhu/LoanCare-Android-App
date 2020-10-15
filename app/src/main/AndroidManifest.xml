@@ -15,6 +15,7 @@
         <activity android:name=".PersonalLoanActivity" />
         <activity android:name=".LoanForm" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".changeloan" />
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

@@ -23,6 +23,31 @@ public class Loan {
     public int years;
     @ColumnInfo(name="emi")
     public int emi;
+    @ColumnInfo(name="date")
+    public String date;
+
+    public Loan(int loan_id, String bankName, String loanType, String progress, float interest_rate, float principal, int years, int emi, String date) {
+        this.loan_id = loan_id;
+        BankName = bankName;
+        LoanType = loanType;
+        Progress = progress;
+        this.interest_rate = interest_rate;
+        Principal = principal;
+        this.years = years;
+        this.emi = emi;
+        this.date = date;
+    }
+
+    public Loan() {
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getLoan_id() {
         return loan_id;

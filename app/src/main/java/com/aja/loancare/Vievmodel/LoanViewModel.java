@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.aja.loancare.Repository.LoanRepository;
 import com.aja.loancare.mvvmmodel.Loan;
@@ -16,14 +17,14 @@ import com.aja.loancare.mvvmmodel.Loan;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LoanViewModel  extends AndroidViewModel implements LifecycleObserver {
+public class LoanViewModel  extends AndroidViewModel {
     private LoanRepository Repository;
     private LiveData<List<Loan>> allLoanss;
 
     public LoanViewModel(@NonNull Application application) {
         super(application);
         Repository=new LoanRepository(application);
-        allLoanss=Repository.getAllAlarm();
+        allLoanss=Repository.getAllLoan();
     }
     public void insert(Loan loan)
     {
@@ -37,15 +38,15 @@ public class LoanViewModel  extends AndroidViewModel implements LifecycleObserve
     {
         Repository.delete(loan);
     }
-    public void deleteallalarms()
+    public void deleteallLoans()
     {
         Repository.deleteallAlarms();
     }
-    public LiveData<List<Loan>> getAllAlarms()
+    public LiveData<List<Loan>> getAllLoanss()
     {
         return allLoanss;
     }
-    public Loan getAlarmById(int id) {
+    public Loan getLoanById(int id) {
         try {
             return Repository.getLoanById(id);
         } catch (InterruptedException | ExecutionException e) {
@@ -54,5 +55,16 @@ public class LoanViewModel  extends AndroidViewModel implements LifecycleObserve
         return new Loan();
     }
 
+//    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+//    public void onRefresh()
+//    {
+//        allLoanss=Repository.getAllLoan();
+//    }
+//
+//    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+//    public void onCreateRefresh()
+//    {
+//        allLoanss=Repository.getAllLoan();
+//    }
 
 }

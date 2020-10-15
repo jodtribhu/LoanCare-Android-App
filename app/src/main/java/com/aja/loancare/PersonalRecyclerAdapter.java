@@ -52,18 +52,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         holder.duration.setText(text.getYears());
         holder.txtpgr.setText(text.getProgress());
         holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
-        if (holder.loantype.toString()=="SBI"){
-          holder.loanimg.setBackgroundResource(R.drawable.sbi);
-        }
-        if (holder.loantype.toString()=="HDFC"){
-            holder.loanimg.setBackgroundResource(R.drawable.hdfc);
-        }
-        if (holder.loantype.toString()=="PNB"){
-            holder.loanimg.setBackgroundResource(R.drawable.pnb);
-        }
-        if (holder.loantype.toString()=="Axis"){
-            holder.loanimg.setBackgroundResource(R.drawable.axis);
-        }
+
     }
 
     @Override

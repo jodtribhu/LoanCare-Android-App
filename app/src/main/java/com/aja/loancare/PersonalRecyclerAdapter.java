@@ -42,7 +42,6 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
 
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
-
         Loan text = ll.get(position);
         holder.loantype.setText(text.getLoanType());
         holder.bankname.setText(text.getBankName());
@@ -52,6 +51,19 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         holder.duration.setText(text.getYears());
         holder.txtpgr.setText(text.getProgress());
         holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
+        if (holder.bankname.toString()=="SBI"){
+            holder.loanimg.setBackgroundResource(R.drawable.sbi);
+        }
+        if (holder.bankname.toString()=="HDFC"){
+            holder.loanimg.setBackgroundResource(R.drawable.hdfc);
+        }
+        if (holder.bankname.toString()=="PNB"){
+            holder.loanimg.setBackgroundResource(R.drawable.pnb);
+        }
+        if (holder.bankname.toString()=="Axis"){
+            holder.loanimg.setBackgroundResource(R.drawable.axis);
+        }
+
 
     }
 

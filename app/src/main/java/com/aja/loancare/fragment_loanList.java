@@ -28,13 +28,13 @@ import java.util.List;
 
 import javax.xml.transform.Result;
 
-public class fragment_loanList extends Fragment implements PersonalRecyclerAdapter.onPersonalItemisCLick ,PersonalRecyclerAdapter.onPersonalItemModifyCLick{
+/*public class fragment_loanList extends Fragment implements PersonalRecyclerAdapter.onPersonalItemisCLick ,PersonalRecyclerAdapter.onPersonalItemModifyCLick{
     private static final String TAG = "fragment_loanList";
     FloatingActionButton fab;
     ArrayList<Loan> loanlist;
     LoanViewModel loanviemodel;
-    Float principle,interest,duration;
-    Integer progress;
+    Float principle,interest;
+    Integer progress,duration;
     String bank,loan,date;
     PersonalRecyclerAdapter recyclerAdapter;
     RecyclerView lv;
@@ -101,7 +101,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 principle=Float.parseFloat(data.getStringExtra("principle"));
                 interest =Float.parseFloat(data.getStringExtra("interest"));
                 progress =Integer.parseInt(data.getStringExtra("progress"));
-                duration =Float.parseFloat(data.getStringExtra("duration"));
+                duration =Integer.parseInt(data.getStringExtra("duration"));
                 date = data.getStringExtra("date");
                 bank=data.getStringExtra("bankname");
                 loan=data.getStringExtra("loantype");
@@ -130,7 +130,6 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
             if(data!=null)
             {
                 principle=data.getStringExtra("principle");
-
                 interest = data.getStringExtra("interest");
                 duration = data.getStringExtra("duration");
                 date = data.getStringExtra("date");

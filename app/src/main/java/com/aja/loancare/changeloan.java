@@ -32,7 +32,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
         principle=findViewById(R.id.principle);
         interest=findViewById(R.id.interest);
         duration=findViewById(R.id.duration);
-        txtDate=(EditText)findViewById(R.id.in_date);
+        txtDate=(EditText) findViewById(R.id.in_date);
         loan = (Spinner) findViewById(R.id.spinnerLoan);
         loan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

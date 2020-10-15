@@ -11,6 +11,6 @@
     <color name="R">#2196f3</color>
     <color name="Python">#1a237e</color>
     <color name="table_background">#999999</color>
-    <color name="row_background">#ffffff</color>
-    <color name="text_black">#000000</color>
+    <color name="row_background">#253341</color>
+    <color name="text_white">#ffffff</color>
 </resources>

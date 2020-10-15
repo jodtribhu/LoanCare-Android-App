@@ -41,7 +41,7 @@ public class tablegenerator {
             tvCol.setText(data[iCol]);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
-            tvCol.setTextColor(mContext.getResources().getColor(R.color.text_black));
+            tvCol.setTextColor(mContext.getResources().getColor(R.color.text_white));
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(R.color.row_background));
             tr.addView(tvCol);

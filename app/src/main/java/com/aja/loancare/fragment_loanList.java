@@ -31,7 +31,9 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     FloatingActionButton fab;
     ArrayList<Loan> loanlist;
     LoanViewModel loanviemodel;
-    String principle,interest,duration,bank,loan,date;
+    Float principle,interest,duration;
+    Integer progress;
+    String bank,loan,date;
     PersonalRecyclerAdapter recyclerAdapter;
 
     @Override
@@ -77,9 +79,10 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 if(data!=null)
 
                 {
-                principle=data.getStringExtra("principle");
-                interest = data.getStringExtra("interest");
-                duration = data.getStringExtra("duration");
+                principle=Float.parseFloat(data.getStringExtra("principle"));
+                interest =Float.parseFloat(data.getStringExtra("interest"));
+                progress =Integer.parseInt(data.getStringExtra("progress"));
+                duration =Float.parseFloat(data.getStringExtra("duration"));
                 date = data.getStringExtra("date");
                 bank=data.getStringExtra("bankname");
                 loan=data.getStringExtra("loantype");
@@ -100,6 +103,10 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     @Override
     public void onClickListener(int position) {
     Intent intent=new Intent(getActivity(),PersonalLoanActivity.class);
+    intent.putExtra("principle",principle);
+    intent.putExtra("interest",interest);
+    intent.putExtra("duration",duration);
+    intent.putExtra("progress",progress);
     startActivity(intent);
     }
 }

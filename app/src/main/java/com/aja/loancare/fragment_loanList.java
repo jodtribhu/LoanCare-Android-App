@@ -28,7 +28,7 @@ import java.util.List;
 
 import javax.xml.transform.Result;
 
-/*public class fragment_loanList extends Fragment implements PersonalRecyclerAdapter.onPersonalItemisCLick ,PersonalRecyclerAdapter.onPersonalItemModifyCLick{
+public class fragment_loanList extends Fragment implements PersonalRecyclerAdapter.onPersonalItemisCLick ,PersonalRecyclerAdapter.onPersonalItemModifyCLick{
     private static final String TAG = "fragment_loanList";
     FloatingActionButton fab;
     ArrayList<Loan> loanlist;

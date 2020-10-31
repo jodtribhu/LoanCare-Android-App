@@ -26,7 +26,7 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
     Spinner bank,loan;
     Button submit;
     String bankName,loanType;
-    Date date;
+    String date;
     private int mYear, mMonth, mDay;
     int durationVal;
     Intent i;
@@ -122,7 +122,7 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 errMsg+="date; ";
             }
             else {
-                date = (Date) txtDate.getText();
+                date =txtDate.getText().toString();
             }
             if(bankName=="-"){
                 errMsg+="Bank; ";

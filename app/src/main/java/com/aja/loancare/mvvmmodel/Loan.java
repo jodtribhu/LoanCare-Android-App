@@ -26,39 +26,31 @@ public class Loan {
     @ColumnInfo(name="emi")
     public int emi;
     @ColumnInfo(name="date")
-    public Date date;
-    @ColumnInfo(name="day")
-    public int day;
-    @ColumnInfo(name="month")
-    public int month;
-    @ColumnInfo(name="month")
-    public int year;
+    public String date;
+    @ColumnInfo(name="sday")
+    public int sday;
+    @ColumnInfo(name="smonth")
+    public int smonth;
+    @ColumnInfo(name="syear")
+    public int syear;
+    @ColumnInfo(name="rday")
+    public int rday;
+    @ColumnInfo(name="rmonth")
+    public int rmonth;
+    @ColumnInfo(name="ryear")
+    public int ryear;
+    @ColumnInfo(name="ring_date")
+    public String ring_date;
 
-    public int getDay() {
-        return day;
+    public String getRing_date() {
+        return ring_date;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setRing_date(String ring_date) {
+        this.ring_date = ring_date;
     }
 
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int years, int emi, Date date, int day, int month, int year) {
+    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int years, int emi, String date, int sday, int smonth, int syear, int rday, int rmonth, int ryear, String ring_date) {
         this.loan_id = loan_id;
         BankName = bankName;
         LoanType = loanType;
@@ -68,19 +60,71 @@ public class Loan {
         this.years = years;
         this.emi = emi;
         this.date = date;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.sday = sday;
+        this.smonth = smonth;
+        this.syear = syear;
+        this.rday = rday;
+        this.rmonth = rmonth;
+        this.ryear = ryear;
+        this.ring_date = ring_date;
+    }
+
+    public int getSday() {
+        return sday;
+    }
+
+    public void setSday(int sday) {
+        this.sday = sday;
+    }
+
+    public int getSmonth() {
+        return smonth;
+    }
+
+    public void setSmonth(int smonth) {
+        this.smonth = smonth;
+    }
+
+    public int getSyear() {
+        return syear;
+    }
+
+    public void setSyear(int syear) {
+        this.syear = syear;
+    }
+
+    public int getRday() {
+        return rday;
+    }
+
+    public void setRday(int rday) {
+        this.rday = rday;
+    }
+
+    public int getRmonth() {
+        return rmonth;
+    }
+
+    public void setRmonth(int rmonth) {
+        this.rmonth = rmonth;
+    }
+
+    public int getRyear() {
+        return ryear;
+    }
+
+    public void setRyear(int ryear) {
+        this.ryear = ryear;
     }
 
     public Loan() {
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aja.loancare">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <supports-screens android:smallScreens="true"
         android:normalScreens="true"
@@ -34,6 +35,24 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name="com.aja.loancare.LoanReciever"
+            android:exported="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.project.action.ALARM"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.aja.loancare.LoanStopReciever"
+            android:exported="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.project.action.ALARM"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

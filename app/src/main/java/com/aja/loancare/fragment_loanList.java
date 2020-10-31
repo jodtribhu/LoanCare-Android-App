@@ -21,13 +21,19 @@ import com.aja.loancare.Vievmodel.LoanViewModel;
 import com.aja.loancare.mvvmmodel.Loan;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class fragment_loanList extends Fragment implements PersonalRecyclerAdapter.onPersonalItemisCLick, PersonalRecyclerAdapter.onPersonalItemModifyCLick {
     private static final String TAG = "fragment_loanList";
+    public static String LOAN_RECIEVER_ID="com.aja.loancare.LOAN_RECIEVER_ID";
     FloatingActionButton fab;
     ArrayList<Loan> loanlist;
     LoanViewModel loanviemodel;
@@ -35,6 +41,10 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     PersonalRecyclerAdapter recyclerAdapter;
     RecyclerView lv;
     View v;
+    Date date2;
+    int sday;
+    int smonth;
+    int syear;
 
     public static final int ADD_LOAN = 1;
     public static final int EDIT_LOAN = 2;
@@ -62,6 +72,8 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                LoanHandler loanHandler=new LoanHandler(getActivity());
+                loanHandler.cancelAlarm(recyclerAdapter.getLoanAt(viewHolder.getAdapterPosition()));
                 loanviemodel.delete(recyclerAdapter.getLoanAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Loan Deleted", Toast.LENGTH_SHORT).show();
             }
@@ -101,6 +113,33 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 bank = data.getStringExtra("bankname");
                 loan = data.getStringExtra("loantype");
                 Calendar calendar=Calendar.getInstance();
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                try {
+                    date2= format.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                calendar.setTime(date2);
+
+
+                sday=calendar.get(Calendar.DAY_OF_MONTH);
+                smonth=calendar.get(Calendar.MONTH);
+                syear=calendar.get(Calendar.YEAR);
+
+                loanobj.setSday(sday);
+                loanobj.setSmonth(smonth);
+                loanobj.setSyear(syear);
+
+                //Ring Month
+                Calendar ringcal = Calendar.getInstance();
+                ringcal.set(Calendar.DAY_OF_MONTH,sday);
+                ringcal.set(Calendar.MONTH,smonth);
+                ringcal.set(Calendar.YEAR,syear);
+                ringcal.add(Calendar.MONTH, 1);
+
+                loanobj.setRday(ringcal.get(Calendar.DAY_OF_MONTH));
+                loanobj.setRmonth(ringcal.get(Calendar.MONTH));
+                loanobj.setRyear(ringcal.get(Calendar.YEAR));
 
                 loanobj.setBankName(bank);
                 loanobj.setLoanType(loan);
@@ -134,7 +173,6 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 loanobj.setPrincipal(Float.parseFloat(principle));
                 loanobj.setLoan_id(id);
                 loanviemodel.update(loanobj);
-                Toast.makeText(getActivity(), "nulytttl" + loanobj.getPrincipal(), Toast.LENGTH_SHORT).show();
             } else if (data == null) {
                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "NULL");

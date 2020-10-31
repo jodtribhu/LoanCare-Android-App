@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.aja.loancare.model.NewsMOdel;
@@ -40,18 +41,26 @@ public class fragment_news extends Fragment implements NewsRecyclerAdapter.onIte
     private RequestQueue mQueue;
     private NewsRecyclerAdapter recyclerAdapter2;
     RecyclerView ns;
+    ProgressBar pro;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_news, container, false);
+        pro=v.findViewById(R.id.progressBar);
 
         mQueue= MySingleton.getInstance(getActivity()).getRequestQueue();
-
+        mQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<String>() {
+            @Override
+            public void onRequestFinished(Request<String> request) {
+                pro.setVisibility(View.INVISIBLE);
+            }
+        });
         String turl="https://bfsi.economictimes.indiatimes.com/rss/banking";
         StringRequest mRequest=new StringRequest(Request.Method.GET, turl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                pro.setVisibility(View.VISIBLE);
                 Document document= Jsoup.parse(response);
                 Elements itemElements=document.select("item");
                 Elements Linkss=document.select("link");
@@ -80,11 +89,12 @@ public class fragment_news extends Fragment implements NewsRecyclerAdapter.onIte
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getActivity(), "Sorry there is an error in retrieval of data ", Toast.LENGTH_SHORT).show();
             }
         });
 
         MySingleton.getInstance(getActivity()).addToRequestQueue(mRequest);
+
         ns= v.findViewById(R.id.recyclernews);
         recyclerAdapter2= new NewsRecyclerAdapter(getActivity(),newsList);
         ns.setAdapter(recyclerAdapter2);

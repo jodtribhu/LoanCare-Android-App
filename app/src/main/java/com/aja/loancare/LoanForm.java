@@ -1,6 +1,7 @@
 package com.aja.loancare;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -24,7 +25,8 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
     EditText txtDate,principle,interest,duration;
     Spinner bank,loan;
     Button submit;
-    String bankName,loanType,date;
+    String bankName,loanType;
+    Date date;
     private int mYear, mMonth, mDay;
     int durationVal;
     Intent i;
@@ -120,7 +122,7 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 errMsg+="date; ";
             }
             else {
-                date = txtDate.getText().toString();
+                date = (Date) txtDate.getText();
             }
             if(bankName=="-"){
                 errMsg+="Bank; ";

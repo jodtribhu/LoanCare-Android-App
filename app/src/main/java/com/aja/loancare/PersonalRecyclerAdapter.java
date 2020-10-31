@@ -24,11 +24,13 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     List<Loan> ll=new ArrayList<>();
 
     Context context;
+    LoanHandler mLoanHandler;
     private onPersonalItemisCLick mOnPersonalItemisCLick;
     onPersonalItemModifyCLick mOnPersonalItemisModifyCLick;
 
     public PersonalRecyclerAdapter(Context context) {
         this.context=context;
+        mLoanHandler=new LoanHandler(context);
     }
 
     @NonNull
@@ -50,13 +52,15 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
 
-        Loan text = ll.get(position);
-        holder.loantype.setText(text.getLoanType());
-        holder.bankname.setText(text.getBankName());
-        holder.principal.setText(String.valueOf(text.getPrincipal()));
-        holder.interest.setText(String.valueOf(text.getInterest_rate()));
-        holder.date.setText(text.getDate());
-        holder.duration.setText(String.valueOf(text.getYears()));
+        Loan loan = ll.get(position);
+        holder.loantype.setText(loan.getLoanType());
+        holder.bankname.setText(loan.getBankName());
+        holder.principal.setText(String.valueOf(loan.getPrincipal()));
+        holder.interest.setText(String.valueOf(loan.getInterest_rate()));
+        holder.date.setText(loan.getDate());
+        holder.duration.setText(String.valueOf(loan.getYears()));
+
+        mLoanHandler.scheduleLoanAlarm(loan);
 //        holder.txtpgr.setText(text.getProgress());
 //        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
 

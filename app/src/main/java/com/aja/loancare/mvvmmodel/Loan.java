@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName="loan_table")
 public class Loan {
 
@@ -14,7 +16,7 @@ public class Loan {
     @ColumnInfo(name="loan_type")
     public String LoanType;
     @ColumnInfo(name="progress")
-    public String Progress;
+    public int Progress;
     @ColumnInfo(name="interest_rate")
     public float interest_rate;
     @ColumnInfo(name="principal")
@@ -24,9 +26,39 @@ public class Loan {
     @ColumnInfo(name="emi")
     public int emi;
     @ColumnInfo(name="date")
-    public String date;
+    public Date date;
+    @ColumnInfo(name="day")
+    public int day;
+    @ColumnInfo(name="month")
+    public int month;
+    @ColumnInfo(name="month")
+    public int year;
 
-    public Loan(int loan_id, String bankName, String loanType, String progress, float interest_rate, float principal, int years, int emi, String date) {
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int years, int emi, Date date, int day, int month, int year) {
         this.loan_id = loan_id;
         BankName = bankName;
         LoanType = loanType;
@@ -36,16 +68,19 @@ public class Loan {
         this.years = years;
         this.emi = emi;
         this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
     public Loan() {
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -73,11 +108,11 @@ public class Loan {
         LoanType = loanType;
     }
 
-    public String getProgress() {
+    public int getProgress() {
         return Progress;
     }
 
-    public void setProgress(String progress) {
+    public void setProgress(int progress) {
         Progress = progress;
     }
 

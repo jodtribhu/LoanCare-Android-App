@@ -3,7 +3,11 @@
     package="com.aja.loancare">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <supports-screens android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".emi_calculator"></activity>
+        <activity android:name=".emi_calculator"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".PersonalLoanActivity" />
         <activity android:name=".LoanForm" />
         <activity android:name=".MainActivity" />

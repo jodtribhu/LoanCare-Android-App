@@ -36,6 +36,7 @@ import java.util.Locale;
 
 public class fragment_emi_calculations extends Fragment {
     SeekBar loan_seekbar;
+    
     EditText loanamt;
     SeekBar interest_seekbar;
     EditText interestamt;

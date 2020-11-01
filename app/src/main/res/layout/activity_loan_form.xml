@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FD5576"
+    android:background="#D3D3D3"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            app:cardBackgroundColor="#FF95B3"
+            app:cardBackgroundColor="#Ffffff"
             app:cardCornerRadius="8dp">
 
             <LinearLayout
@@ -173,9 +173,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
                         android:focusable="false"
                         android:fontFamily="@font/montserrat"
-                        android:hint="Date"
+                        android:hint="  Date"
                         android:inputType="none"
                         android:shadowColor="#ffffff"
                         android:textColor="#ffffff"
@@ -194,9 +195,10 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:fontFamily="@font/montserrat"
-                        android:hint="Duration"
+                        android:hint="  Duration"
                         android:id="@+id/duration"
                         android:inputType="numberDecimal|number"
+                        android:drawableLeft="@drawable/ic_outline_timelapse_24"
                         android:shadowColor="#ffffff"
                         android:textColor="#ffffff"
                         android:textColorHint="#871A" />

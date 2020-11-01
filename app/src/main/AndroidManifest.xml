@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aja.loancare">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <supports-screens android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".emi_calculator"></activity>
+        <activity android:name=".emi_calculator"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".PersonalLoanActivity" />
         <activity android:name=".LoanForm" />
         <activity android:name=".MainActivity" />
@@ -29,6 +35,24 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name="com.aja.loancare.LoanReciever"
+            android:exported="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.project.action.ALARM"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.aja.loancare.LoanStopReciever"
+            android:exported="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.project.action.ALARM"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

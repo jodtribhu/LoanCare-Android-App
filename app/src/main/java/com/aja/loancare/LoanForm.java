@@ -1,9 +1,6 @@
 package com.aja.loancare;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -27,9 +24,9 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
     EditText txtDate,principle,interest,duration;
     Spinner bank,loan;
     Button submit;
-    String bankName,loanType,date,dateInString;
+    String bankName,loanType,date;
     private int mYear, mMonth, mDay;
-    int durationVal,durationEnd;
+    int durationVal;
     Intent i;
     Float principleVal,interestVal;
     @Override
@@ -82,7 +79,7 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
     @Override
     public void onClick(View v) {
         if (v == txtDate) {
-            Calendar c = Calendar.getInstance();
+            final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -92,32 +89,8 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                     (this, this, mYear, mMonth, mDay);
             datePickerDialog.show();
 
-            //
-
         }
         if (v == submit){
-            if(txtDate.getText().toString()!=null) {
-                Calendar c = Calendar.getInstance();
-                durationEnd = Integer.parseInt(duration.getText().toString());
-                dateInString = txtDate.getText().toString();  // Start date
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-                try {
-                    c.setTime(sdf.parse(dateInString));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                c.add(Calendar.DATE, durationEnd*30);  // add days
-                sdf = new SimpleDateFormat("MM/dd/yyyy");
-
-                Date resultdate = new Date(c.getTimeInMillis());   // Get new time
-                dateInString = sdf.format(resultdate);
-                Toast.makeText(getApplicationContext(), dateInString, Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT).show();
-            }
             boolean error=false;
             String errMsg="Enter ";
             if(principle.getText().toString().matches("")){
@@ -150,11 +123,9 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 date = txtDate.getText().toString();
             }
             if(bankName=="-"){
-                error=true;
                 errMsg+="Bank; ";
             }
             if(loanType=="-"){
-                error=true;
                 errMsg+="Loan type; ";
             }
 
@@ -168,7 +139,6 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 i.putExtra("date", date);
                 i.putExtra("bankname",bankName);
                 i.putExtra("loantype", loanType);
-                i.putExtra("enddate",dateInString );
 
                 Toast.makeText(this, "onClick: Log data "+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK,i);

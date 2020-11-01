@@ -136,7 +136,7 @@
                         android:hint="  Principle Amount"
                         android:inputType="numberDecimal|number"
                         android:shadowColor="#ffffff"
-                        android:textColor="#ffffff"
+                        android:textColor="#000000"
                         android:textColorHint="#871A" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,19 +149,18 @@
                     android:textColorHint="#2b2b2b">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/interest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_trending_up_24"
                         android:ems="10"
                         android:fontFamily="@font/montserrat"
                         android:hint="  Interest"
-                        android:drawableLeft="@drawable/ic_baseline_trending_up_24"
-                        android:id="@+id/interest"
                         android:inputType="numberDecimal|number"
                         android:shadowColor="#ffffff"
-                        android:textColor="#ffffff"
+                        android:textColor="#000000"
                         android:textColorHint="#871A" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
@@ -174,14 +173,14 @@
                         android:id="@+id/in_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="10"
                         android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+                        android:ems="10"
                         android:focusable="false"
                         android:fontFamily="@font/montserrat"
                         android:hint="  Date"
                         android:inputType="none"
                         android:shadowColor="#ffffff"
-                        android:textColor="#ffffff"
+                        android:textColor="#000000"
                         android:textColorHint="#871A" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -202,7 +201,7 @@
                         android:inputType="numberDecimal|number"
                         android:drawableLeft="@drawable/ic_outline_timelapse_24"
                         android:shadowColor="#ffffff"
-                        android:textColor="#ffffff"
+                        android:textColor="#000000"
                         android:textColorHint="#871A" />
                 </com.google.android.material.textfield.TextInputLayout>
 

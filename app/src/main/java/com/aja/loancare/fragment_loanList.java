@@ -37,6 +37,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     PersonalRecyclerAdapter recyclerAdapter;
     RecyclerView lv;
     View v;
+    Integer prg=50;
 
     public static final int ADD_LOAN=1;
     public static final int EDIT_LOAN=2;
@@ -141,7 +142,6 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 loanobj.setPrincipal(Float.parseFloat(principle));
                 loanobj.setLoan_id(id);
                 loanviemodel.update(loanobj);
-                Toast.makeText(getActivity(),"nulytttl" +loanobj.getPrincipal(),Toast.LENGTH_SHORT).show();
             }
 
             else if(data==null){
@@ -157,6 +157,10 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     @Override
     public void onClickListener(int position) {
     Intent intent=new Intent(getActivity(),PersonalLoanActivity.class);
+    intent.putExtra("principle",principle);
+    intent.putExtra("interest",interest);
+    intent.putExtra("duration",duration);
+    intent.putExtra("progress",prg);
     startActivity(intent);
     }
 

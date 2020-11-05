@@ -145,7 +145,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
                     i.putExtra("bankname",bankName);
                     i.putExtra("loantype", loanType);
                     i.putExtra("Id",editid);
-                    Toast.makeText(this, "onClick: Log data biri"+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "onClick: Log data "+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK,i);
                     finish();
 

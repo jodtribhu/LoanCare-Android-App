@@ -19,8 +19,8 @@
     <string-array name="LoanItems">
         <item>-</item>
         <item>Car loan</item>
-        <item>Hoam Loan</item>
+        <item>Home Loan</item>
         <item>Educational Loan</item>
-        <item>Educational Loan</item>
+        <item>Agricultural Loan</item>
     </string-array>
 </resources>

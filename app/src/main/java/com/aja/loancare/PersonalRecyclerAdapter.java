@@ -52,14 +52,27 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
 
         Loan text = ll.get(position);
         holder.loantype.setText(text.getLoanType());
-        holder.bankname.setText(text.getBankName());
-        holder.principal.setText(String.valueOf(text.getPrincipal()));
-        holder.interest.setText(String.valueOf(text.getInterest_rate()));
-        holder.date.setText(text.getDate());
-        holder.duration.setText(String.valueOf(text.getYears()));
-//        holder.txtpgr.setText(text.getProgress());
-//        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
-
+        holder.bankname.setText(text.getBankName()+" Bank");
+        holder.principal.setText("Principal: "+String.valueOf(text.getPrincipal()));
+        holder.interest.setText("Interest: "+String.valueOf(text.getInterest_rate()));
+        holder.date.setText("Date: "+text.getDate());
+        holder.duration.setText("Duration: "+String.valueOf(text.getYears()));
+        if (text.getBankName().contains("SBI")){
+            holder.txtpgr.setText("50%");
+            holder.pgr.setProgress(50);
+        }
+        if (text.getBankName().contains("HDFC")){
+            holder.txtpgr.setText("60%");
+            holder.pgr.setProgress(60);
+        }
+        if (text.getBankName().contains("PNB")){
+            holder.txtpgr.setText("40%");
+            holder.pgr.setProgress(40);
+        }
+        if (text.getBankName().contains("Axis")){
+            holder.txtpgr.setText("80%");
+            holder.pgr.setProgress(80);
+        }
     }
 
     @Override
@@ -67,7 +80,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         return ll.size();
     }
     public class PersonalRecyclerHolder extends RecyclerView.ViewHolder {
-//        ImageView loanimg= itemView.findViewById(R.id.loanimg);
+        //ImageView loanimg= itemView.findViewById(R.id.loanimg);
         TextView loantype=itemView.findViewById(R.id.loantype);
         TextView bankname=itemView.findViewById(R.id.bank);
         TextView principal=itemView.findViewById(R.id.prp);

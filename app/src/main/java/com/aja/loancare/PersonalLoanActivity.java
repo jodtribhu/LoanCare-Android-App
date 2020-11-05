@@ -17,12 +17,13 @@ public class PersonalLoanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_loan);
         Intent i =getIntent();
-        p=i.getFloatExtra("principle",0);
-        r=i.getFloatExtra("interest",0);
-        d=i.getIntExtra("duration",0);
+        p=Float.parseFloat(i.getStringExtra("principle"));
+        r=Float.parseFloat(i.getStringExtra("interest"));
+        d=Integer.parseInt(i.getStringExtra("duration"));
         prg=i.getIntExtra("progress",0);
+        r=r/1200;
         carry=1+r;
-        emi=(p * r * Math.pow(carry,d))/(Math.pow(carry,d)-1);
+        emi=(int)Math.round((p * r * Math.pow(carry,d))/(Math.pow(carry,d)-1));
         x=(int)Math.round((prg * 0.01 )*d);
         temi=p;
         showTable();

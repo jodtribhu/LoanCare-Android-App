@@ -24,11 +24,13 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     List<Loan> ll=new ArrayList<>();
 
     Context context;
+    LoanHandler mLoanHandler;
     private onPersonalItemisCLick mOnPersonalItemisCLick;
     onPersonalItemModifyCLick mOnPersonalItemisModifyCLick;
 
     public PersonalRecyclerAdapter(Context context) {
         this.context=context;
+        mLoanHandler=new LoanHandler(context);
     }
 
     @NonNull
@@ -50,29 +52,18 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
 
-        Loan text = ll.get(position);
-        holder.loantype.setText(text.getLoanType());
-        holder.bankname.setText(text.getBankName()+" Bank");
-        holder.principal.setText("Principal: "+String.valueOf(text.getPrincipal()));
-        holder.interest.setText("Interest: "+String.valueOf(text.getInterest_rate()));
-        holder.date.setText("Date: "+text.getDate());
-        holder.duration.setText("Duration: "+String.valueOf(text.getYears()));
-        if (text.getBankName().contains("SBI")){
-            holder.txtpgr.setText("50%");
-            holder.pgr.setProgress(50);
-        }
-        if (text.getBankName().contains("HDFC")){
-            holder.txtpgr.setText("60%");
-            holder.pgr.setProgress(60);
-        }
-        if (text.getBankName().contains("PNB")){
-            holder.txtpgr.setText("40%");
-            holder.pgr.setProgress(40);
-        }
-        if (text.getBankName().contains("Axis")){
-            holder.txtpgr.setText("80%");
-            holder.pgr.setProgress(80);
-        }
+        Loan loan = ll.get(position);
+        holder.loantype.setText(loan.getLoanType());
+        holder.bankname.setText(loan.getBankName());
+        holder.principal.setText(String.valueOf(loan.getPrincipal()));
+        holder.interest.setText(String.valueOf(loan.getInterest_rate()));
+        holder.date.setText(loan.getDate());
+        holder.duration.setText(String.valueOf(loan.getYears()));
+
+        mLoanHandler.scheduleLoanAlarm(loan);
+//        holder.txtpgr.setText(text.getProgress());
+//        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
+
     }
 
     @Override
@@ -80,7 +71,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         return ll.size();
     }
     public class PersonalRecyclerHolder extends RecyclerView.ViewHolder {
-        //ImageView loanimg= itemView.findViewById(R.id.loanimg);
+//        ImageView loanimg= itemView.findViewById(R.id.loanimg);
         TextView loantype=itemView.findViewById(R.id.loantype);
         TextView bankname=itemView.findViewById(R.id.bank);
         TextView principal=itemView.findViewById(R.id.prp);

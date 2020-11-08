@@ -1,81 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp"
-    android:background="#ffffff"
-    app:cardCornerRadius="10dp"
-    android:orientation="vertical">
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="#212121"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp">
     <LinearLayout
         android:id="@+id/pers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:weightSum="2">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1">
+                   <ImageView
+                       android:id="@+id/btype"
+                       android:src="@mipmap/ic_launcher"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:scaleType="centerCrop"/>
                    <TextView
-                        android:id="@+id/bank"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bank name"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                       android:textStyle="bold"/>
-                   <TextView
+                       android:id="@+id/bank"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Bank name"
+                       android:textColor="#ffffff"
+                       android:textSize="16sp"
+                       android:textStyle="bold"
+                       android:layout_toRightOf="@+id/btype"/>
+                    <TextView
                         android:id="@+id/loantype"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Loan Type"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:textSize="16sp"
-                       android:textStyle="bold"/>
+                       android:textStyle="bold"
+                        android:layout_below="@+id/bank"/>
                     <TextView
                         android:id="@+id/prp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Principal"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:textSize="16sp"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/loantype"/>
                     <TextView
                         android:id="@+id/intrst"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Interest"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:textSize="16sp"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/prp"/>
                     <TextView
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:textSize="16sp"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/intrst"/>
                     <TextView
                         android:id="@+id/dur"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="duration"
-                        android:textColor="#000000"
+                        android:textColor="#ffffff"
                         android:textSize="16sp"
-                        android:layout_marginTop="5dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Modify"
-                android:id="@+id/mod"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-
-            </LinearLayout>
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/date"/>
+                   <Button
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/ic_edit"
+                        android:id="@+id/mod"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/dur"/>
+        </RelativeLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -84,8 +94,8 @@
             <ProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/CircularDeterminateProgressBar"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -101,11 +111,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                 app:layout_constraintStart_toStartOf="@+id/progress_bar"
                 app:layout_constraintTop_toTopOf="@+id/progress_bar"
-                tools:text="60%" />
-
+                tools:text="60%"
+                android:textColor="#ffffff"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>

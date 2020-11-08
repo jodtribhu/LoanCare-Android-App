@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_loanList">
+    tools:context=".fragment_loanList"
+    android:background="#424242">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -21,5 +22,5 @@
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_add"
         android:layout_margin="16dp"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

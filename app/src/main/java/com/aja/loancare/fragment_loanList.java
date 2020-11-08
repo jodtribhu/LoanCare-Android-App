@@ -120,7 +120,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                     e.printStackTrace();
                 }
                 calendar.setTime(date2);
-
+                loanobj.setDate(date);
 
                 sday=calendar.get(Calendar.DAY_OF_MONTH);
                 smonth=calendar.get(Calendar.MONTH);

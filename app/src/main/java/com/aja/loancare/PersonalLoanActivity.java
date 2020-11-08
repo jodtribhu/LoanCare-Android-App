@@ -17,9 +17,9 @@ public class PersonalLoanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_loan);
         Intent i =getIntent();
-        p=Float.parseFloat(i.getStringExtra("principle"));
-        r=Float.parseFloat(i.getStringExtra("interest"));
-        d=Integer.parseInt(i.getStringExtra("duration"));
+        p=i.getFloatExtra("principle",0);
+        r=i.getFloatExtra("interest",0);
+        d=i.getIntExtra("duration",0);
         prg=i.getIntExtra("progress",0);
         r=r/1200;
         carry=1+r;

@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Loan.class},version = 28,exportSchema = false)
+@Database(entities = {Loan.class},version = 35,exportSchema = false)
 
 public abstract class LoanDatabase extends RoomDatabase {
     private static LoanDatabase instance;

@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Entity(tableName="loan_table")
 public class Loan {
-
     @PrimaryKey(autoGenerate = true)
     public int loan_id;
     @ColumnInfo(name="bank_name")
@@ -41,6 +40,18 @@ public class Loan {
     public int ryear;
     @ColumnInfo(name="ring_date")
     public String ring_date;
+    @ColumnInfo(name="paid_months")
+    public int paid_months;
+
+
+    public int getPaid_months() {
+        return paid_months;
+    }
+
+    public void setPaid_months(int paid_months) {
+        this.paid_months = paid_months;
+    }
+
 
     public String getRing_date() {
         return ring_date;
@@ -50,7 +61,7 @@ public class Loan {
         this.ring_date = ring_date;
     }
 
-    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int years, int emi, String date, int sday, int smonth, int syear, int rday, int rmonth, int ryear, String ring_date) {
+    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int years, int emi, String date, int sday, int smonth, int syear, int rday, int rmonth, int ryear, String ring_date, int paid_months) {
         this.loan_id = loan_id;
         BankName = bankName;
         LoanType = loanType;
@@ -67,6 +78,7 @@ public class Loan {
         this.rmonth = rmonth;
         this.ryear = ryear;
         this.ring_date = ring_date;
+        this.paid_months = paid_months;
     }
 
     public int getSday() {

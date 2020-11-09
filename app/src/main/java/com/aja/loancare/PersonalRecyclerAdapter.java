@@ -71,8 +71,10 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         if (holder.loantype.toString().equals("Agricultural Loan")){
             holder.btype.setImageResource(R.drawable.ic_agro);
         }
-
         mLoanHandler.scheduleLoanAlarm(loan);
+        holder.pgr.setMax(100);
+        holder.pgr.setProgress(loan.getProgress());
+
 //        holder.txtpgr.setText(text.getProgress());
 //        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
 

@@ -108,7 +108,7 @@ app:layout_constraintVertical_bias="0.39">
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Interest Amount"
+                android:text="Interest Rate"
                 android:textColor="#c6e2e9"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -233,6 +233,7 @@ app:layout_constraintVertical_bias="0.39">
                 app:layout_constraintGuide_begin="271dp" />
 
             <ToggleButton
+                android:visibility="invisible"
                 android:id="@+id/year_month"
                 android:layout_width="68dp"
                 android:layout_height="49dp"

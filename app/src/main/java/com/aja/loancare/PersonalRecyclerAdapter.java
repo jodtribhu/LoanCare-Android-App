@@ -1,6 +1,7 @@
 package com.aja.loancare;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,16 +52,32 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     }
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
-
+        SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(context);
+        int c_color=sharedPreferences.getInt(fragment_settings.Card_color,0);
+        holder.itemView.setBackgroundColor(c_color);
         Loan loan = ll.get(position);
         holder.loantype.setText(loan.getLoanType());
-        holder.bankname.setText(loan.getBankName());
-        holder.principal.setText(String.valueOf(loan.getPrincipal()));
-        holder.interest.setText(String.valueOf(loan.getInterest_rate()));
-        holder.date.setText(loan.getDate());
-        holder.duration.setText(String.valueOf(loan.getYears()));
-
+        holder.bankname.setText(loan.getBankName()+" Bank");
+        holder.principal.setText("Principal: "+String.valueOf(loan.getPrincipal()));
+        holder.interest.setText("Interest: "+String.valueOf(loan.getInterest_rate())+"%");
+        holder.date.setText("Date: "+loan.getDate());
+        holder.duration.setText("Duration: "+String.valueOf(loan.getYears())+" m");
+        if (holder.loantype.toString().equals("Car loan")){
+            holder.btype.setImageResource(R.drawable.ic_car);
+        }
+        if (holder.loantype.toString().equals("Home Loan")){
+            holder.btype.setImageResource(R.drawable.ic_home);
+        }
+        if (holder.loantype.toString().equals("Educational Loan")){
+            holder.btype.setImageResource(R.drawable.ic_edu);
+        }
+        if (holder.loantype.toString().equals("Agricultural Loan")){
+            holder.btype.setImageResource(R.drawable.ic_agro);
+        }
         mLoanHandler.scheduleLoanAlarm(loan);
+        holder.pgr.setMax(100);
+        holder.pgr.setProgress(loan.getProgress());
+
 //        holder.txtpgr.setText(text.getProgress());
 //        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
 
@@ -74,6 +91,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
 //        ImageView loanimg= itemView.findViewById(R.id.loanimg);
         TextView loantype=itemView.findViewById(R.id.loantype);
         TextView bankname=itemView.findViewById(R.id.bank);
+        ImageView btype=itemView.findViewById(R.id.btype);
         TextView principal=itemView.findViewById(R.id.prp);
         TextView interest=itemView.findViewById(R.id.intrst);
         TextView duration=itemView.findViewById(R.id.dur);

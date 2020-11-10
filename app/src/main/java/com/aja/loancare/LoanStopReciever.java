@@ -12,10 +12,13 @@ public class LoanStopReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         loan_id = intent.getIntExtra(fragment_loanList.LOAN_RECIEVER_ID, 0);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
         if (notificationManager != null) {
             notificationManager.cancelAll();
         }
-
+        Intent newintent = new Intent("com.aja.loancare.fragment_loanlist");
+        newintent.putExtra("LoanStopReciever.LOAN_ID", loan_id);
+        context.sendBroadcast(newintent);
     }
 
 }

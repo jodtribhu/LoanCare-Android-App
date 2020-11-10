@@ -1,6 +1,10 @@
 package com.aja.loancare;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,6 +59,9 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
 
         v = inflater.inflate(R.layout.fragment_loan_list, container, false);
         fab = v.findViewById(R.id.fab);
+
+        IntentFilter intentFilter=new IntentFilter("com.aja.loancare.fragment_loanlist");
+        getActivity().registerReceiver(mBroadcastReceiver,intentFilter);
 
         loanlist = new ArrayList<>();
         lv = v.findViewById(R.id.recyclerpersonal);
@@ -95,8 +101,41 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
             }
         });
 
+
+        SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        int b_color=sharedPreferences.getInt(fragment_settings.Background_color,0);
+
+        View root = v.findViewById(R.id.coordinator_layout);
+        root.setBackgroundColor(b_color);
+
+
         return v;
     }
+
+    private BroadcastReceiver mBroadcastReceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int loan_id=intent.getIntExtra("LoanStopReciever.LOAN_ID",0);
+            Loan loan=loanviemodel.getLoanById(loan_id);
+            int progress=loan.getProgress();
+            int duration=loan.getYears();
+            int dm=duration*12;
+            int paidmonths=loan.getPaid_months();
+            paidmonths=paidmonths+1;
+            int percentage;
+            percentage = (int)((double) paidmonths/(double)dm*100);
+            Toast.makeText(context, "Progress"+percentage+" Paid months "+paidmonths+" DM "+dm+ "division "+percentage , Toast.LENGTH_SHORT).show();
+            loan.setProgress( percentage);
+            loan.setPaid_months(paidmonths);
+            loan.setLoan_id(loan_id);
+            loanviemodel.update(loan);
+
+
+        }
+    };
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -120,7 +159,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                     e.printStackTrace();
                 }
                 calendar.setTime(date2);
-
+                loanobj.setDate(date);
 
                 sday=calendar.get(Calendar.DAY_OF_MONTH);
                 smonth=calendar.get(Calendar.MONTH);
@@ -199,5 +238,12 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         i.putExtra(changeloan.EDIT_LOAN_LOANTYPE, loan.getLoanType());
         i.putExtra("IDd", loan.getLoan_id());
         startActivityForResult(i, EDIT_LOAN);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
     }
 }

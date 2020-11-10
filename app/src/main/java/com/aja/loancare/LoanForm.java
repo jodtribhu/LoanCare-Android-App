@@ -46,7 +46,6 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 loanType = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),loanType,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -59,7 +58,6 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bankName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),bankName,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -113,7 +111,6 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
 
                 Date resultdate = new Date(c.getTimeInMillis());   // Get new time
                 dateInString = sdf.format(resultdate);
-                Toast.makeText(getApplicationContext(), dateInString, Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT).show();
@@ -170,7 +167,6 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 i.putExtra("loantype", loanType);
                 i.putExtra("enddate",dateInString );
 
-                Toast.makeText(this, "onClick: Log data "+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK,i);
                 finish();
 

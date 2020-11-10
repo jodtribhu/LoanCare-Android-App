@@ -170,7 +170,6 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 i.putExtra("loantype", loanType);
                 i.putExtra("enddate",dateInString );
 
-                Toast.makeText(this, "onClick: Log data "+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK,i);
                 finish();
 

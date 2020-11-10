@@ -10,6 +10,7 @@
         <item>reply_all</item>
     </string-array>
     <string-array name="BankItems">
+        <item>-</item>
         <item>ABHYUDAYA CO-OP BANK LTD</item>
         <item>ABU DHABI COMMERCIAL BANK</item>
         <item>AKOLA DISTRICT CENTRAL CO-OPERATIVE BANK</item>

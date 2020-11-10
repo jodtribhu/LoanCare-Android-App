@@ -4,8 +4,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true"
     android:layout_margin="6dp"
-    app:cardBackgroundColor="#212121"
+    app:cardBackgroundColor="#ee4c7c"
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp">
     <LinearLayout
@@ -20,35 +23,45 @@
             android:layout_weight="1">
                    <ImageView
                        android:id="@+id/btype"
-                       android:src="@mipmap/ic_launcher"
+                       android:src="@drawable/ic_home"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
+                       android:layout_marginTop="7dp"
+                       android:paddingLeft="5dp"
                        android:scaleType="centerCrop"/>
                    <TextView
                        android:id="@+id/bank"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Bank name"
-                       android:textColor="#ffffff"
-                       android:textSize="16sp"
+                       android:fontFamily="@font/lora"
+                       android:textColor="#303c6c"
+                       android:textSize="20sp"
                        android:textStyle="bold"
+                       android:layout_marginTop="5dp"
+                       android:paddingLeft="5dp"
                        android:layout_toRightOf="@+id/btype"/>
                     <TextView
                         android:id="@+id/loantype"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Loan Type"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:fontFamily="@font/lora"
+                        android:textColor="#303c6c"
+                        android:textSize="20sp"
                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
                         android:layout_below="@+id/bank"/>
                     <TextView
                         android:id="@+id/prp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Principal"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:textColor="#303c6c"
+                        android:fontFamily="@font/lora"
+                        android:textSize="20sp"
+                        android:paddingLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_below="@+id/loantype"/>
                     <TextView
@@ -56,35 +69,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Interest"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:fontFamily="@font/lora"
+                        android:textColor="#303c6c"
+                        android:textSize="20sp"
                         android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
                         android:layout_below="@id/prp"/>
                     <TextView
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:textColor="#303c6c"
+                        android:fontFamily="@font/lora"
+                        android:textSize="20sp"
                         android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
                         android:layout_below="@+id/intrst"/>
                     <TextView
                         android:id="@+id/dur"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="duration"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:fontFamily="@font/lora"
+                        android:textColor="#303c6c"
+                        android:textSize="20sp"
                         android:layout_marginTop="5dp"
+                        android:paddingStart="5dp"
+                        android:paddingBottom="10dp"
                         android:layout_below="@+id/date"/>
-                   <Button
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/ic_edit"
-                        android:id="@+id/mod"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/dur"/>
         </RelativeLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -113,6 +126,14 @@
                 app:layout_constraintTop_toTopOf="@+id/progress_bar"
                 tools:text="60%"
                 android:textColor="#ffffff"/>
+
+            <Button
+                android:id="@+id/mod"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/ic_edit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

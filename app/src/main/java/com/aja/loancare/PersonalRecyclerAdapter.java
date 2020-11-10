@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -55,20 +56,20 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         Loan loan = ll.get(position);
         holder.loantype.setText(loan.getLoanType());
         holder.bankname.setText(loan.getBankName()+" Bank");
-        holder.principal.setText("Principal: "+String.valueOf(loan.getPrincipal()));
-        holder.interest.setText("Interest: "+String.valueOf(loan.getInterest_rate())+"%");
+        holder.principal.setText("Prp: "+String.valueOf(loan.getPrincipal()));
+        holder.interest.setText("Int: "+String.valueOf(loan.getInterest_rate())+"%");
         holder.date.setText("Date: "+loan.getDate());
         holder.duration.setText("Duration: "+String.valueOf(loan.getYears())+" m");
-        if (holder.loantype.toString().equals("Car loan")){
+        if (loan.getLoanType().equals("Car loan")){
             holder.btype.setImageResource(R.drawable.ic_car);
         }
-        if (holder.loantype.toString().equals("Home Loan")){
+        if (loan.getLoanType().equals("Home Loan")){
             holder.btype.setImageResource(R.drawable.ic_home);
         }
-        if (holder.loantype.toString().equals("Educational Loan")){
+        if (loan.getLoanType().equals("Educational Loan")){
             holder.btype.setImageResource(R.drawable.ic_edu);
         }
-        if (holder.loantype.toString().equals("Agricultural Loan")){
+        if (loan.getLoanType().equals("Agricultural Loan")){
             holder.btype.setImageResource(R.drawable.ic_agro);
         }
 

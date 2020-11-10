@@ -1,6 +1,7 @@
 package com.aja.loancare;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,9 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     }
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
-
+        SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(context);
+        int c_color=sharedPreferences.getInt(fragment_settings.Card_color,0);
+        holder.itemView.setBackgroundColor(c_color);
         Loan loan = ll.get(position);
         holder.loantype.setText(loan.getLoanType());
         holder.bankname.setText(loan.getBankName()+" Bank");

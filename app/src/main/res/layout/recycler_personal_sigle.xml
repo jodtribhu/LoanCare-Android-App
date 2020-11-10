@@ -1,95 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_margin="6dp"
     app:cardBackgroundColor="#212121"
-    app:cardElevation="10dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
     <LinearLayout
         android:id="@+id/pers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:weightSum="2">
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
-                   <ImageView
-                       android:id="@+id/btype"
-                       android:src="@mipmap/ic_launcher"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:scaleType="centerCrop"/>
-                   <TextView
-                       android:id="@+id/bank"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="Bank name"
-                       android:textColor="#ffffff"
-                       android:textSize="16sp"
-                       android:textStyle="bold"
-                       android:layout_toRightOf="@+id/btype"/>
-                    <TextView
-                        android:id="@+id/loantype"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Loan Type"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                       android:textStyle="bold"
-                        android:layout_below="@+id/bank"/>
-                    <TextView
-                        android:id="@+id/prp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Principal"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/loantype"/>
-                    <TextView
-                        android:id="@+id/intrst"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Interest"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/prp"/>
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="date"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/intrst"/>
-                    <TextView
-                        android:id="@+id/dur"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="duration"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/date"/>
-                   <Button
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/ic_edit"
-                        android:id="@+id/mod"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/dur"/>
+
+            <ImageView
+                android:id="@+id/btype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/btype"
+                android:text="Bank name"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/loantype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bank"
+                android:text="Loan Type"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/prp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loantype"
+                android:layout_marginTop="5dp"
+                android:text="Principal"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/intrst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/prp"
+                android:layout_marginTop="5dp"
+                android:text="Interest"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/intrst"
+                android:layout_marginTop="5dp"
+                android:text="date"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date"
+                android:layout_marginTop="5dp"
+                android:text="duration"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/mod"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/dur"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_edit" />
         </RelativeLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-             android:layout_weight="1">
+            android:layout_weight="1">
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -110,12 +123,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#ffffff"
                 app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
                 app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                 app:layout_constraintStart_toStartOf="@+id/progress_bar"
                 app:layout_constraintTop_toTopOf="@+id/progress_bar"
-                tools:text="60%"
-                android:textColor="#ffffff"/>
+                tools:text="60%" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

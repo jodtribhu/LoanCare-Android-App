@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,6 +100,15 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
 
             }
         });
+
+
+        SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        int b_color=sharedPreferences.getInt(fragment_settings.Background_color,0);
+
+        View root = v.findViewById(R.id.coordinator_layout);
+        root.setBackgroundColor(b_color);
+
 
         return v;
     }

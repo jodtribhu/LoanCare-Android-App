@@ -117,19 +117,25 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         @Override
         public void onReceive(Context context, Intent intent) {
             int loan_id=intent.getIntExtra("LoanStopReciever.LOAN_ID",0);
-            Loan loan=loanviemodel.getLoanById(loan_id);
-            int progress=loan.getProgress();
-            int duration=loan.getYears();
-            int dm=duration*12;
-            int paidmonths=loan.getPaid_months();
-            paidmonths=paidmonths+1;
-            int percentage;
-            percentage = (int)((double) paidmonths/(double)dm*100);
-            Toast.makeText(context, "Progress"+percentage+" Paid months "+paidmonths+" DM "+dm+ "division "+percentage , Toast.LENGTH_SHORT).show();
-            loan.setProgress( percentage);
-            loan.setPaid_months(paidmonths);
-            loan.setLoan_id(loan_id);
-            loanviemodel.update(loan);
+            if(loanviemodel.checkLoanById(loan_id)!=0) {
+                Loan loan = loanviemodel.getLoanById(loan_id);
+                int progress = loan.getProgress();
+                int duration = loan.getYears();
+                int dm = duration * 12;
+                int paidmonths = loan.getPaid_months();
+                paidmonths = paidmonths + 1;
+                int percentage;
+                percentage = (int) ((double) paidmonths / (double) dm * 100);
+                Toast.makeText(context, "Progress" + percentage + " Paid months " + paidmonths + " DM " + dm + "division " + percentage, Toast.LENGTH_SHORT).show();
+                loan.setProgress(percentage);
+                loan.setPaid_months(paidmonths);
+                loan.setLoan_id(loan_id);
+                loanviemodel.update(loan);
+            }
+            else
+            {
+                Toast.makeText(context, "Sorry Record Does Not exist", Toast.LENGTH_SHORT).show();
+            }
 
 
         }
@@ -222,8 +228,12 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     }
 
     @Override
-    public void onClickListener(int position) {
+    public void onClickListener(Loan loan) {
         Intent intent = new Intent(getActivity(), PersonalLoanActivity.class);
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PRINCIPLE, loan.getPrincipal());
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_INTEREST, loan.getInterest_rate());
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_DURATION, loan.getYears());
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PROGRESS, loan.getProgress());
         startActivity(intent);
     }
 

@@ -245,11 +245,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_DURATION, loan.getYears());
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PROGRESS, loan.getProgress());
         startActivity(intent);
-        //intent.putExtra(changeloan.EDIT_LOAN_PRINCIPLE, loan.getPrincipal());
-        //intent.putExtra(changeloan.EDIT_LOAN_INTEREST, loan.getInterest_rate());
-        //intent.putExtra(changeloan.EDIT_LOAN_DURATION, loan.getYears());
-        //intent.putExtra(changeloan.EDIT_LOAN_DURATION, loan.getYears());
-    }
+        }
 
     @Override
     public void onModifyClickListener(Loan loan) {

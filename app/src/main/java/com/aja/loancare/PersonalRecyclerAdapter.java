@@ -89,7 +89,6 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         return ll.size();
     }
     public class PersonalRecyclerHolder extends RecyclerView.ViewHolder {
-//        ImageView loanimg= itemView.findViewById(R.id.loanimg);
         TextView loantype=itemView.findViewById(R.id.loantype);
         TextView bankname=itemView.findViewById(R.id.bank);
         ImageView btype=itemView.findViewById(R.id.btype);

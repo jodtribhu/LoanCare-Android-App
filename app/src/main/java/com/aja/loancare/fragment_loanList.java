@@ -126,11 +126,18 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 paidmonths = paidmonths + 1;
                 int percentage;
                 percentage = (int) ((double) paidmonths / (double) dm * 100);
-                Toast.makeText(context, "Progress" + percentage + " Paid months " + paidmonths + " DM " + dm + "division " + percentage, Toast.LENGTH_SHORT).show();
-                loan.setProgress(percentage);
-                loan.setPaid_months(paidmonths);
-                loan.setLoan_id(loan_id);
-                loanviemodel.update(loan);
+                if(percentage>=100)
+                {
+                    loanviemodel.delete(loan);
+                    Toast.makeText(context, "Congratulations You Have Completed the loan", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(context, "Progress" + percentage + " Paid months " + paidmonths + " DM " + dm + "division " + percentage, Toast.LENGTH_SHORT).show();
+                    loan.setProgress(percentage);
+                    loan.setPaid_months(paidmonths);
+                    loan.setLoan_id(loan_id);
+                    loanviemodel.update(loan);
+                }
             }
             else
             {

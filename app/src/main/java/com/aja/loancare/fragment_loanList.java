@@ -226,6 +226,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 loanobj.setYears(Integer.parseInt(duration));
                 loanobj.setInterest_rate(Float.parseFloat(interest));
                 loanobj.setPrincipal(Float.parseFloat(principle));
+                loanobj.setDate(date);
                 loanobj.setLoan_id(id);
                 loanviemodel.update(loanobj);
             } else if (data == null) {

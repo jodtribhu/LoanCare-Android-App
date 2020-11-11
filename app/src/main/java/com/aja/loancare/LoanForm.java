@@ -25,11 +25,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import static android.content.ContentValues.TAG;
+
 public class LoanForm extends Activity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
     EditText txtDate,principle,interest,duration;
+    private static final String TAG = "LoanForm";
     Spinner bank,loan;
     Button submit;
-    String bankName,loanType,date,datenew,dateInString,currentDate;
+    String bankName,loanType,date,dateInString,currentDate;
     private int mYear, mMonth, mDay;
     int durationVal,durationEnd,monthDifference;
     Intent i;
@@ -102,29 +105,27 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
             Date d = Calendar.getInstance().getTime();
             SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
             currentDate = df.format(d);
-            Toast.makeText(getApplication(),currentDate,Toast.LENGTH_SHORT).show();
             if(txtDate.getText().toString()!=null) {
                 Calendar c = Calendar.getInstance();
-                if(duration.getText().toString().matches("")) {
+                if(duration.getText().toString().matches("") && txtDate.getText().toString().matches("")) {
                     //
                 }
-                else{
-                    if(duration.getText().toString().matches(""));
+                else {
+                        dateInString = txtDate.getText().toString();  // Start date
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        try {
+                            c.setTime(sdf.parse(dateInString));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        c.add(Calendar.MONTH, durationVal );  // add MONTHS
+                        sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+                        Date resultdate = new Date(c.getTimeInMillis());   // Get new time
+                        dateInString = sdf.format(resultdate);
+
                 }
-                dateInString = txtDate.getText().toString();  // Start date
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-                try {
-                    c.setTime(sdf.parse(dateInString));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                c.add(Calendar.DATE, durationEnd*30);  // add days
-                sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-                Date resultdate = new Date(c.getTimeInMillis());   // Get new time
-                dateInString = sdf.format(resultdate);
             }
             else{
                 Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT).show();
@@ -185,14 +186,13 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 }
 
 
-                Toast.makeText(getApplication(),date1+"  next  "+date2,Toast.LENGTH_SHORT).show();
                 difference = date1.getTime() - date2.getTime();
                 differenceDates = difference / (24 * 60 * 60 * 1000);
-                monthDifference =( int)((differenceDates)/30);
-                //Toast.makeText(this, monthDifference, Toast.LENGTH_SHORT).show();
+                monthDifference =(int)((differenceDates)/30);
+                Log.i(TAG, "onClick: monthdifferene "+monthDifference);
                 i.putExtra("principle", String.valueOf(principleVal));
                 i.putExtra("interest", String.valueOf(interestVal));
-                i.putExtra("duration", String.valueOf(durationVal));
+                i.putExtra("duration", String.valueOf(durationVal)); //MONTHS
                 i.putExtra("date", date);
                 i.putExtra("bankname",bankName);
                 i.putExtra("loantype", loanType);

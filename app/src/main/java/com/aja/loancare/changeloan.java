@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,7 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class changeloan extends Activity implements View.OnClickListener, DatePickerDialog.OnDateSetListener  {
     public static String EDIT_LOAN_PRINCIPLE="com.aja.loancare.PRINCIPLE";
@@ -21,14 +26,18 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
     public static String EDIT_LOAN_DATE="com.aja.loancare.DATE";
     public static String EDIT_LOAN_BANKNAME="com.aja.loancare.BANKNAME";
     public static String EDIT_LOAN_LOANTYPE="com.aja.loancare.LOANTYPE";
+    private static final String TAG = "changeloan";
     EditText txtDate,principle,interest,duration;
     Spinner bank,loan;
     Button submit;
-    String bankName,loanType,date;
+    String bankName,loanType,date,dateInString,currentDate;
     private int mYear, mMonth, mDay;
-    int durationVal;
+    int durationVal,monthDifference;
     int editid;
     Float principleVal,interestVal;
+    Date date1;
+    Date date2;
+    long differenceDates,difference;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,19 +51,18 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
         loan = (Spinner) findViewById(R.id.spinnerLoan);
 
 
-        Intent i=getIntent();
-        principle.setText(String.valueOf(i.getFloatExtra(EDIT_LOAN_PRINCIPLE,0)));
-        interest.setText(String.valueOf(i.getFloatExtra(EDIT_LOAN_INTEREST,0)));
-        duration.setText(String.valueOf(i.getIntExtra(EDIT_LOAN_DURATION,0)));
-        txtDate.setText(i.getStringExtra(EDIT_LOAN_DATE));
-        editid=i.getIntExtra("IDd",0);
+        Intent in=getIntent();
+        principle.setText(String.valueOf(in.getFloatExtra(EDIT_LOAN_PRINCIPLE,0)));
+        interest.setText(String.valueOf(in.getFloatExtra(EDIT_LOAN_INTEREST,0)));
+        duration.setText(String.valueOf(in.getIntExtra(EDIT_LOAN_DURATION,0)));
+        txtDate.setText(in.getStringExtra(EDIT_LOAN_DATE));
+        editid=in.getIntExtra("IDd",0);
 
         submit=findViewById(R.id.Button_loan);
         loan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 loanType = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),loanType,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -67,7 +75,6 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bankName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),bankName,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -82,7 +89,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
     @Override
     public void onClick(View v) {
         if (v == txtDate) {
-            final Calendar c = Calendar.getInstance();
+            Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -92,8 +99,38 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
                     (this, this, mYear, mMonth, mDay);
             datePickerDialog.show();
 
+            //
+
         }
         if (v == submit){
+            Date d = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+            currentDate = df.format(d);
+            if(txtDate.getText().toString()!=null) {
+                Calendar c = Calendar.getInstance();
+                if(duration.getText().toString().matches("") && txtDate.getText().toString().matches("")) {
+                    //
+                }
+                else {
+                    dateInString = txtDate.getText().toString();  // Start date
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd",Locale.ENGLISH);
+                    try {
+                        c.setTime(sdf.parse(dateInString));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    c.add(Calendar.MONTH, durationVal );  // add MONTHS
+                    sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+                    Date resultdate = new Date(c.getTimeInMillis());   // Get new time
+                    dateInString = sdf.format(resultdate);
+
+                }
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT).show();
+            }
             boolean error=false;
             String errMsg="Enter ";
             if(principle.getText().toString().matches("")){
@@ -126,28 +163,46 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
                 date = txtDate.getText().toString();
             }
             if(bankName=="-"){
+                error=true;
                 errMsg+="Bank; ";
             }
             if(loanType=="-"){
+                error=true;
                 errMsg+="Loan type; ";
             }
 
             if(error==true) {
                 Toast.makeText(getApplicationContext(),errMsg,Toast.LENGTH_LONG).show();
             }
-            else
-                {
-                    Intent i=getIntent();
-                    i.putExtra("principle", String.valueOf(principleVal));
-                    i.putExtra("interest", String.valueOf(interestVal));
-                    i.putExtra("duration", String.valueOf(durationVal));
-                    i.putExtra("date", date);
-                    i.putExtra("bankname",bankName);
-                    i.putExtra("loantype", loanType);
-                    i.putExtra("Id",editid);
-                    Toast.makeText(this, "onClick: Log data "+principleVal+interestVal+durationVal, Toast.LENGTH_SHORT).show();
-                    setResult(RESULT_OK,i);
-                    finish();
+            else {
+                try {
+                    date1=new SimpleDateFormat("yyyy/MM/dd").parse(currentDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    date2=new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                difference = date1.getTime() - date2.getTime();
+                differenceDates = difference / (24 * 60 * 60 * 1000);
+                monthDifference =(int)((differenceDates)/30);
+                Log.i(TAG, "onClick: monthdifferene "+monthDifference);
+
+                Log.i(TAG, "onClick: principleVal"+principleVal);
+                Intent i=getIntent();
+                i.putExtra("principle", String.valueOf(principleVal));
+                i.putExtra("interest", String.valueOf(interestVal));
+                i.putExtra("duration", String.valueOf(durationVal));
+                i.putExtra("date", date);
+                i.putExtra("bankname",bankName);
+                i.putExtra("loantype", loanType);
+                i.putExtra("Id",editid);
+                setResult(RESULT_OK,i);
+                finish();
 
             }
         }
@@ -156,7 +211,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
 
     @Override
     public void onDateSet(DatePicker datePicker, int dayOfMonth, int monthOfYear, int year) {
-        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1)
+        txtDate.setText(dayOfMonth  + "-" + (monthOfYear + 1)
                 + "-" + year);
     }
 }

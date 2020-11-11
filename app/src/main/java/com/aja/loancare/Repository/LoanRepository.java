@@ -51,6 +51,10 @@ public class LoanRepository {
         return new getByIdAsyncTask(mLoanDao).execute(id).get();
     }
 
+    public int checkLoanid(int id) throws ExecutionException, InterruptedException {
+        return new checkByIdAsyncTask(mLoanDao).execute(id).get();
+    }
+
 
     private static class InsertLoanAsyncTask extends AsyncTask<Loan,Void,Void>
     {
@@ -130,4 +134,19 @@ public class LoanRepository {
         }
     }
 
+
+
+    private static class checkByIdAsyncTask extends android.os.AsyncTask<Integer, Void, Integer> {
+
+        private LoanDao mLoanDao;
+
+        checkByIdAsyncTask(LoanDao mLoanDao) {
+            this.mLoanDao=mLoanDao;
+        }
+
+        @Override
+        protected Integer doInBackground(final Integer... params) {
+            return mLoanDao.isDataExist(params[0]);
+        }
+    }
 }

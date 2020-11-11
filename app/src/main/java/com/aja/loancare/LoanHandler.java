@@ -68,6 +68,7 @@ public class LoanHandler {
 
     public void cancelAlarm(Loan loan)
     {
+        Toast.makeText(mContext, "Inside cancel Alarm", Toast.LENGTH_SHORT).show();
         AlarmManager alarmManager =(AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
         Intent myIntent=new Intent(mContext,LoanReciever.class);
         myIntent.putExtra(LOAN_ID_HANDLER,loan.getLoan_id());

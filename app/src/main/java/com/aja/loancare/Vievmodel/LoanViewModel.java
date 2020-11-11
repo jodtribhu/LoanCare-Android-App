@@ -54,6 +54,14 @@ public class LoanViewModel  extends AndroidViewModel {
         }
         return new Loan();
     }
+    public int checkLoanById(int id) {
+        try {
+            return Repository.checkLoanid(id);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 //    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
 //    public void onRefresh()

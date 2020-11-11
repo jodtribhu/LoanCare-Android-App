@@ -3,7 +3,6 @@ package com.aja.loancare;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -43,12 +41,16 @@ public class fragment_settings extends Fragment {
     public static final String Vibrate=" com.aja.loancare.Vibrate";
     public static final String Background_color=" com.aja.loancare.Background_color";
     public static final String Card_color=" com.aja.loancare.Card_color";
+    public static final String Text_Color=" com.aja.loancare.Progress_color";
     CheckBox vibrate_checkbox;
     TextView Colorb;
     Button Colourbutton;
 
     TextView Colorc;
     Button cardcolorbutton;
+
+    TextView ColorT;
+    Button texrcolorbutton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +64,8 @@ public class fragment_settings extends Fragment {
         Colourbutton=v.findViewById(R.id.Background_Color);
         Colorc=v.findViewById(R.id.colorcView);
         cardcolorbutton=v.findViewById(R.id.card_Color);
+        texrcolorbutton=v.findViewById(R.id.text_Color);
+        ColorT=v.findViewById(R.id.colortView);
 
 
 
@@ -71,15 +75,56 @@ public class fragment_settings extends Fragment {
         SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(getActivity());
         int hour=sharedPreferences.getInt(fragment_settings.LOAN_HOUR,0);
         int minute=sharedPreferences.getInt(fragment_settings.LOAN_MINUTE,0);
+        int ccolor=sharedPreferences.getInt(fragment_settings.Card_color,0);
+        int bcolor=sharedPreferences.getInt(fragment_settings.Background_color,0);
+        int tcolor=sharedPreferences.getInt(fragment_settings.Text_Color,0);
         if(hour!=0 || minute !=0)
         {
             Timeview.setText(hour+":"+minute);
         }
         isCheckeds= sharedPreferences.getBoolean(fragment_settings.Vibrate,false);
         vibrate_checkbox.setChecked(isCheckeds);
-//
+        Colorb.setBackgroundColor(bcolor);
+        Colorc.setBackgroundColor(ccolor);
+        ColorT.setBackgroundColor(tcolor);
 
 
+        texrcolorbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialogBuilder
+                        .with(getActivity())
+                        .setTitle("Choose color")
+//                        .initialColor(Color.parseColor("#ffff")
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(12)
+                        .setOnColorSelectedListener(new OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(int selectedColor) {
+                                Toast.makeText(getActivity(), "onColorSelected: 0x" + Integer.toHexString(selectedColor), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences( getActivity());
+                                SharedPreferences.Editor editor = mPrefs.edit();
+                                editor.putInt(Text_Color, selectedColor);
+                                editor.commit();
+                                ColorT.setBackgroundColor(selectedColor);
+
+
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .build()
+                        .show();
+            }
+        });
 
 
 
@@ -108,6 +153,8 @@ public class fragment_settings extends Fragment {
                                 SharedPreferences.Editor editor = mPrefs.edit();
                                 editor.putInt(Card_color, selectedColor);
                                 editor.commit();
+                                Colorc.setBackgroundColor(selectedColor);
+
 
                             }
                         })
@@ -144,6 +191,8 @@ public class fragment_settings extends Fragment {
                                 SharedPreferences.Editor editor = mPrefs.edit();
                                 editor.putInt(Background_color, selectedColor);
                                 editor.commit();
+                                Colorb.setBackgroundColor(selectedColor);
+
 
                             }
                         })

@@ -7,10 +7,13 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,10 +31,25 @@ public class LoanReciever  extends BroadcastReceiver {
     String bank_name;
     String Loantype;
     int interest_amt;
+    boolean vibrateok;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(context);
+        vibrateok= sharedPreferences.getBoolean(fragment_settings.Vibrate,false);
+
+        if(vibrateok==true) {
+            Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                v.vibrate(500);
+            }
+        }
         NotificationManager notificationManager=(NotificationManager)context.getSystemService((context.NOTIFICATION_SERVICE));
         Toast.makeText(context, "It is working", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "onReceive: Inside reciever");

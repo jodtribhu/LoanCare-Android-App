@@ -27,4 +27,7 @@ public interface LoanDao {
     @Query("SELECT * FROM loan_table WHERE loan_id=:id")
     Loan getById(int id);
 
+    @Query("SELECT * FROM loan_table WHERE loan_id = :id")
+    int isDataExist(int id);
+
 }

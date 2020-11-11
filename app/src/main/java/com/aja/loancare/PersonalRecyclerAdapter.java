@@ -2,6 +2,9 @@ package com.aja.loancare;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +60,17 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
         SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(context);
         int c_color=sharedPreferences.getInt(fragment_settings.Card_color,0);
+        int t_color=sharedPreferences.getInt(fragment_settings.Text_Color,0);
+
+        //Text color setting
+        holder.loantype.setTextColor(t_color);
+        holder.bankname.setTextColor(t_color);
+        holder.principal.setTextColor(t_color);
+        holder.interest.setTextColor(t_color);
+        holder.date.setTextColor(t_color);
+        holder.duration.setTextColor(t_color);
+
+
         holder.itemView.setBackgroundColor(c_color);
         Loan loan = ll.get(position);
         holder.loantype.setText(loan.getLoanType());
@@ -78,7 +94,6 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         mLoanHandler.scheduleLoanAlarm(loan);
         holder.pgr.setMax(100);
         holder.pgr.setProgress(loan.getProgress());
-
 //        holder.txtpgr.setText(text.getProgress());
 //        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
 
@@ -106,7 +121,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnPersonalItemisCLick.onClickListener(getAdapterPosition());
+                    mOnPersonalItemisCLick.onClickListener(ll.get(getAdapterPosition()));
                 }
             });
                 mButton.setOnClickListener(new View.OnClickListener() {
@@ -119,13 +134,15 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         }
     }
     public interface onPersonalItemisCLick{
-        void onClickListener( int position);
+        void onClickListener( Loan loan);
     }
 
     public void onPersonalItemisCLickListener(onPersonalItemisCLick onItemisCLick)
     {
         this.mOnPersonalItemisCLick=onItemisCLick;
     }
+
+
 
     public interface onPersonalItemModifyCLick{
         void onModifyClickListener(Loan loan);

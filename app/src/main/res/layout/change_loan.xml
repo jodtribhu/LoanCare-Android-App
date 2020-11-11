@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#D3D3D3">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:orientation="vertical"
         tools:context=".LoanForm">
 
 
@@ -58,7 +58,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/lora"
-                        android:text="Select Bank: "  />
+                        android:text="Select Bank: " />
 
                     <Spinner
                         android:id="@+id/spinnerBank"
@@ -74,6 +74,7 @@
                         android:textAlignment="textStart" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,7 +106,7 @@
                             android:layout_marginRight="7dp"
                             android:layout_toRightOf="@+id/select"
                             android:entries="@array/LoanItems"
-                            android:textAlignment="textStart"/>
+                            android:textAlignment="textStart" />
 
                     </FrameLayout>
 
@@ -130,9 +131,9 @@
                         android:id="@+id/principle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_monetization_on_24"
                         android:ems="10"
                         android:fontFamily="@font/montserrat"
-                        android:drawableLeft="@drawable/ic_baseline_monetization_on_24"
                         android:hint="  Principle Amount"
                         android:inputType="numberDecimal|number"
                         android:shadowColor="#ffffff"
@@ -192,14 +193,14 @@
                     android:textColorHint="#2b2b2b">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_outline_timelapse_24"
                         android:ems="10"
                         android:fontFamily="@font/montserrat"
                         android:hint="  Duration"
-                        android:id="@+id/duration"
                         android:inputType="numberDecimal|number"
-                        android:drawableLeft="@drawable/ic_outline_timelapse_24"
                         android:shadowColor="#ffffff"
                         android:textColor="#000000"
                         android:textColorHint="#871A" />

@@ -129,6 +129,9 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 if(percentage>=100)
                 {
                     loanviemodel.delete(loan);
+                    LoanHandler loanHandler=new LoanHandler(getActivity());
+                    loanHandler.cancelAlarm(loan);
+
                     Toast.makeText(context, "Congratulations You Have Completed the loan", Toast.LENGTH_SHORT).show();
                 }
                 else {

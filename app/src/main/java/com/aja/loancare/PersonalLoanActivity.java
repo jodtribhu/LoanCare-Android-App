@@ -38,9 +38,9 @@ public class PersonalLoanActivity extends AppCompatActivity {
         layMain = findViewById(R.id.table);
         String[] firstRow = {"EMI#", "EMI","Balance"};
         mTable.addRow(firstRow);
-        for (int i=1;i<=x;i++){
+        for (int i=0;i<x;i++){
              temi=temi-emi;
-        mTable.addRow(new String[]{String.valueOf(i),String.valueOf(emi),String.valueOf(temi)});}
+        mTable.addRow(new String[]{String.valueOf(i+1),String.valueOf(emi),String.valueOf(temi)});}
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());
 

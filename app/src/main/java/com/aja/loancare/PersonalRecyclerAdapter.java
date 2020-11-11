@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -69,24 +70,25 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         holder.interest.setTextColor(t_color);
         holder.date.setTextColor(t_color);
         holder.duration.setTextColor(t_color);
+        holder.txtpgr.setTextColor(t_color);
 
 
-        holder.itemView.setBackgroundColor(c_color);
+        holder.card.setCardBackgroundColor(c_color);
         Loan loan = ll.get(position);
         holder.loantype.setText(loan.getLoanType());
-        holder.bankname.setText(loan.getBankName()+" Bank");
-        holder.principal.setText("Prp: "+String.valueOf(loan.getPrincipal()));
-        holder.interest.setText("Int: "+String.valueOf(loan.getInterest_rate())+"%");
-        holder.date.setText("Date: "+loan.getDate());
-        holder.duration.setText("Duration: "+String.valueOf(loan.getYears())+" m");
+        holder.bankname.setText(loan.getBankName());
+        holder.principal.setText("P: "+String.valueOf(loan.getPrincipal()));
+        holder.interest.setText("I: "+String.valueOf(loan.getInterest_rate())+"%");
+        holder.date.setText("D: "+loan.getDate());
+        holder.duration.setText("Dur: "+String.valueOf(loan.getYears())+" m");
         if (loan.getLoanType().equals("Car loan")){
-            holder.btype.setImageResource(R.drawable.ic_car);
+            holder.btype.setImageResource(R.drawable.car);
         }
         if (loan.getLoanType().equals("Home Loan")){
-            holder.btype.setImageResource(R.drawable.ic_home);
+            holder.btype.setImageResource(R.drawable.home);
         }
         if (loan.getLoanType().equals("Educational Loan")){
-            holder.btype.setImageResource(R.drawable.ic_edu);
+            holder.btype.setImageResource(R.drawable.book1);
         }
         if (loan.getLoanType().equals("Agricultural Loan")){
             holder.btype.setImageResource(R.drawable.ic_agro);
@@ -94,9 +96,6 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         mLoanHandler.scheduleLoanAlarm(loan);
         holder.pgr.setMax(100);
         holder.pgr.setProgress(loan.getProgress());
-//        holder.txtpgr.setText(text.getProgress());
-//        holder.pgr.setProgress(Integer.parseInt(text.getProgress()));
-
     }
 
     @Override
@@ -114,6 +113,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         ProgressBar pgr=itemView.findViewById(R.id.progress_bar);
         Button mButton=itemView.findViewById(R.id.mod);
         TextView txtpgr=itemView.findViewById(R.id.text_view_progress);
+        CardView card=itemView.findViewById(R.id.cardrec);
 
         public PersonalRecyclerHolder(@NonNull final View itemView) {
             super(itemView);

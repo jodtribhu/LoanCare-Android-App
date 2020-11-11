@@ -3,6 +3,7 @@ package com.aja.loancare;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -75,9 +76,9 @@ public class fragment_settings extends Fragment {
         SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(getActivity());
         int hour=sharedPreferences.getInt(fragment_settings.LOAN_HOUR,0);
         int minute=sharedPreferences.getInt(fragment_settings.LOAN_MINUTE,0);
-        int ccolor=sharedPreferences.getInt(fragment_settings.Card_color,0);
+        int ccolor=sharedPreferences.getInt(fragment_settings.Card_color, Color.parseColor("#ee4c7c"));
         int bcolor=sharedPreferences.getInt(fragment_settings.Background_color,0);
-        int tcolor=sharedPreferences.getInt(fragment_settings.Text_Color,0);
+        int tcolor=sharedPreferences.getInt(fragment_settings.Text_Color, Color.parseColor("#FFFFFF"));
         if(hour!=0 || minute !=0)
         {
             Timeview.setText(hour+":"+minute);

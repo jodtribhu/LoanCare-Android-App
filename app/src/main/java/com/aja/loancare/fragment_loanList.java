@@ -48,6 +48,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     int sday;
     int smonth;
     int syear;
+    int pastmonths;
 
     public static final int ADD_LOAN = 1;
     public static final int EDIT_LOAN = 2;
@@ -61,7 +62,10 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         fab = v.findViewById(R.id.fab);
 
         IntentFilter intentFilter=new IntentFilter("com.aja.loancare.fragment_loanlist");
+        IntentFilter intentFilter2=new IntentFilter("com.aja.loancare.loanhandler");
         getActivity().registerReceiver(mBroadcastReceiver,intentFilter);
+
+        getActivity().registerReceiver(mBroadcastActiveReceiver,intentFilter2);
 
         loanlist = new ArrayList<>();
         lv = v.findViewById(R.id.recyclerpersonal);
@@ -120,8 +124,8 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
             if(loanviemodel.checkLoanById(loan_id)!=0) {
                 Loan loan = loanviemodel.getLoanById(loan_id);
                 int progress = loan.getProgress();
-                int duration = loan.getYears();
-                int dm = duration * 12;
+                int duration = loan.getMonths();
+                int dm = duration;
                 int paidmonths = loan.getPaid_months();
                 paidmonths = paidmonths + 1;
                 int percentage;
@@ -135,12 +139,13 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                     Toast.makeText(context, "Congratulations You Have Completed the loan", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(context, "Progress" + percentage + " Paid months " + paidmonths + " DM " + dm + "division " + percentage, Toast.LENGTH_SHORT).show();
                     loan.setProgress(percentage);
                     loan.setPaid_months(paidmonths);
                     loan.setLoan_id(loan_id);
                     loanviemodel.update(loan);
                 }
+
+
             }
             else
             {
@@ -151,7 +156,24 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         }
     };
 
+    private BroadcastReceiver mBroadcastActiveReceiver=new BroadcastReceiver() {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            int loan_id=intent.getIntExtra("LoanHandler.LOAN_ID",0);
+            boolean state=intent.getBooleanExtra("LoanHandler.LOAN_STATE",false);
+            Loan loan = loanviemodel.getLoanById(loan_id);
+            Log.i(TAG, "onReceive: Inside mBoadCastActiveReciever "+loan_id+" state  "+state);
+            if(loanviemodel.checkLoanById(loan_id)!=0) {
+                loan.setLoan_id(loan_id);
+                loan.setActive_state(state);
+                loanviemodel.update(loan);
+
+            }
+
+        }
+    };
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -167,6 +189,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 date = data.getStringExtra("date");
                 bank = data.getStringExtra("bankname");
                 loan = data.getStringExtra("loantype");
+                pastmonths=data.getIntExtra("pastmonths",0);
                 Calendar calendar=Calendar.getInstance();
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 try {
@@ -184,7 +207,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 loanobj.setSday(sday);
                 loanobj.setSmonth(smonth);
                 loanobj.setSyear(syear);
-
+                loanobj.setActive_state(false);
                 //Ring Month
                 Calendar ringcal = Calendar.getInstance();
                 ringcal.set(Calendar.DAY_OF_MONTH,sday);
@@ -198,9 +221,34 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
 
                 loanobj.setBankName(bank);
                 loanobj.setLoanType(loan);
-                loanobj.setYears(Integer.parseInt(duration));
+                loanobj.setMonths(Integer.parseInt(duration));
                 loanobj.setInterest_rate(Float.parseFloat(interest));
                 loanobj.setPrincipal(Float.parseFloat(principle));
+
+                double interL1=Double.parseDouble(interest);
+                interL1=interL1/(1200);
+                double temp = (1 + interL1);
+                double numerator = Math.pow(temp, Double.parseDouble(duration));
+                double denominator=Math.pow(temp, Double.parseDouble(duration))-1;
+                double num = numerator / denominator;
+                double emi1 =Double.parseDouble(principle) * interL1 * num;
+                int em_cal= (int) Math.round(emi1);
+                loanobj.setEmi(em_cal);
+
+                if(pastmonths>0)
+                {
+                    loanobj.setPaid_months(pastmonths);
+                    int percentage;
+                    percentage = (int) ((double) pastmonths / Double.parseDouble(duration) * 100);
+                    loanobj.setProgress(percentage);
+                }
+                else
+                {
+                    loanobj.setPaid_months(0);
+                }
+
+
+
                 loanviemodel.insert(loanobj);
             } else if (data == null) {
                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
@@ -220,14 +268,61 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 date = data.getStringExtra("date");
                 bank = data.getStringExtra("bankname");
                 loan = data.getStringExtra("loantype");
+                pastmonths=data.getIntExtra("pastmonths",0);
+
+
+
+
+
+                loanobj.setActive_state(false);
                 id = data.getIntExtra("IDd", 0);
                 loanobj.setBankName(bank);
                 loanobj.setLoanType(loan);
-                loanobj.setYears(Integer.parseInt(duration));
+                loanobj.setMonths(Integer.parseInt(duration));
                 loanobj.setInterest_rate(Float.parseFloat(interest));
                 loanobj.setPrincipal(Float.parseFloat(principle));
-                loanobj.setDate(date);
+//                loanobj.setDate(date);
+                loanobj.setActive_state(false);
                 loanobj.setLoan_id(id);
+
+                Calendar calendar=Calendar.getInstance();
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                try {
+                    date2= format.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                calendar.setTime(date2);
+                loanobj.setDate(date);
+
+                sday=calendar.get(Calendar.DAY_OF_MONTH);
+                smonth=calendar.get(Calendar.MONTH);
+                syear=calendar.get(Calendar.YEAR);
+
+                loanobj.setSday(sday);
+                loanobj.setSmonth(smonth);
+                loanobj.setSyear(syear);
+                //Ring Month
+                Calendar ringcal = Calendar.getInstance();
+                ringcal.set(Calendar.DAY_OF_MONTH,sday);
+                ringcal.set(Calendar.MONTH,smonth);
+                ringcal.set(Calendar.YEAR,syear);
+                ringcal.add(Calendar.MONTH, 1);
+
+                loanobj.setRday(ringcal.get(Calendar.DAY_OF_MONTH));
+                loanobj.setRmonth(ringcal.get(Calendar.MONTH));
+                loanobj.setRyear(ringcal.get(Calendar.YEAR));
+
+
+
+                if(pastmonths>0)
+                {
+                    loanobj.setPaid_months(pastmonths);
+                }
+                else
+                {
+                    loanobj.setPaid_months(0);
+                }
                 loanviemodel.update(loanobj);
             } else if (data == null) {
                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
@@ -243,7 +338,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         Intent intent = new Intent(getActivity(), PersonalLoanActivity.class);
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PRINCIPLE, loan.getPrincipal());
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_INTEREST, loan.getInterest_rate());
-        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_DURATION, loan.getYears());
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_DURATION, loan.getRmonth());
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PROGRESS, loan.getProgress());
         startActivity(intent);
         }
@@ -253,7 +348,7 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         Intent i = new Intent(getActivity(), changeloan.class);
         i.putExtra(changeloan.EDIT_LOAN_PRINCIPLE, loan.getPrincipal());
         i.putExtra(changeloan.EDIT_LOAN_INTEREST, loan.getInterest_rate());
-        i.putExtra(changeloan.EDIT_LOAN_DURATION, loan.getYears());
+        i.putExtra(changeloan.EDIT_LOAN_DURATION, loan.getMonths());
         i.putExtra(changeloan.EDIT_LOAN_DATE, loan.getDate());
         i.putExtra(changeloan.EDIT_LOAN_BANKNAME, loan.getBankName());
         i.putExtra(changeloan.EDIT_LOAN_LOANTYPE, loan.getLoanType());
@@ -266,5 +361,6 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(mBroadcastReceiver);
+        getActivity().unregisterReceiver(mBroadcastActiveReceiver);
     }
 }

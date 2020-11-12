@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -34,7 +35,8 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
     Button submit;
     String bankName,loanType,date,dateInString,currentDate;
     private int mYear, mMonth, mDay;
-    int durationVal,durationEnd,monthDifference;
+    int durationVal,durationEnd;
+    int monthDifference=0;
     Intent i;
     Date date1;
     Date date2;
@@ -112,11 +114,14 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 }
                 else {
                         dateInString = txtDate.getText().toString();  // Start date
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd",Locale.ENGLISH);
                         try {
-                            c.setTime(sdf.parse(dateInString));
+
+                                c.setTime(Objects.requireNonNull(sdf.parse(dateInString)));
+
+
                         } catch (ParseException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
 
                         c.add(Calendar.MONTH, durationVal );  // add MONTHS
@@ -189,17 +194,27 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                 difference = date1.getTime() - date2.getTime();
                 differenceDates = difference / (24 * 60 * 60 * 1000);
                 monthDifference =(int)((differenceDates)/30);
-                Log.i(TAG, "onClick: monthdifferene "+monthDifference);
-                i.putExtra("principle", String.valueOf(principleVal));
-                i.putExtra("interest", String.valueOf(interestVal));
-                i.putExtra("duration", String.valueOf(durationVal)); //MONTHS
-                i.putExtra("date", date);
-                i.putExtra("bankname",bankName);
-                i.putExtra("loantype", loanType);
-                i.putExtra("enddate",dateInString );
-                setResult(RESULT_OK,i);
-                finish();
 
+
+
+
+
+                if(monthDifference<=durationVal)
+                {
+                    Log.i(TAG, "onClick: monthdifferene " + monthDifference);
+                    i.putExtra("principle", String.valueOf(principleVal));
+                    i.putExtra("interest", String.valueOf(interestVal));
+                    i.putExtra("duration", String.valueOf(durationVal)); //MONTHS
+                    i.putExtra("date", date);
+                    i.putExtra("bankname", bankName);
+                    i.putExtra("loantype", loanType);
+                    i.putExtra("enddate", dateInString);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplication(),"The loan has been already paid.",Toast.LENGTH_SHORT).show();
+                    }
             }
         }
     }

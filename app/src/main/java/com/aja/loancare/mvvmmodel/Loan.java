@@ -20,8 +20,8 @@ public class Loan {
     public float interest_rate;
     @ColumnInfo(name="principal")
     public float Principal;
-    @ColumnInfo(name="years")
-    public int years;
+    @ColumnInfo(name="months")
+    public int months;
     @ColumnInfo(name="emi")
     public int emi;
     @ColumnInfo(name="date")
@@ -42,6 +42,8 @@ public class Loan {
     public String ring_date;
     @ColumnInfo(name="paid_months")
     public int paid_months;
+    @ColumnInfo(name="active_state")
+    public Boolean active_state;
 
 
     public int getPaid_months() {
@@ -61,14 +63,14 @@ public class Loan {
         this.ring_date = ring_date;
     }
 
-    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int years, int emi, String date, int sday, int smonth, int syear, int rday, int rmonth, int ryear, String ring_date, int paid_months) {
+    public Loan(int loan_id, String bankName, String loanType, int progress, float interest_rate, float principal, int months, int emi, String date, int sday, int smonth, int syear, int rday, int rmonth, int ryear, String ring_date, int paid_months, Boolean active_state) {
         this.loan_id = loan_id;
         BankName = bankName;
         LoanType = loanType;
         Progress = progress;
         this.interest_rate = interest_rate;
         Principal = principal;
-        this.years = years;
+        this.months = months;
         this.emi = emi;
         this.date = date;
         this.sday = sday;
@@ -79,6 +81,15 @@ public class Loan {
         this.ryear = ryear;
         this.ring_date = ring_date;
         this.paid_months = paid_months;
+        this.active_state = active_state;
+    }
+
+    public Boolean getActive_state() {
+        return active_state;
+    }
+
+    public void setActive_state(Boolean active_state) {
+        this.active_state = active_state;
     }
 
     public int getSday() {
@@ -188,12 +199,12 @@ public class Loan {
         Principal = principal;
     }
 
-    public int getYears() {
-        return years;
+    public int getMonths() {
+        return months;
     }
 
-    public void setYears(int years) {
-        this.years = years;
+    public void setMonths(int months) {
+        this.months = months;
     }
 
     public int getEmi() {

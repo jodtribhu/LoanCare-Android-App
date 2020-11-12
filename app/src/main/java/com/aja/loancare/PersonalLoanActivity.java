@@ -29,6 +29,7 @@ public class PersonalLoanActivity extends AppCompatActivity {
         r=r/1200;
         carry=1+r;
         emi=(int)Math.round((p * r * Math.pow(carry,d))/(Math.pow(carry,d)-1));
+
         x=(int)Math.round((prg * 0.01 )*d);
         temi=p;
         showTable();

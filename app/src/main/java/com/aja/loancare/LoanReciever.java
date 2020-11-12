@@ -30,7 +30,8 @@ public class LoanReciever  extends BroadcastReceiver {
     int loan_id;
     String bank_name;
     String Loantype;
-    int interest_amt;
+    int emi;
+    float interest_rate;
     boolean vibrateok;
 
 
@@ -55,9 +56,9 @@ public class LoanReciever  extends BroadcastReceiver {
         Log.i(TAG, "onReceive: Inside reciever");
         loan_id=intent.getIntExtra(LoanHandler.LOAN_ID_HANDLER,0);
         bank_name=intent.getStringExtra(LoanHandler.LOAN_BANK_NAME);
-        interest_amt=intent.getIntExtra(LoanHandler.LOAN_INTEREST_RATE,0);
+        interest_rate=intent.getFloatExtra(LoanHandler.LOAN_INTEREST_RATE,0);
         Loantype=intent.getStringExtra(LoanHandler.LOAN_TYPE);
-
+        emi=intent.getIntExtra(LoanHandler.EMI,0);
         if(notificationManager!=null)
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -67,7 +68,7 @@ public class LoanReciever  extends BroadcastReceiver {
                 notificationManager.createNotificationChannel(alarmchannel);
             }
         }
-        Notification notification=buildnotification(context,getstopintent(context,loan_id),bank_name,interest_amt,Loantype);
+        Notification notification=buildnotification(context,getstopintent(context,loan_id),bank_name,interest_rate,Loantype,emi);
         if(notificationManager!=null)
         {
             notificationManager.notify(1,notification);
@@ -85,7 +86,7 @@ public class LoanReciever  extends BroadcastReceiver {
 
 
 
-    public Notification buildnotification(Context context, PendingIntent StopIntent,String bank_name,int interest,String Loantype)
+    public Notification buildnotification(Context context, PendingIntent StopIntent,String bank_name,float interest,String Loantype,int emi)
     {
         Calendar calender=Calendar.getInstance();
         NotificationCompat.Builder notification = new NotificationCompat.Builder(context, CHANNEL_ID);
@@ -96,7 +97,7 @@ public class LoanReciever  extends BroadcastReceiver {
 
             notification.setDefaults(Notification.DEFAULT_ALL).setLargeIcon(largeIcon)
                     .setStyle(new NotificationCompat.InboxStyle()
-                    .addLine("Bank Name : "+bank_name).addLine("Interest Amount To pay "+interest).addLine("Loan Type : "+Loantype)
+                    .addLine("Bank Name : "+bank_name).addLine("Interest Rate  "+interest).addLine("Loan Type : "+Loantype).addLine("EMI To Pay : "+emi)
                     )
                     .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setWhen(System.currentTimeMillis())
@@ -113,7 +114,7 @@ public class LoanReciever  extends BroadcastReceiver {
                     .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setWhen(System.currentTimeMillis()).setLargeIcon(largeIcon)
                     .setStyle(new NotificationCompat.InboxStyle()
-                            .addLine("Bank Name : "+bank_name).addLine("Interest Amount To pay "+interest).addLine("Loan Type : "+Loantype)
+                            .addLine("Bank Name : "+bank_name).addLine("Interest Rate "+interest).addLine("Loan Type : "+Loantype).addLine("EMI To Pay : "+emi)
                     )
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle(context.getString(R.string.app_name))

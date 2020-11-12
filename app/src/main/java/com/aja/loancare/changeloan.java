@@ -117,7 +117,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
                     try {
                         c.setTime(sdf.parse(dateInString));
                     } catch (ParseException e) {
-                        e.printStackTrace();
+
                     }
 
                     c.add(Calendar.MONTH, durationVal );  // add MONTHS
@@ -200,6 +200,7 @@ public class changeloan extends Activity implements View.OnClickListener, DatePi
                 i.putExtra("date", date);
                 i.putExtra("bankname",bankName);
                 i.putExtra("loantype", loanType);
+                i.putExtra("pastmonths",monthDifference);
                 i.putExtra("Id",editid);
                 setResult(RESULT_OK,i);
                 finish();

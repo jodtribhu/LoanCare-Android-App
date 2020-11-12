@@ -81,7 +81,7 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
         holder.principal.setText("P: "+String.valueOf(loan.getPrincipal()));
         holder.interest.setText("I: "+String.valueOf(loan.getInterest_rate())+"%");
         holder.date.setText("D: "+loan.getDate());
-        holder.duration.setText("Dur: "+String.valueOf(loan.getYears())+" m");
+        holder.duration.setText("Dur: "+String.valueOf(loan.getMonths())+" m");
         if (loan.getLoanType().equals("Car loan")){
             holder.btype.setImageResource(R.drawable.car);
         }

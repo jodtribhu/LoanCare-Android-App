@@ -11,7 +11,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="#ee4c7c"
     app:cardCornerRadius="10dp"
-    app:cardElevation="20dp">
+    app:cardElevation="10dp">
 
     <LinearLayout
         android:id="@+id/pers"
@@ -128,13 +128,13 @@
                 android:id="@+id/text_view_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
                 android:textColor="#ffffff"
                 app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
                 app:layout_constraintEnd_toEndOf="@+id/progress_bar"
                 app:layout_constraintStart_toStartOf="@+id/progress_bar"
                 app:layout_constraintTop_toTopOf="@+id/progress_bar"
-                tools:text="60%" />
+                tools:text="60" />
 
             <Button
                 android:id="@+id/mod"

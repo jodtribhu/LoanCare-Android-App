@@ -2,6 +2,7 @@ package com.aja.loancare;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -60,8 +61,8 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
     @Override
     public void onBindViewHolder(@NonNull PersonalRecyclerHolder holder, int position) {
         SharedPreferences sharedPreferences= android.preference.PreferenceManager.getDefaultSharedPreferences(context);
-        int c_color=sharedPreferences.getInt(fragment_settings.Card_color,0);
-        int t_color=sharedPreferences.getInt(fragment_settings.Text_Color,0);
+        int c_color=sharedPreferences.getInt(fragment_settings.Card_color, Color.parseColor("#ee4c7c"));
+        int t_color=sharedPreferences.getInt(fragment_settings.Text_Color, Color.parseColor("#000000"));
 
         //Text color setting
         holder.loantype.setTextColor(t_color);
@@ -91,11 +92,33 @@ public class PersonalRecyclerAdapter extends RecyclerView.Adapter<PersonalRecycl
             holder.btype.setImageResource(R.drawable.book1);
         }
         if (loan.getLoanType().equals("Agricultural Loan")){
-            holder.btype.setImageResource(R.drawable.ic_agro);
+            holder.btype.setImageResource(R.drawable.agro);
+        }
+        if (loan.getLoanType().equals("Two-Wheeler Loan")){
+            holder.btype.setImageResource(R.drawable.bike);
+        }
+        if (loan.getLoanType().equals("Personal Loan")){
+            holder.btype.setImageResource(R.drawable.person);
+        }
+        if (loan.getLoanType().equals("Fixed rate Loan")){
+            holder.btype.setImageResource(R.drawable.lock1);
+        }
+
+        if (loan.getLoanType().equals("Variable rate Loan")){
+            holder.btype.setImageResource(R.drawable.var);
+        }
+
+        if (loan.getLoanType().equals("Credit card Loan")){
+            holder.btype.setImageResource(R.drawable.credit);
+        }
+
+        if (loan.getLoanType().equals("Pay-day Loan")){
+            holder.btype.setImageResource(R.drawable.pay);
         }
         mLoanHandler.scheduleLoanAlarm(loan);
         holder.pgr.setMax(100);
         holder.pgr.setProgress(loan.getProgress());
+//        holder.txtpgr.setText(loan.getProgress());
     }
 
     @Override

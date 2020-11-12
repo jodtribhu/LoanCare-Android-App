@@ -209,6 +209,7 @@ public class LoanForm extends Activity implements View.OnClickListener,DatePicke
                     i.putExtra("bankname", bankName);
                     i.putExtra("loantype", loanType);
                     i.putExtra("enddate", dateInString);
+                    i.putExtra("pastmonths",monthDifference);
                     setResult(RESULT_OK, i);
                     finish();
                 }

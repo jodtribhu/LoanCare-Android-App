@@ -73,7 +73,7 @@ public class LoanHandler {
         calendar.set(Calendar.SECOND,0);
 
 
-       if( loan.getRday()<=checkday && loan.getRmonth()>=checkmonth && loan.getRyear()>=checkyear)
+       if( loan.getRday()<=checkday && loan.getRmonth()<=checkmonth && loan.getRyear()<=checkyear)
         {
 
             Log.i(TAG, "scheduleLoanAlarm: hour "+hour +" minute "+minute +" checkhour "+checkhour+" checkminute "+checkminute);
@@ -97,7 +97,7 @@ public class LoanHandler {
             mContext.sendBroadcast(newintent);
 
             Log.i(TAG, "scheduleLoanAlarm: AlarmManager Set ");
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),24*60*60*1000, pendingintent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),24*60*60*1000, pendingintent);
 
         }
     }

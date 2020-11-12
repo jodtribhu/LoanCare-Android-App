@@ -245,9 +245,10 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 else
                 {
                     loanobj.setPaid_months(0);
+                    loanobj.setProgress(0);
                 }
 
-
+                Log.i(TAG, "onActivityResult: pastmonths "+loanobj.getPaid_months()+" Progress "+loanobj.getProgress() +" Past MOnths "+pastmonths);
 
                 loanviemodel.insert(loanobj);
             } else if (data == null) {
@@ -313,7 +314,15 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
                 loanobj.setRmonth(ringcal.get(Calendar.MONTH));
                 loanobj.setRyear(ringcal.get(Calendar.YEAR));
 
-
+                double interL1=Double.parseDouble(interest);
+                interL1=interL1/(1200);
+                double temp = (1 + interL1);
+                double numerator = Math.pow(temp, Double.parseDouble(duration));
+                double denominator=Math.pow(temp, Double.parseDouble(duration))-1;
+                double num = numerator / denominator;
+                double emi1 =Double.parseDouble(principle) * interL1 * num;
+                int em_cal= (int) Math.round(emi1);
+                loanobj.setEmi(em_cal);
 
                 if(pastmonths>0)
                 {
@@ -338,8 +347,9 @@ public class fragment_loanList extends Fragment implements PersonalRecyclerAdapt
         Intent intent = new Intent(getActivity(), PersonalLoanActivity.class);
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PRINCIPLE, loan.getPrincipal());
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_INTEREST, loan.getInterest_rate());
-        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_DURATION, loan.getRmonth());
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_DURATION, loan.getMonths());
         intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PROGRESS, loan.getProgress());
+        intent.putExtra(PersonalLoanActivity.PersonalLoanActivity_PAID_MONTHS,loan.getPaid_months());
         startActivity(intent);
         }
 

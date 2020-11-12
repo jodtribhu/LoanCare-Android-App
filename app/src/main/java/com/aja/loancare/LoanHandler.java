@@ -66,25 +66,54 @@ public class LoanHandler {
 
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH,loan.getRday());
-        calendar.set(Calendar.MONTH,(loan.getRmonth())-1);
+        calendar.set(Calendar.MONTH,loan.getRmonth()-1);
         calendar.set(Calendar.YEAR,loan.getRyear())  ;
         calendar.set(Calendar.HOUR_OF_DAY,hour);
         calendar.set(Calendar.MINUTE,minute);
         calendar.set(Calendar.SECOND,0);
+        Log.i(TAG, "scheduleLoanAlarm: Set Calendar "+calendar.getTime());
+        Log.i(TAG, "scheduleLoanAlarm: hour "+hour +" minute "+minute +" checkhour "+checkhour+" checkminute "+checkminute);
+        Log.i(TAG, "scheduleLoanAlarm: Day "+loan.getRday() +" MOnth "+(loan.getRmonth()-1) +" Year "+ loan.getRyear()+" checkday "+checkday+" checkmonth "+(checkmonth)+" checkyear "+checkyear);
 
-
-       if( loan.getRday()<=checkday && loan.getRmonth()<=checkmonth && loan.getRyear()<=checkyear)
+       if( loan.getRday()<=checkday && ( loan.getRmonth()-1) <= (checkmonth)&& loan.getRyear()<=checkyear)
         {
+            Log.i(TAG, "scheduleLoanAlarm: Inside loan.getRday()<=checkday && loan.getRmonth()<=checkmonth && loan.getRyear()<=checkyear");
+            if( hour<=checkhour)
+            {
+                if(hour==checkhour)
+                {
+                    if(minute>checkminute)
+                    {
+                        Log.i(TAG, "scheduleLoanAlarm: inside minute comp");
+                        calendar.set(Calendar.MONTH,checkmonth);
+                    }
+                    else
+                    {
+                        calendar.set(Calendar.MONTH,checkmonth);
+                        calendar.add(Calendar.MONTH,1);
+                    }
+                }
+                else
+                {
+                    calendar.set(Calendar.MONTH,checkmonth);
+                    calendar.add(Calendar.MONTH,1);
+                }
 
-            Log.i(TAG, "scheduleLoanAlarm: hour "+hour +" minute "+minute +" checkhour "+checkhour+" checkminute "+checkminute);
-            if( hour<=checkhour && minute<checkminute )
+                Log.i(TAG, "scheduleLoanAlarm: Inside hour<checkhour");
+
+            }
+            else
             {
                 calendar.set(Calendar.MONTH,checkmonth);
-                calendar.add(Calendar.MONTH,1);
             }
 
             Log.i(TAG, "scheduleLoanAlarm: Date to be rung (loan.getRday()<=checkday)"+calendar.getTime());
         }
+       else if(loan.getRday()>checkday && ( loan.getRmonth()-1) <= (checkmonth)&& loan.getRyear()<=checkyear)
+       {
+           calendar.set(Calendar.MONTH,checkmonth);
+           Log.i(TAG, "scheduleLoanAlarm: Inside loan.getRday()>checkday && ( loan.getRmonth()-1) <= (checkmonth)&& loan.getRyear()<=checkyear");
+       }
 
 
         Log.i(TAG, "scheduleLoanAlarm: Check sample "+calendar.getTime()+"Loan id "+loan.getLoan_id());
@@ -96,7 +125,7 @@ public class LoanHandler {
             newintent.putExtra("LoanHandler.LOAN_STATE", true);
             mContext.sendBroadcast(newintent);
 
-            Log.i(TAG, "scheduleLoanAlarm: AlarmManager Set ");
+            Log.i(TAG, "scheduleLoanAlarm: AlarmManager Set at time "+calendar.getTime());
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),24*60*60*1000, pendingintent);
 
         }

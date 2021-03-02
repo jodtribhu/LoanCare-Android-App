@@ -1,4 +1,4 @@
-#Features
+## Features
 1)It keeps track of the loans and provide notification on monthly basis.
 
 2)The user can compare between two loans and find which one is optimal for the user.
